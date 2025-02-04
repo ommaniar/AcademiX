@@ -1,0 +1,395 @@
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr"><div class="shortdescription nomobile noexcerpt noprint searchaux" style="display:none">Computer memory architecture</div>
+<figure typeof="mw:File/Thumb"><a href="https://en.wikipedia.org/wiki/File:ComputerMemoryHierarchy.svg" class="mw-file-description"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/ComputerMemoryHierarchy.svg/300px-ComputerMemoryHierarchy.svg.png" decoding="async" width="300" height="223" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/ComputerMemoryHierarchy.svg/450px-ComputerMemoryHierarchy.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/ComputerMemoryHierarchy.svg/600px-ComputerMemoryHierarchy.svg.png 2x" data-file-width="826" data-file-height="614" /></a><figcaption>Diagram of the computer memory hierarchy</figcaption></figure>
+<style data-mw-deduplicate="TemplateStyles:r1129693374">.mw-parser-output .hlist dl,.mw-parser-output .hlist ol,.mw-parser-output .hlist ul{margin:0;padding:0}.mw-parser-output .hlist dd,.mw-parser-output .hlist dt,.mw-parser-output .hlist li{margin:0;display:inline}.mw-parser-output .hlist.inline,.mw-parser-output .hlist.inline dl,.mw-parser-output .hlist.inline ol,.mw-parser-output .hlist.inline ul,.mw-parser-output .hlist dl dl,.mw-parser-output .hlist dl ol,.mw-parser-output .hlist dl ul,.mw-parser-output .hlist ol dl,.mw-parser-output .hlist ol ol,.mw-parser-output .hlist ol ul,.mw-parser-output .hlist ul dl,.mw-parser-output .hlist ul ol,.mw-parser-output .hlist ul ul{display:inline}.mw-parser-output .hlist .mw-empty-li{display:none}.mw-parser-output .hlist dt::after{content:": "}.mw-parser-output .hlist dd::after,.mw-parser-output .hlist li::after{content:" · ";font-weight:bold}.mw-parser-output .hlist dd:last-child::after,.mw-parser-output .hlist dt:last-child::after,.mw-parser-output .hlist li:last-child::after{content:none}.mw-parser-output .hlist dd dd:first-child::before,.mw-parser-output .hlist dd dt:first-child::before,.mw-parser-output .hlist dd li:first-child::before,.mw-parser-output .hlist dt dd:first-child::before,.mw-parser-output .hlist dt dt:first-child::before,.mw-parser-output .hlist dt li:first-child::before,.mw-parser-output .hlist li dd:first-child::before,.mw-parser-output .hlist li dt:first-child::before,.mw-parser-output .hlist li li:first-child::before{content:" (";font-weight:normal}.mw-parser-output .hlist dd dd:last-child::after,.mw-parser-output .hlist dd dt:last-child::after,.mw-parser-output .hlist dd li:last-child::after,.mw-parser-output .hlist dt dd:last-child::after,.mw-parser-output .hlist dt dt:last-child::after,.mw-parser-output .hlist dt li:last-child::after,.mw-parser-output .hlist li dd:last-child::after,.mw-parser-output .hlist li dt:last-child::after,.mw-parser-output .hlist li li:last-child::after{content:")";font-weight:normal}.mw-parser-output .hlist ol{counter-reset:listitem}.mw-parser-output .hlist ol>li{counter-increment:listitem}.mw-parser-output .hlist ol>li::before{content:" "counter(listitem)"\a0 "}.mw-parser-output .hlist dd ol>li:first-child::before,.mw-parser-output .hlist dt ol>li:first-child::before,.mw-parser-output .hlist li ol>li:first-child::before{content:" ("counter(listitem)"\a0 "}</style><style data-mw-deduplicate="TemplateStyles:r1246091330">.mw-parser-output .sidebar{width:22em;float:right;clear:right;margin:0.5em 0 1em 1em;background:var(--background-color-neutral-subtle,#f8f9fa);border:1px solid var(--border-color-base,#a2a9b1);padding:0.2em;text-align:center;line-height:1.4em;font-size:88%;border-collapse:collapse;display:table}body.skin-minerva .mw-parser-output .sidebar{display:table!important;float:right!important;margin:0.5em 0 1em 1em!important}.mw-parser-output .sidebar-subgroup{width:100%;margin:0;border-spacing:0}.mw-parser-output .sidebar-left{float:left;clear:left;margin:0.5em 1em 1em 0}.mw-parser-output .sidebar-none{float:none;clear:both;margin:0.5em 1em 1em 0}.mw-parser-output .sidebar-outer-title{padding:0 0.4em 0.2em;font-size:125%;line-height:1.2em;font-weight:bold}.mw-parser-output .sidebar-top-image{padding:0.4em}.mw-parser-output .sidebar-top-caption,.mw-parser-output .sidebar-pretitle-with-top-image,.mw-parser-output .sidebar-caption{padding:0.2em 0.4em 0;line-height:1.2em}.mw-parser-output .sidebar-pretitle{padding:0.4em 0.4em 0;line-height:1.2em}.mw-parser-output .sidebar-title,.mw-parser-output .sidebar-title-with-pretitle{padding:0.2em 0.8em;font-size:145%;line-height:1.2em}.mw-parser-output .sidebar-title-with-pretitle{padding:0.1em 0.4em}.mw-parser-output .sidebar-image{padding:0.2em 0.4em 0.4em}.mw-parser-output .sidebar-heading{padding:0.1em 0.4em}.mw-parser-output .sidebar-content{padding:0 0.5em 0.4em}.mw-parser-output .sidebar-content-with-subgroup{padding:0.1em 0.4em 0.2em}.mw-parser-output .sidebar-above,.mw-parser-output .sidebar-below{padding:0.3em 0.8em;font-weight:bold}.mw-parser-output .sidebar-collapse .sidebar-above,.mw-parser-output .sidebar-collapse .sidebar-below{border-top:1px solid #aaa;border-bottom:1px solid #aaa}.mw-parser-output .sidebar-navbar{text-align:right;font-size:115%;padding:0 0.4em 0.4em}.mw-parser-output .sidebar-list-title{padding:0 0.4em;text-align:left;font-weight:bold;line-height:1.6em;font-size:105%}.mw-parser-output .sidebar-list-title-c{padding:0 0.4em;text-align:center;margin:0 3.3em}@media(max-width:640px){body.mediawiki .mw-parser-output .sidebar{width:100%!important;clear:both;float:none!important;margin-left:0!important;margin-right:0!important}}body.skin--responsive .mw-parser-output .sidebar a>img{max-width:none!important}@media screen{html.skin-theme-clientpref-night .mw-parser-output .sidebar:not(.notheme) .sidebar-list-title,html.skin-theme-clientpref-night .mw-parser-output .sidebar:not(.notheme) .sidebar-title-with-pretitle{background:transparent!important}html.skin-theme-clientpref-night .mw-parser-output .sidebar:not(.notheme) .sidebar-title-with-pretitle a{color:var(--color-progressive)!important}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .sidebar:not(.notheme) .sidebar-list-title,html.skin-theme-clientpref-os .mw-parser-output .sidebar:not(.notheme) .sidebar-title-with-pretitle{background:transparent!important}html.skin-theme-clientpref-os .mw-parser-output .sidebar:not(.notheme) .sidebar-title-with-pretitle a{color:var(--color-progressive)!important}}@media print{body.ns-0 .mw-parser-output .sidebar{display:none!important}}</style><table class="sidebar sidebar-collapse nomobile nowraplinks hlist"><tbody><tr><th class="sidebar-title"><a href="https://en.wikipedia.org/wiki/Computer_memory" title="Computer memory">Computer memory</a> and <a href="https://en.wikipedia.org/wiki/Computer_data_storage" title="Computer data storage">computer data storage</a> types</th></tr><tr><td class="sidebar-content">
+<div class="sidebar-list mw-collapsible mw-collapsed"><div class="sidebar-list-title" style="color: var(--color-base)">General</div><div class="sidebar-list-content mw-collapsible-content">
+<ul><li><a href="https://en.wikipedia.org/wiki/Memory_cell_(computing)" title="Memory cell (computing)">Memory cell</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_coherence" title="Memory coherence">Memory coherence</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cache_coherence" title="Cache coherence">Cache coherence</a></li>
+<li><a class="mw-selflink selflink">Memory hierarchy</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_access_pattern" title="Memory access pattern">Memory access pattern</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_map" title="Memory map">Memory map</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Computer_data_storage#Secondary_storage" title="Computer data storage">Secondary storage</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Semiconductor_memory" title="Semiconductor memory">MOS memory</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Floating-gate_MOSFET" title="Floating-gate MOSFET">floating-gate</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Continuous_availability" title="Continuous availability">Continuous availability</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Areal_density_(computer_storage)" class="mw-redirect" title="Areal density (computer storage)">Areal density (computer storage)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Block_(data_storage)" title="Block (data storage)">Block (data storage)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Object_storage" title="Object storage">Object storage</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Direct-attached_storage" title="Direct-attached storage">Direct-attached storage</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Network-attached_storage" title="Network-attached storage">Network-attached storage</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Storage_area_network" title="Storage area network">Storage area network</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Block-level_storage" title="Block-level storage">Block-level storage</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Single-instance_storage" title="Single-instance storage">Single-instance storage</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data" title="Data">Data</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_model" title="Data model">Structured data</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Unstructured_data" title="Unstructured data">Unstructured data</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Big_data" title="Big data">Big data</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Metadata" title="Metadata">Metadata</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_compression" title="Data compression">Data compression</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_corruption" title="Data corruption">Data corruption</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_cleansing" title="Data cleansing">Data cleansing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_degradation" title="Data degradation">Data degradation</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_integrity" title="Data integrity">Data integrity</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_security" title="Data security">Data security</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_validation" title="Data validation">Data validation</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_validation_and_reconciliation" title="Data validation and reconciliation">Data validation and reconciliation</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_recovery" title="Data recovery">Data recovery</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Computer_data_storage" title="Computer data storage">Storage</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_cluster" class="mw-redirect" title="Data cluster">Data cluster</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Directory_(computing)" title="Directory (computing)">Directory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Shared_resource" title="Shared resource">Shared resource</a></li>
+<li><a href="https://en.wikipedia.org/wiki/File_sharing" title="File sharing">File sharing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/File_system" title="File system">File system</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Clustered_file_system" title="Clustered file system">Clustered file system</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Clustered_file_system#Distributed_file_systems" title="Clustered file system">Distributed file system</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Distributed_file_system_for_cloud" title="Distributed file system for cloud">Distributed file system for cloud</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Distributed_data_store" title="Distributed data store">Distributed data store</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Distributed_database" title="Distributed database">Distributed database</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Database" title="Database">Database</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_bank" title="Data bank">Data bank</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_storage" title="Data storage">Data storage</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_store" title="Data store">Data store</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_deduplication" title="Data deduplication">Data deduplication</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_structure" title="Data structure">Data structure</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_redundancy" title="Data redundancy">Data redundancy</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Replication_(computing)" title="Replication (computing)">Replication (computing)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_refresh" title="Memory refresh">Memory refresh</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Storage_record" title="Storage record">Storage record</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Information_repository" title="Information repository">Information repository</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Knowledge_base" title="Knowledge base">Knowledge base</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Computer_file" title="Computer file">Computer file</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Object_file" title="Object file">Object file</a></li>
+<li><a href="https://en.wikipedia.org/wiki/File_deletion" title="File deletion">File deletion</a></li>
+<li><a href="https://en.wikipedia.org/wiki/File_copying" title="File copying">File copying</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Backup" title="Backup">Backup</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Core_dump" title="Core dump">Core dump</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Hex_dump" title="Hex dump">Hex dump</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_communication" title="Data communication">Data communication</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Information_transfer" title="Information transfer">Information transfer</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Temporary_file" title="Temporary file">Temporary file</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Copy_protection" title="Copy protection">Copy protection</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Digital_rights_management" title="Digital rights management">Digital rights management</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Volume_(computing)" title="Volume (computing)">Volume (computing)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Boot_sector" title="Boot sector">Boot sector</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Master_boot_record" title="Master boot record">Master boot record</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Volume_boot_record" title="Volume boot record">Volume boot record</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Disk_array" title="Disk array">Disk array</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Disk_image" title="Disk image">Disk image</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Disk_mirroring" title="Disk mirroring">Disk mirroring</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Disk_aggregation" title="Disk aggregation">Disk aggregation</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Disk_partitioning" title="Disk partitioning">Disk partitioning</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_segmentation" title="Memory segmentation">Memory segmentation</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Locality_of_reference" title="Locality of reference">Locality of reference</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Logical_disk" title="Logical disk">Logical disk</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Storage_virtualization" title="Storage virtualization">Storage virtualization</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Virtual_memory" title="Virtual memory">Virtual memory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory-mapped_file" title="Memory-mapped file">Memory-mapped file</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Software_entropy" class="mw-redirect" title="Software entropy">Software entropy</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Software_rot" title="Software rot">Software rot</a></li>
+<li><a href="https://en.wikipedia.org/wiki/In-memory_database" title="In-memory database">In-memory database</a></li>
+<li><a href="https://en.wikipedia.org/wiki/In-memory_processing" title="In-memory processing">In-memory processing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Persistence_(computer_science)" title="Persistence (computer science)">Persistence (computer science)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Persistent_data_structure" title="Persistent data structure">Persistent data structure</a></li>
+<li><a href="https://en.wikipedia.org/wiki/RAID" title="RAID">RAID</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Non-RAID_drive_architectures" title="Non-RAID drive architectures">Non-RAID drive architectures</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_paging" title="Memory paging">Memory paging</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Bank_switching" title="Bank switching">Bank switching</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Grid_computing" title="Grid computing">Grid computing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cloud_computing" title="Cloud computing">Cloud computing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cloud_storage" title="Cloud storage">Cloud storage</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Fog_computing" title="Fog computing">Fog computing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Edge_computing" title="Edge computing">Edge computing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Dew_computing" title="Dew computing">Dew computing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Amdahl%27s_law" title="Amdahl&#39;s law">Amdahl's law</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Moore%27s_law" title="Moore&#39;s law">Moore's law</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Mark_Kryder#Kryder&#39;s_law_projection" title="Mark Kryder">Kryder's law</a></li></ul></div></div></td>
+</tr><tr><th class="sidebar-heading">
+<a href="https://en.wikipedia.org/wiki/Volatile_memory" title="Volatile memory">Volatile</a></th></tr><tr><td class="sidebar-content">
+<div class="sidebar-list mw-collapsible mw-collapsed"><div class="sidebar-list-title" style="color: var(--color-base)"><a href="https://en.wikipedia.org/wiki/Random-access_memory" title="Random-access memory">RAM</a></div><div class="sidebar-list-content mw-collapsible-content">
+<ul><li><a href="https://en.wikipedia.org/wiki/Cache_(computing)#HARDWARE" title="Cache (computing)">Hardware cache</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/CPU_cache" title="CPU cache">CPU cache</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Scratchpad_memory" title="Scratchpad memory">Scratchpad memory</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Dynamic_random-access_memory" title="Dynamic random-access memory">DRAM</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/EDRAM" title="EDRAM">eDRAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Synchronous_dynamic_random-access_memory" title="Synchronous dynamic random-access memory">SDRAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Synchronous_dynamic_random-access_memory#Synchronous_Graphics_RAM_(SGRAM)" title="Synchronous dynamic random-access memory">SGRAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/LPDDR" title="LPDDR">LPDDR</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Quad_Data_Rate_SRAM" title="Quad Data Rate SRAM">QDRSRAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Dynamic_random-access_memory#Extended_data_out_DRAM" title="Dynamic random-access memory">EDO DRAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/XDR_DRAM" title="XDR DRAM">XDR DRAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/RDRAM" title="RDRAM">RDRAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/DDR_SDRAM" title="DDR SDRAM">DDR</a></li>
+<li><a href="https://en.wikipedia.org/wiki/GDDR_SDRAM" title="GDDR SDRAM">GDDR</a></li>
+<li><a href="https://en.wikipedia.org/wiki/High_Bandwidth_Memory" title="High Bandwidth Memory">HBM</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Static_random-access_memory" title="Static random-access memory">SRAM</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/1T-SRAM" title="1T-SRAM">1T-SRAM</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Resistive_random-access_memory" title="Resistive random-access memory">ReRAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Quantum_memory" title="Quantum memory">QRAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Content-addressable_memory" title="Content-addressable memory">Content-addressable memory</a> (CAM)</li>
+<li><a href="https://en.wikipedia.org/wiki/Computational_RAM" title="Computational RAM">Computational RAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Video_random_access_memory" class="mw-redirect" title="Video random access memory">VRAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Dual-ported_RAM" title="Dual-ported RAM">Dual-ported RAM</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Video_RAM_(dual-ported_DRAM)" class="mw-redirect" title="Video RAM (dual-ported DRAM)">Video RAM (dual-ported DRAM)</a></li></ul></li></ul></div></div></td>
+</tr><tr><td class="sidebar-content">
+<div class="sidebar-list mw-collapsible mw-collapsed"><div class="sidebar-list-title" style="color: var(--color-base)">Historical</div><div class="sidebar-list-content mw-collapsible-content">
+<ul><li><a href="https://en.wikipedia.org/wiki/Williams_tube" title="Williams tube">Williams–Kilburn tube</a> (1946–1947)</li>
+<li><a href="https://en.wikipedia.org/wiki/Delay-line_memory" title="Delay-line memory">Delay-line memory</a> (1947)</li>
+<li><a href="https://en.wikipedia.org/wiki/Mellon_optical_memory" title="Mellon optical memory">Mellon optical memory</a> (1951)</li>
+<li><a href="https://en.wikipedia.org/wiki/Selectron_tube" title="Selectron tube">Selectron tube</a> (1952)</li>
+<li><a href="https://en.wikipedia.org/wiki/Dekatron" title="Dekatron">Dekatron</a></li>
+<li><a href="https://en.wikipedia.org/wiki/T-RAM" title="T-RAM">T-RAM</a> (2009)</li>
+<li><a href="https://en.wikipedia.org/wiki/Z-RAM" title="Z-RAM">Z-RAM</a> (2002–2010)</li></ul></div></div></td>
+</tr><tr><th class="sidebar-heading">
+<a href="https://en.wikipedia.org/wiki/Non-volatile_memory" title="Non-volatile memory">Non-volatile</a></th></tr><tr><td class="sidebar-content">
+<div class="sidebar-list mw-collapsible mw-collapsed"><div class="sidebar-list-title" style="color: var(--color-base)"><a href="https://en.wikipedia.org/wiki/Read-only_memory" title="Read-only memory">ROM</a></div><div class="sidebar-list-content mw-collapsible-content">
+<ul><li><a href="https://en.wikipedia.org/wiki/Diode_matrix" title="Diode matrix">Diode matrix</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Read-only_memory#Factory-programmed" title="Read-only memory">MROM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Programmable_ROM" title="Programmable ROM">PROM</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/EPROM" title="EPROM">EPROM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/EEPROM" title="EEPROM">EEPROM</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/ROM_cartridge" title="ROM cartridge">ROM cartridge</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Solid-state_storage" title="Solid-state storage">Solid-state storage</a> (SSS)
+<ul><li><a href="https://en.wikipedia.org/wiki/Flash_memory" title="Flash memory">Flash memory</a> is used in:</li>
+<li><a href="https://en.wikipedia.org/wiki/Solid-state_drive" title="Solid-state drive">Solid-state drive</a> (SSD)</li>
+<li><a href="https://en.wikipedia.org/wiki/Solid-state_hybrid_drive" class="mw-redirect" title="Solid-state hybrid drive">Solid-state hybrid drive</a> (SSHD)</li>
+<li><a href="https://en.wikipedia.org/wiki/USB_flash_drive" title="USB flash drive">USB flash drive</a></li>
+<li><a href="https://en.wikipedia.org/wiki/IBM_FlashSystem" title="IBM FlashSystem">IBM FlashSystem</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Flash_Core_Module" title="Flash Core Module">Flash Core Module</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_card" title="Memory card">Memory card</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Memory_Stick" title="Memory Stick">Memory Stick</a></li>
+<li><a href="https://en.wikipedia.org/wiki/CompactFlash" title="CompactFlash">CompactFlash</a></li>
+<li><a href="https://en.wikipedia.org/wiki/PC_Card" title="PC Card">PC Card</a></li>
+<li><a href="https://en.wikipedia.org/wiki/MultiMediaCard" title="MultiMediaCard">MultiMediaCard</a></li>
+<li><a href="https://en.wikipedia.org/wiki/SD_card" title="SD card">SD card</a></li>
+<li><a href="https://en.wikipedia.org/wiki/SIM_card" title="SIM card">SIM card</a></li>
+<li><a href="https://en.wikipedia.org/wiki/SmartMedia" title="SmartMedia">SmartMedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Universal_Flash_Storage" title="Universal Flash Storage">Universal Flash Storage</a></li>
+<li><a href="https://en.wikipedia.org/wiki/SxS" title="SxS">SxS</a></li>
+<li><a href="https://en.wikipedia.org/wiki/MicroP2" title="MicroP2">MicroP2</a></li>
+<li><a href="https://en.wikipedia.org/wiki/XQD_card" title="XQD card">XQD card</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Programmable_metallization_cell" title="Programmable metallization cell">Programmable metallization cell</a></li></ul></div></div></td>
+</tr><tr><td class="sidebar-content">
+<div class="sidebar-list mw-collapsible mw-collapsed"><div class="sidebar-list-title" style="color: var(--color-base)"><a href="https://en.wikipedia.org/wiki/Non-volatile_random-access_memory" title="Non-volatile random-access memory">NVRAM</a></div><div class="sidebar-list-content mw-collapsible-content">
+<ul><li><a href="https://en.wikipedia.org/wiki/Memistor" title="Memistor">Memistor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memristor" title="Memristor">Memristor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Phase-change_memory" title="Phase-change memory">PCM</a> (<a href="https://en.wikipedia.org/wiki/3D_XPoint" title="3D XPoint">3D XPoint</a>)</li>
+<li><a href="https://en.wikipedia.org/wiki/Magnetoresistive_RAM" title="Magnetoresistive RAM">MRAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Electrochemical_RAM" title="Electrochemical RAM">Electrochemical RAM</a> (ECRAM)</li>
+<li><a href="https://en.wikipedia.org/wiki/Nano-RAM" title="Nano-RAM">Nano-RAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Programmable_metallization_cell" title="Programmable metallization cell">CBRAM</a></li></ul></div></div></td>
+</tr><tr><td class="sidebar-content">
+<div class="sidebar-list mw-collapsible mw-collapsed"><div class="sidebar-list-title" style="color: var(--color-base)">Early-stage <a href="https://en.wikipedia.org/wiki/Non-volatile_random-access_memory" title="Non-volatile random-access memory">NVRAM</a></div><div class="sidebar-list-content mw-collapsible-content">
+<ul><li><a href="https://en.wikipedia.org/wiki/Ferroelectric_RAM" title="Ferroelectric RAM">FeRAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Resistive_random-access_memory" title="Resistive random-access memory">ReRAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Fe_FET" title="Fe FET">FeFET memory</a></li></ul></div></div></td>
+</tr><tr><td class="sidebar-content">
+<div class="sidebar-list mw-collapsible mw-collapsed"><div class="sidebar-list-title" style="color: var(--color-base)"><a href="https://en.wikipedia.org/wiki/Analog_recording" title="Analog recording">Analog recording</a></div><div class="sidebar-list-content mw-collapsible-content">
+<ul><li><a href="https://en.wikipedia.org/wiki/Phonograph_cylinder" title="Phonograph cylinder">Phonograph cylinder</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Phonograph_record" title="Phonograph record">Phonograph record</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Quadruplex_videotape" title="Quadruplex videotape">Quadruplex videotape</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Vision_Electronic_Recording_Apparatus" title="Vision Electronic Recording Apparatus">Vision Electronic Recording Apparatus</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Magnetic_recording" class="mw-redirect" title="Magnetic recording">Magnetic recording</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Magnetic_storage" title="Magnetic storage">Magnetic storage</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Magnetic_tape" title="Magnetic tape">Magnetic tape</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Magnetic-tape_data_storage" title="Magnetic-tape data storage">Magnetic-tape data storage</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Tape_drive" title="Tape drive">Tape drive</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Tape_library" title="Tape library">Tape library</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Digital_Data_Storage" title="Digital Data Storage">Digital Data Storage</a> (DDS)</li>
+<li><a href="https://en.wikipedia.org/wiki/Videotape" title="Videotape">Videotape</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Videocassette" class="mw-redirect" title="Videocassette">Videocassette</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cassette_tape" title="Cassette tape">Cassette tape</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Linear_Tape-Open" title="Linear Tape-Open">Linear Tape-Open</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Betamax" title="Betamax">Betamax</a></li>
+<li><a href="https://en.wikipedia.org/wiki/8_mm_video_format" title="8 mm video format">8 mm video format</a></li>
+<li><a href="https://en.wikipedia.org/wiki/DV_(video_format)" title="DV (video format)">DV</a></li>
+<li><a href="https://en.wikipedia.org/wiki/MiniDV" class="mw-redirect" title="MiniDV">MiniDV</a></li>
+<li><a href="https://en.wikipedia.org/wiki/MicroMV" title="MicroMV">MicroMV</a></li>
+<li><a href="https://en.wikipedia.org/wiki/U-matic" title="U-matic">U-matic</a></li>
+<li><a href="https://en.wikipedia.org/wiki/VHS" title="VHS">VHS</a></li>
+<li><a href="https://en.wikipedia.org/wiki/S-VHS" title="S-VHS">S-VHS</a></li>
+<li><a href="https://en.wikipedia.org/wiki/VHS-C" title="VHS-C">VHS-C</a></li>
+<li><a href="https://en.wikipedia.org/wiki/D-VHS" title="D-VHS">D-VHS</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Hard_disk_drive" title="Hard disk drive">Hard disk drive</a></li></ul></div></div></td>
+</tr><tr><td class="sidebar-content">
+<div class="sidebar-list mw-collapsible mw-collapsed"><div class="sidebar-list-title" style="color: var(--color-base)"><a href="https://en.wikipedia.org/wiki/Optical_storage" title="Optical storage">Optical</a></div><div class="sidebar-list-content mw-collapsible-content">
+<ul><li><a href="https://en.wikipedia.org/wiki/3D_optical_data_storage" title="3D optical data storage">3D optical data storage</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Optical_disc" title="Optical disc">Optical disc</a></li>
+<li><a href="https://en.wikipedia.org/wiki/LaserDisc" title="LaserDisc">LaserDisc</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Compact_Disc_Digital_Audio" title="Compact Disc Digital Audio">Compact Disc Digital Audio</a> (CDDA)</li>
+<li><a href="https://en.wikipedia.org/wiki/Compact_disc" title="Compact disc">CD</a></li>
+<li><a href="https://en.wikipedia.org/wiki/CD_Video" title="CD Video">CD Video</a></li>
+<li><a href="https://en.wikipedia.org/wiki/CD-R" title="CD-R">CD-R</a></li>
+<li><a href="https://en.wikipedia.org/wiki/CD-RW" title="CD-RW">CD-RW</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Video_CD" title="Video CD">Video CD</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Super_Video_CD" title="Super Video CD">Super Video CD</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Mini_CD" title="Mini CD">Mini CD</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Nintendo_optical_discs" title="Nintendo optical discs">Nintendo optical discs</a></li>
+<li><a href="https://en.wikipedia.org/wiki/CD-ROM" title="CD-ROM">CD-ROM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Hyper_CD-ROM" title="Hyper CD-ROM">Hyper CD-ROM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/DVD" title="DVD">DVD</a></li>
+<li><a href="https://en.wikipedia.org/wiki/DVD_recordable#DVD+R_and_DVD+RW_(DVD_&quot;plus&quot;)" title="DVD recordable">DVD+R</a></li>
+<li><a href="https://en.wikipedia.org/wiki/DVD-Video" title="DVD-Video">DVD-Video</a></li>
+<li><a href="https://en.wikipedia.org/wiki/DVD_card" title="DVD card">DVD card</a></li>
+<li><a href="https://en.wikipedia.org/wiki/DVD-RAM" title="DVD-RAM">DVD-RAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/MiniDVD" title="MiniDVD">MiniDVD</a></li>
+<li><a href="https://en.wikipedia.org/wiki/HD_DVD" title="HD DVD">HD DVD</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Blu-ray" title="Blu-ray">Blu-ray</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Ultra_HD_Blu-ray" title="Ultra HD Blu-ray">Ultra HD Blu-ray</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Holographic_Versatile_Disc" title="Holographic Versatile Disc">Holographic Versatile Disc</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Write_once_read_many" title="Write once read many">WORM</a></li></ul></div></div></td>
+</tr><tr><td class="sidebar-content">
+<div class="sidebar-list mw-collapsible mw-collapsed"><div class="sidebar-list-title" style="color: var(--color-base)">In development</div><div class="sidebar-list-content mw-collapsible-content">
+<ul><li><a href="https://en.wikipedia.org/wiki/Programmable_metallization_cell" title="Programmable metallization cell">CBRAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Racetrack_memory" title="Racetrack memory">Racetrack memory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Nano-RAM" title="Nano-RAM">NRAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Millipede_memory" title="Millipede memory">Millipede memory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Electrochemical_RAM" title="Electrochemical RAM">ECRAM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Patterned_media" title="Patterned media">Patterned media</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Holographic_data_storage" title="Holographic data storage">Holographic data storage</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Electronic_quantum_holography" title="Electronic quantum holography">Electronic quantum holography</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/5D_optical_data_storage" title="5D optical data storage">5D optical data storage</a></li>
+<li><a href="https://en.wikipedia.org/wiki/DNA_digital_data_storage" title="DNA digital data storage">DNA digital data storage</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Universal_memory" title="Universal memory">Universal memory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Time_crystal" title="Time crystal">Time crystal</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Quantum_memory" title="Quantum memory">Quantum memory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/UltraRAM" title="UltraRAM">UltraRAM</a></li></ul></div></div></td>
+</tr><tr><td class="sidebar-content">
+<div class="sidebar-list mw-collapsible mw-collapsed"><div class="sidebar-list-title" style="color: var(--color-base)">Historical</div><div class="sidebar-list-content mw-collapsible-content">
+<ul><li><a href="https://en.wikipedia.org/wiki/Paper_data_storage" title="Paper data storage">Paper data storage</a> (1725)</li>
+<li><a href="https://en.wikipedia.org/wiki/Punched_card" title="Punched card">Punched card</a> (1725)</li>
+<li><a href="https://en.wikipedia.org/wiki/Punched_tape" title="Punched tape">Punched tape</a> (1725)</li>
+<li><a href="https://en.wikipedia.org/wiki/Plugboard" title="Plugboard">Plugboard</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Drum_memory" title="Drum memory">Drum memory</a> (1932)</li>
+<li><a href="https://en.wikipedia.org/wiki/Magnetic-core_memory" title="Magnetic-core memory">Magnetic-core memory</a> (1949)</li>
+<li><a href="https://en.wikipedia.org/wiki/Plated-wire_memory" title="Plated-wire memory">Plated-wire memory</a> (1957)</li>
+<li><a href="https://en.wikipedia.org/wiki/Core_rope_memory" title="Core rope memory">Core rope memory</a> (1960s)</li>
+<li><a href="https://en.wikipedia.org/wiki/Thin-film_memory" title="Thin-film memory">Thin-film memory</a> (1962)</li>
+<li><a href="https://en.wikipedia.org/wiki/Disk_pack" title="Disk pack">Disk pack</a> (1962)</li>
+<li><a href="https://en.wikipedia.org/wiki/Twistor_memory" title="Twistor memory">Twistor memory</a> (~1968)</li>
+<li><a href="https://en.wikipedia.org/wiki/Bubble_memory" title="Bubble memory">Bubble memory</a> (~1970)</li>
+<li><a href="https://en.wikipedia.org/wiki/Floppy_disk" title="Floppy disk">Floppy disk</a> (1971)</li></ul></div></div></td>
+</tr><tr><td class="sidebar-navbar"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1129693374"><style data-mw-deduplicate="TemplateStyles:r1239400231">.mw-parser-output .navbar{display:inline;font-size:88%;font-weight:normal}.mw-parser-output .navbar-collapse{float:left;text-align:left}.mw-parser-output .navbar-boxtext{word-spacing:0}.mw-parser-output .navbar ul{display:inline-block;white-space:nowrap;line-height:inherit}.mw-parser-output .navbar-brackets::before{margin-right:-0.125em;content:"[ "}.mw-parser-output .navbar-brackets::after{margin-left:-0.125em;content:" ]"}.mw-parser-output .navbar li{word-spacing:-0.125em}.mw-parser-output .navbar a>span,.mw-parser-output .navbar a>abbr{text-decoration:inherit}.mw-parser-output .navbar-mini abbr{font-variant:small-caps;border-bottom:none;text-decoration:none;cursor:inherit}.mw-parser-output .navbar-ct-full{font-size:114%;margin:0 7em}.mw-parser-output .navbar-ct-mini{font-size:114%;margin:0 4em}html.skin-theme-clientpref-night .mw-parser-output .navbar li a abbr{color:var(--color-base)!important}@media(prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .navbar li a abbr{color:var(--color-base)!important}}@media print{.mw-parser-output .navbar{display:none!important}}</style><div class="navbar plainlinks hlist navbar-mini"><ul><li class="nv-view"><a href="https://en.wikipedia.org/wiki/Template:Memory_types" title="Template:Memory types"><abbr title="View this template">v</abbr></a></li><li class="nv-talk"><a href="https://en.wikipedia.org/wiki/Template_talk:Memory_types" title="Template talk:Memory types"><abbr title="Discuss this template">t</abbr></a></li><li class="nv-edit"><a href="https://en.wikipedia.org/wiki/Special:EditPage/Template:Memory_types" title="Special:EditPage/Template:Memory types"><abbr title="Edit this template">e</abbr></a></li></ul></div></td></tr></tbody></table>
+<p>In <a href="https://en.wikipedia.org/wiki/Computer_architecture" title="Computer architecture">computer architecture</a>, the <b>memory hierarchy</b> separates <a href="https://en.wikipedia.org/wiki/Computer_storage" class="mw-redirect" title="Computer storage">computer storage</a> into a hierarchy based on <a href="https://en.wikipedia.org/wiki/Response_time_(technology)" title="Response time (technology)">response time</a>. Since response time, <a href="https://en.wikipedia.org/wiki/Computational_complexity" title="Computational complexity">complexity</a>, and <a href="https://en.wikipedia.org/wiki/Computer_data_storage" title="Computer data storage">capacity</a> are related, the levels may also be distinguished by their <a href="https://en.wikipedia.org/wiki/Computer_performance" title="Computer performance">performance</a> and controlling technologies.<sup id="cite_ref-toyzee_1-0" class="reference"><a href="#cite_note-toyzee-1"><span class="cite-bracket">&#91;</span>1<span class="cite-bracket">&#93;</span></a></sup> Memory hierarchy affects performance in computer architectural design, algorithm predictions, and lower level <a href="https://en.wikipedia.org/wiki/Computer_programming" title="Computer programming">programming</a> constructs involving <a href="https://en.wikipedia.org/wiki/Locality_of_reference" title="Locality of reference">locality of reference</a>. 
+</p><p>Designing for high performance requires considering the restrictions of the memory hierarchy, i.e. the size and capabilities of each component. Each of the various components can be viewed as part of a hierarchy of memories <span class="texhtml">(<i>m</i><sub>1</sub>, <i>m</i><sub>2</sub>, ..., <i>m<sub>n</sub></i>)</span> in which each member <span class="texhtml mvar" style="font-style:italic;">m<sub>i</sub></span> is typically smaller and faster than the next highest member <span class="texhtml"><i>m</i><sub><i>i</i>+1</sub></span> of the hierarchy. To limit waiting by higher levels, a lower level will respond by filling a buffer and then signaling for activating the transfer.
+</p><p>There are four major storage levels.<sup id="cite_ref-toyzee_1-1" class="reference"><a href="#cite_note-toyzee-1"><span class="cite-bracket">&#91;</span>1<span class="cite-bracket">&#93;</span></a></sup>
+</p>
+<ul><li><i>Internal</i> &#8211; <a href="https://en.wikipedia.org/wiki/Processor_register" title="Processor register">Processor registers</a> and <a href="https://en.wikipedia.org/wiki/CPU_cache" title="CPU cache">cache</a>.</li>
+<li>Main &#8211; the system <a href="https://en.wikipedia.org/wiki/Random-access_memory" title="Random-access memory">RAM</a> and controller cards.</li>
+<li>On-line mass storage &#8211; Secondary storage.</li>
+<li>Off-line bulk storage &#8211; Tertiary and Off-line storage.</li></ul>
+<p>This is a general memory hierarchy structuring. Many other structures are useful.  For example, a paging algorithm may be considered as a level for <a href="https://en.wikipedia.org/wiki/Virtual_memory" title="Virtual memory">virtual memory</a> when designing a <a href="https://en.wikipedia.org/wiki/Computer_architecture" title="Computer architecture">computer architecture</a>, and one can include a level of <a href="https://en.wikipedia.org/wiki/Nearline_storage" title="Nearline storage">nearline storage</a> between online and offline storage.
+</p>
+<meta property="mw:PageProp/toc" />
+<div class="mw-heading mw-heading2"><h2 id="Properties_of_the_technologies_in_the_memory_hierarchy">Properties of the technologies in the memory hierarchy</h2></span></div>
+<ul><li>Adding complexity slows down the <i>memory hierarchy</i>.<sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span class="cite-bracket">&#91;</span>2<span class="cite-bracket">&#93;</span></a></sup></li>
+<li>CMOx memory technology stretches the Flash space in the memory hierarchy<sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span class="cite-bracket">&#91;</span>3<span class="cite-bracket">&#93;</span></a></sup></li>
+<li>One of the main ways to increase system performance is minimising how far down the memory hierarchy one has to go to manipulate data.<sup id="cite_ref-4" class="reference"><a href="#cite_note-4"><span class="cite-bracket">&#91;</span>4<span class="cite-bracket">&#93;</span></a></sup></li>
+<li>Latency and bandwidth are two metrics associated with caches. Neither of them is uniform, but is specific to a particular component of the memory hierarchy.<sup id="cite_ref-sun_5-0" class="reference"><a href="#cite_note-sun-5"><span class="cite-bracket">&#91;</span>5<span class="cite-bracket">&#93;</span></a></sup></li>
+<li>Predicting where in the memory hierarchy the data resides is difficult.<sup id="cite_ref-sun_5-1" class="reference"><a href="#cite_note-sun-5"><span class="cite-bracket">&#91;</span>5<span class="cite-bracket">&#93;</span></a></sup></li>
+<li>...the location in the memory hierarchy dictates the time required for the prefetch to occur.<sup id="cite_ref-sun_5-2" class="reference"><a href="#cite_note-sun-5"><span class="cite-bracket">&#91;</span>5<span class="cite-bracket">&#93;</span></a></sup></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Examples">Examples</h2></span></div>
+<figure class="mw-halign-right" typeof="mw:File/Thumb"><a href="https://en.wikipedia.org/wiki/File:Hwloc.png" class="mw-file-description"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Hwloc.png/300px-Hwloc.png" decoding="async" width="300" height="139" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Hwloc.png/450px-Hwloc.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Hwloc.png/600px-Hwloc.png 2x" data-file-width="1450" data-file-height="670" /></a><figcaption>Memory hierarchy of an AMD Bulldozer server.</figcaption></figure>
+<p>The number of levels in the memory hierarchy and the performance at each level has increased over time. The type of memory or storage components also change historically.<sup id="cite_ref-6" class="reference"><a href="#cite_note-6"><span class="cite-bracket">&#91;</span>6<span class="cite-bracket">&#93;</span></a></sup>  For example, the memory hierarchy of an Intel Haswell Mobile<sup id="cite_ref-7" class="reference"><a href="#cite_note-7"><span class="cite-bracket">&#91;</span>7<span class="cite-bracket">&#93;</span></a></sup> processor circa 2013 is:
+</p>
+<ul><li><a href="https://en.wikipedia.org/wiki/Processor_register" title="Processor register">Processor registers</a> &#8211; the fastest possible access (usually 1 CPU cycle). A few thousand bytes in size</li>
+<li><a href="https://en.wikipedia.org/wiki/CPU_cache" title="CPU cache">Cache</a>
+<ul><li>Level 0 (L0) <a href="https://en.wikipedia.org/wiki/Micro-operation" title="Micro-operation">Micro operations</a> cache &#8211; 6,144 bytes (6 KiB<sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="No source provided for IEC units, sources only use metric units like KB, MB, GB, etc (May 2021)">citation needed</span></a></i>&#93;</sup><sup class="noprint Inline-Template" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:No_original_research" title="Wikipedia:No original research"><span title="The material near this tag contains original research. (May 2021)">original research</span></a></i>&#93;</sup>)<sup id="cite_ref-8" class="reference"><a href="#cite_note-8"><span class="cite-bracket">&#91;</span>8<span class="cite-bracket">&#93;</span></a></sup> in size</li>
+<li>Level 1 (L1) <a href="https://en.wikipedia.org/wiki/Opcode" title="Opcode">Instruction</a> cache &#8211; 128 KiB<sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="No source provided for IEC units, sources only use metric units like KB, MB, GB, etc (May 2021)">citation needed</span></a></i>&#93;</sup><sup class="noprint Inline-Template" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:No_original_research" title="Wikipedia:No original research"><span title="The material near this tag contains original research. (May 2021)">original research</span></a></i>&#93;</sup> in size</li>
+<li>Level 1 (L1) Data cache &#8211; 128 KiB<sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="No source provided for IEC units, sources only use metric units like KB, MB, GB, etc (May 2021)">citation needed</span></a></i>&#93;</sup><sup class="noprint Inline-Template" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:No_original_research" title="Wikipedia:No original research"><span title="The material near this tag contains original research. (May 2021)">original research</span></a></i>&#93;</sup> in size. Best access speed is around 700 <a href="https://en.wikipedia.org/wiki/Gigabyte" title="Gigabyte">GB</a>/s<sup id="cite_ref-sisd_qa_f_mem_hsw_9-0" class="reference"><a href="#cite_note-sisd_qa_f_mem_hsw-9"><span class="cite-bracket">&#91;</span>9<span class="cite-bracket">&#93;</span></a></sup></li>
+<li>Level 2 (L2) Instruction and data (shared) &#8211; 1 <a href="https://en.wikipedia.org/wiki/MiB" class="mw-redirect" title="MiB">MiB</a><sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="No source provided for IEC units, sources only use metric units like KB, MB, GB, etc (May 2021)">citation needed</span></a></i>&#93;</sup><sup class="noprint Inline-Template" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:No_original_research" title="Wikipedia:No original research"><span title="The material near this tag contains original research. (May 2021)">original research</span></a></i>&#93;</sup> in size. Best access speed is around 200 GB/s<sup id="cite_ref-sisd_qa_f_mem_hsw_9-1" class="reference"><a href="#cite_note-sisd_qa_f_mem_hsw-9"><span class="cite-bracket">&#91;</span>9<span class="cite-bracket">&#93;</span></a></sup></li>
+<li>Level 3 (L3) Shared cache &#8211; 6 MiB<sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="No source provided for IEC units, sources only use metric units like KB, MB, GB, etc (May 2021)">citation needed</span></a></i>&#93;</sup><sup class="noprint Inline-Template" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:No_original_research" title="Wikipedia:No original research"><span title="The material near this tag contains original research. (May 2021)">original research</span></a></i>&#93;</sup> in size. Best access speed is around 100 GB/s<sup id="cite_ref-sisd_qa_f_mem_hsw_9-2" class="reference"><a href="#cite_note-sisd_qa_f_mem_hsw-9"><span class="cite-bracket">&#91;</span>9<span class="cite-bracket">&#93;</span></a></sup></li>
+<li>Level 4 (L4) Shared cache &#8211; 128 MiB<sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="No source provided for IEC units, sources only use metric units like KB, MB, GB, etc (May 2021)">citation needed</span></a></i>&#93;</sup><sup class="noprint Inline-Template" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:No_original_research" title="Wikipedia:No original research"><span title="The material near this tag contains original research. (May 2021)">original research</span></a></i>&#93;</sup> in size. Best access speed is around 40 GB/s<sup id="cite_ref-sisd_qa_f_mem_hsw_9-3" class="reference"><a href="#cite_note-sisd_qa_f_mem_hsw-9"><span class="cite-bracket">&#91;</span>9<span class="cite-bracket">&#93;</span></a></sup></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Computer_memory" title="Computer memory">Main memory</a> (<a href="https://en.wikipedia.org/wiki/Primary_storage" class="mw-redirect" title="Primary storage">Primary storage</a>) &#8211; <a href="https://en.wikipedia.org/wiki/GiB" class="mw-redirect" title="GiB">GiB</a><sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="No source provided for IEC units, sources only use metric units like KB, MB, GB, etc (May 2021)">citation needed</span></a></i>&#93;</sup><sup class="noprint Inline-Template" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:No_original_research" title="Wikipedia:No original research"><span title="The material near this tag contains original research. (May 2021)">original research</span></a></i>&#93;</sup> in size. Best access speed is around 10 GB/s.<sup id="cite_ref-sisd_qa_f_mem_hsw_9-4" class="reference"><a href="#cite_note-sisd_qa_f_mem_hsw-9"><span class="cite-bracket">&#91;</span>9<span class="cite-bracket">&#93;</span></a></sup> In the case of a <a href="https://en.wikipedia.org/wiki/Non-Uniform_Memory_Access" class="mw-redirect" title="Non-Uniform Memory Access">NUMA</a> machine, access times may not be uniform</li>
+<li><a href="https://en.wikipedia.org/wiki/Disk_storage" title="Disk storage">Disk storage</a> (<a href="https://en.wikipedia.org/wiki/Secondary_storage" class="mw-redirect" title="Secondary storage">Secondary storage</a>) &#8211; <a href="https://en.wikipedia.org/wiki/Terabyte" class="mw-redirect" title="Terabyte">Terabytes</a> in size. As of 2017, best access speed is from a consumer <a href="https://en.wikipedia.org/wiki/Solid-state_drive" title="Solid-state drive">solid state drive</a> is about 2000 MB/s<sup id="cite_ref-10" class="reference"><a href="#cite_note-10"><span class="cite-bracket">&#91;</span>10<span class="cite-bracket">&#93;</span></a></sup></li>
+<li><a href="https://en.wikipedia.org/wiki/Nearline_storage" title="Nearline storage">Nearline storage</a> (<a href="https://en.wikipedia.org/wiki/Tertiary_storage" class="mw-redirect" title="Tertiary storage">Tertiary storage</a>) &#8211; Up to <a href="https://en.wikipedia.org/wiki/Exabytes" class="mw-redirect" title="Exabytes">exabytes</a> in size.  As of 2013, best access speed is about 160 MB/s<sup id="cite_ref-11" class="reference"><a href="#cite_note-11"><span class="cite-bracket">&#91;</span>11<span class="cite-bracket">&#93;</span></a></sup></li>
+<li><a href="https://en.wikipedia.org/wiki/Offline_storage" class="mw-redirect" title="Offline storage">Offline storage</a></li></ul>
+<p>The lower levels of the hierarchy – from disks downwards – are also known as <a href="https://en.wikipedia.org/wiki/Tiered_storage" class="mw-redirect" title="Tiered storage">tiered storage</a>. The formal distinction between online, nearline, and offline storage is:<sup id="cite_ref-pearson2010_12-0" class="reference"><a href="#cite_note-pearson2010-12"><span class="cite-bracket">&#91;</span>12<span class="cite-bracket">&#93;</span></a></sup>
+</p>
+<ul><li>Online storage is immediately available for I/O.</li>
+<li>Nearline storage is not immediately available, but can be made online quickly without human intervention.</li>
+<li>Offline storage is not immediately available, and requires some human intervention to bring online.</li></ul>
+<p>For example, always-on spinning disks are online, while spinning disks that spin-down, such as massive array of idle disk (<a href="https://en.wikipedia.org/wiki/Non-RAID_drive_architectures#MAID" title="Non-RAID drive architectures">MAID</a>), are nearline. Removable media such as tape cartridges that can be automatically loaded, as in a <a href="https://en.wikipedia.org/wiki/Tape_library" title="Tape library">tape library</a>, are nearline, while cartridges that must be manually loaded are offline.
+</p><p>Most modern <a href="https://en.wikipedia.org/wiki/Central_processing_unit" title="Central processing unit">CPUs</a> are so fast that for most program workloads, the <a href="https://en.wiktionary.org/wiki/bottleneck" class="extiw" title="wikt:bottleneck">bottleneck</a> is the <a href="https://en.wikipedia.org/wiki/Locality_of_reference" title="Locality of reference">locality of reference</a> of memory accesses and the efficiency of the <a href="https://en.wikipedia.org/wiki/CPU_cache" title="CPU cache">caching</a> and memory transfer between different levels of the hierarchy<sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources. (September 2009)">citation needed</span></a></i>&#93;</sup>. As a result, the CPU spends much of its time idling, waiting for memory I/O to complete.  This is sometimes called the <i>space cost</i>, as a larger memory object is more likely to overflow a small/fast level and require use of a larger/slower level. The resulting load on memory use is known as <i>pressure</i> (respectively <i>register pressure</i>, <i>cache pressure</i>, and (main) <i>memory pressure</i>). Terms for data being missing from a higher level and needing to be fetched from a lower level are, respectively: <a href="https://en.wikipedia.org/wiki/Register_spilling" class="mw-redirect" title="Register spilling">register spilling</a> (due to <a href="https://en.wikipedia.org/wiki/Register_pressure" class="mw-redirect" title="Register pressure">register pressure</a>: register to cache), <a href="https://en.wikipedia.org/wiki/Cache_miss" class="mw-redirect" title="Cache miss">cache miss</a> (cache to main memory), and (hard) <a href="https://en.wikipedia.org/wiki/Page_fault" title="Page fault">page fault</a> (main memory to disk).
+</p><p>Modern <a href="https://en.wikipedia.org/wiki/Programming_language" title="Programming language">programming languages</a> mainly assume two levels of memory, main memory and disk storage, though in <a href="https://en.wikipedia.org/wiki/Assembly_language" title="Assembly language">assembly language</a> and <a href="https://en.wikipedia.org/wiki/Inline_assembler" title="Inline assembler">inline assemblers</a> in languages such as <a href="https://en.wikipedia.org/wiki/C_(programming_language)" title="C (programming language)">C</a>, registers can be directly accessed. Taking optimal advantage of the memory hierarchy requires the cooperation of programmers, hardware, and compilers (as well as underlying support from the operating system):
+</p>
+<ul><li><i>Programmers</i> are responsible for moving data between disk and memory through file I/O.</li>
+<li><i>Hardware</i> is responsible for moving data between memory and caches.</li>
+<li><i><a href="https://en.wikipedia.org/wiki/Optimizing_compiler" title="Optimizing compiler">Optimizing compilers</a></i> are responsible for generating code that, when executed, will cause the hardware to use caches and registers efficiently.</li></ul>
+<p>Many programmers assume one level of memory.  This works fine until the application hits a performance wall.  Then the memory hierarchy will be assessed during <a href="https://en.wikipedia.org/wiki/Code_refactoring" title="Code refactoring">code refactoring</a>.
+</p>
+<div class="mw-heading mw-heading2"><h2 id="See_also">See also</h2></span></div>
+<ul><li><a href="https://en.wikipedia.org/wiki/Cache_hierarchy" title="Cache hierarchy">Cache hierarchy</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Locality_of_reference#Spatial_and_temporal_locality_usage" title="Locality of reference">Use of spatial and temporal locality: hierarchical memory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cache_(computing)#Buffer_vs._cache" title="Cache (computing)">Buffer vs. cache</a></li>
+<li><a href="https://en.wikipedia.org/wiki/CPU_cache#Cache_hierarchy_in_a_modern_processor" title="CPU cache">Cache hierarchy in a modern processor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_wall" class="mw-redirect" title="Memory wall">Memory wall</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Computer_memory" title="Computer memory">Computer memory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Hierarchical_storage_management" title="Hierarchical storage management">Hierarchical storage management</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cloud_storage" title="Cloud storage">Cloud storage</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_access_pattern" title="Memory access pattern">Memory access pattern</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Communication-avoiding_algorithm" title="Communication-avoiding algorithm">Communication-avoiding algorithm</a></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="References">References</h2></span></div>
+<style data-mw-deduplicate="TemplateStyles:r1239543626">.mw-parser-output .reflist{margin-bottom:0.5em;list-style-type:decimal}@media screen{.mw-parser-output .reflist{font-size:90%}}.mw-parser-output .reflist .references{font-size:100%;margin-bottom:0;list-style-type:inherit}.mw-parser-output .reflist-columns-2{column-width:30em}.mw-parser-output .reflist-columns-3{column-width:25em}.mw-parser-output .reflist-columns{margin-top:0.3em}.mw-parser-output .reflist-columns ol{margin-top:0}.mw-parser-output .reflist-columns li{page-break-inside:avoid;break-inside:avoid-column}.mw-parser-output .reflist-upper-alpha{list-style-type:upper-alpha}.mw-parser-output .reflist-upper-roman{list-style-type:upper-roman}.mw-parser-output .reflist-lower-alpha{list-style-type:lower-alpha}.mw-parser-output .reflist-lower-greek{list-style-type:lower-greek}.mw-parser-output .reflist-lower-roman{list-style-type:lower-roman}</style><div class="reflist">
+<div class="mw-references-wrap mw-references-columns"><ol class="references">
+<li id="cite_note-toyzee-1"><span class="mw-cite-backlink">^ <a href="#cite_ref-toyzee_1-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-toyzee_1-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><style data-mw-deduplicate="TemplateStyles:r1238218222">.mw-parser-output cite.citation{font-style:inherit;word-wrap:break-word}.mw-parser-output .citation q{quotes:"\"""\"""'""'"}.mw-parser-output .citation:target{background-color:rgba(0,127,255,0.133)}.mw-parser-output .id-lock-free.id-lock-free a{background:url("https://upload.wikimedia.org/wikipedia/commons/6/65/Lock-green.svg")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-limited.id-lock-limited a,.mw-parser-output .id-lock-registration.id-lock-registration a{background:url("https://upload.wikimedia.org/wikipedia/commons/d/d6/Lock-gray-alt-2.svg")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-subscription.id-lock-subscription a{background:url("https://upload.wikimedia.org/wikipedia/commons/a/aa/Lock-red-alt-2.svg")right 0.1em center/9px no-repeat}.mw-parser-output .cs1-ws-icon a{background:url("https://upload.wikimedia.org/wikipedia/commons/4/4c/Wikisource-logo.svg")right 0.1em center/12px no-repeat}body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-free a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-limited a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-registration a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-subscription a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .cs1-ws-icon a{background-size:contain;padding:0 1em 0 0}.mw-parser-output .cs1-code{color:inherit;background:inherit;border:none;padding:inherit}.mw-parser-output .cs1-hidden-error{display:none;color:var(--color-error,#d33)}.mw-parser-output .cs1-visible-error{color:var(--color-error,#d33)}.mw-parser-output .cs1-maint{display:none;color:#085;margin-left:0.3em}.mw-parser-output .cs1-kern-left{padding-left:0.2em}.mw-parser-output .cs1-kern-right{padding-right:0.2em}.mw-parser-output .citation .mw-selflink{font-weight:inherit}@media screen{.mw-parser-output .cs1-format{font-size:95%}html.skin-theme-clientpref-night .mw-parser-output .cs1-maint{color:#18911f}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .cs1-maint{color:#18911f}}</style><cite id="CITEREFToyZee1986" class="citation book cs1">Toy, Wing; Zee, Benjamin (1986). <a rel="nofollow" class="external text" href="https://archive.org/details/computerhardware0000toyw/page/30"><i>Computer Hardware/Software Architecture</i></a>. Prentice Hall. p.&#160;<a rel="nofollow" class="external text" href="https://archive.org/details/computerhardware0000toyw/page/30">30</a>. <a href="https://en.wikipedia.org/wiki/ISBN_(identifier)" class="mw-redirect" title="ISBN (identifier)">ISBN</a>&#160;<a href="https://en.wikipedia.org/wiki/Special:BookSources/0-13-163502-6" title="Special:BookSources/0-13-163502-6"><bdi>0-13-163502-6</bdi></a>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Computer+Hardware%2FSoftware+Architecture&amp;rft.pages=30&amp;rft.pub=Prentice+Hall&amp;rft.date=1986&amp;rft.isbn=0-13-163502-6&amp;rft.aulast=Toy&amp;rft.aufirst=Wing&amp;rft.au=Zee%2C+Benjamin&amp;rft_id=https%3A%2F%2Farchive.org%2Fdetails%2Fcomputerhardware0000toyw%2Fpage%2F30&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMemory+hierarchy" class="Z3988"></span></span>
+</li>
+<li id="cite_note-2"><span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><a href="https://en.wikipedia.org/wiki/Write-combining" class="mw-redirect" title="Write-combining">Write-combining</a></span>
+</li>
+<li id="cite_note-3"><span class="mw-cite-backlink"><b><a href="#cite_ref-3">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="https://web.archive.org/web/20090805170055/http://www.unitysemi.com/applications-memory-hierarchy.html">"Memory Hierarchy"</a>. Unitity Semiconductor Corporation. Archived from <a rel="nofollow" class="external text" href="http://www.unitysemi.com/applications-memory-hierarchy.html">the original</a> on 5 August 2009<span class="reference-accessdate">. Retrieved <span class="nowrap">16 September</span> 2009</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=unknown&amp;rft.btitle=Memory+Hierarchy&amp;rft.pub=Unitity+Semiconductor+Corporation&amp;rft_id=http%3A%2F%2Fwww.unitysemi.com%2Fapplications-memory-hierarchy.html&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMemory+hierarchy" class="Z3988"></span></span>
+</li>
+<li id="cite_note-4"><span class="mw-cite-backlink"><b><a href="#cite_ref-4">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite id="CITEREFPádraig_Brady" class="citation web cs1">Pádraig Brady. <a rel="nofollow" class="external text" href="http://www.pixelbeat.org/docs/memory_hierarchy/">"Multi-Core"</a><span class="reference-accessdate">. Retrieved <span class="nowrap">16 September</span> 2009</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=unknown&amp;rft.btitle=Multi-Core&amp;rft.au=P%C3%A1draig+Brady&amp;rft_id=http%3A%2F%2Fwww.pixelbeat.org%2Fdocs%2Fmemory_hierarchy%2F&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMemory+hierarchy" class="Z3988"></span></span>
+</li>
+<li id="cite_note-sun-5"><span class="mw-cite-backlink">^ <a href="#cite_ref-sun_5-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-sun_5-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-sun_5-2"><sup><i><b>c</b></i></sup></a></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite id="CITEREFvan_der_Pas2002" class="citation journal cs1">van der Pas, Ruud (2002). <a rel="nofollow" class="external text" href="http://www.sun.com/blueprints/1102/817-0742.pdf">"Memory Hierarchy in Cache-Based Systems"</a> <span class="cs1-format">(PDF)</span>. Santa Clara, California: <a href="https://en.wikipedia.org/wiki/Sun_Microsystems" title="Sun Microsystems">Sun Microsystems</a>: 26. 817-0742-10.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Memory+Hierarchy+in+Cache-Based+Systems&amp;rft.pages=26&amp;rft.date=2002&amp;rft.aulast=van+der+Pas&amp;rft.aufirst=Ruud&amp;rft_id=http%3A%2F%2Fwww.sun.com%2Fblueprints%2F1102%2F817-0742.pdf&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMemory+hierarchy" class="Z3988"></span> <span class="cs1-visible-error citation-comment"><code class="cs1-code">{{<a href="https://en.wikipedia.org/wiki/Template:Cite_journal" title="Template:Cite journal">cite journal</a>}}</code>: </span><span class="cs1-visible-error citation-comment">Cite journal requires <code class="cs1-code">&#124;journal=</code> (<a href="https://en.wikipedia.org/wiki/Help:CS1_errors#missing_periodical" title="Help:CS1 errors">help</a>)</span></span>
+</li>
+<li id="cite_note-6"><span class="mw-cite-backlink"><b><a href="#cite_ref-6">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="http://www.computerhistory.org/timeline/memory-storage/">"Memory &amp; Storage - Timeline of Computer History - Computer History Museum"</a>. <i>www.computerhistory.org</i>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=www.computerhistory.org&amp;rft.atitle=Memory+%26+Storage+-+Timeline+of+Computer+History+-+Computer+History+Museum&amp;rft_id=http%3A%2F%2Fwww.computerhistory.org%2Ftimeline%2Fmemory-storage%2F&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMemory+hierarchy" class="Z3988"></span></span>
+</li>
+<li id="cite_note-7"><span class="mw-cite-backlink"><b><a href="#cite_ref-7">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite id="CITEREFCrothers" class="citation web cs1">Crothers, Brooke. <a rel="nofollow" class="external text" href="http://news.cnet.com/8301-13579_3-57609045-37/dissecting-intels-top-graphics-in-apples-15-inch-macbook-pro/">"Dissecting Intel's top graphics in Apple's 15-inch MacBook Pro - CNET"</a>. News.cnet.com<span class="reference-accessdate">. Retrieved <span class="nowrap">2014-07-31</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=unknown&amp;rft.btitle=Dissecting+Intel%27s+top+graphics+in+Apple%27s+15-inch+MacBook+Pro+-+CNET&amp;rft.pub=News.cnet.com&amp;rft.aulast=Crothers&amp;rft.aufirst=Brooke&amp;rft_id=http%3A%2F%2Fnews.cnet.com%2F8301-13579_3-57609045-37%2Fdissecting-intels-top-graphics-in-apples-15-inch-macbook-pro%2F&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMemory+hierarchy" class="Z3988"></span></span>
+</li>
+<li id="cite_note-8"><span class="mw-cite-backlink"><b><a href="#cite_ref-8">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="http://www.anandtech.com/show/6355/intels-haswell-architecture/6">"Intel's Haswell Architecture Analyzed: Building a New PC and a New Intel"</a>. AnandTech<span class="reference-accessdate">. Retrieved <span class="nowrap">2014-07-31</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=unknown&amp;rft.btitle=Intel%27s+Haswell+Architecture+Analyzed%3A+Building+a+New+PC+and+a+New+Intel&amp;rft.pub=AnandTech&amp;rft_id=http%3A%2F%2Fwww.anandtech.com%2Fshow%2F6355%2Fintels-haswell-architecture%2F6&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMemory+hierarchy" class="Z3988"></span></span>
+</li>
+<li id="cite_note-sisd_qa_f_mem_hsw-9"><span class="mw-cite-backlink">^ <a href="#cite_ref-sisd_qa_f_mem_hsw_9-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-sisd_qa_f_mem_hsw_9-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-sisd_qa_f_mem_hsw_9-2"><sup><i><b>c</b></i></sup></a> <a href="#cite_ref-sisd_qa_f_mem_hsw_9-3"><sup><i><b>d</b></i></sup></a> <a href="#cite_ref-sisd_qa_f_mem_hsw_9-4"><sup><i><b>e</b></i></sup></a></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="https://web.archive.org/web/20140913231938/http://www.sisoftware.co.uk/?d=qa&amp;f=mem_hsw">"SiSoftware Zone"</a>. Sisoftware.co.uk. Archived from <a rel="nofollow" class="external text" href="http://www.sisoftware.co.uk/?d=qa&amp;f=mem_hsw">the original</a> on 2014-09-13<span class="reference-accessdate">. Retrieved <span class="nowrap">2014-07-31</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=unknown&amp;rft.btitle=SiSoftware+Zone&amp;rft.pub=Sisoftware.co.uk&amp;rft_id=http%3A%2F%2Fwww.sisoftware.co.uk%2F%3Fd%3Dqa%26f%3Dmem_hsw&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMemory+hierarchy" class="Z3988"></span></span>
+</li>
+<li id="cite_note-10"><span class="mw-cite-backlink"><b><a href="#cite_ref-10">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="http://www.storagereview.com/samsung_960_pro_m2_nvme_ssd_review">"Samsung 960 Pro M.2 NVMe SSD Review"</a>. storagereview.com. 20 October 2016<span class="reference-accessdate">. Retrieved <span class="nowrap">2017-04-13</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=unknown&amp;rft.btitle=Samsung+960+Pro+M.2+NVMe+SSD+Review&amp;rft.pub=storagereview.com&amp;rft.date=2016-10-20&amp;rft_id=http%3A%2F%2Fwww.storagereview.com%2Fsamsung_960_pro_m2_nvme_ssd_review&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMemory+hierarchy" class="Z3988"></span></span>
+</li>
+<li id="cite_note-11"><span class="mw-cite-backlink"><b><a href="#cite_ref-11">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="https://web.archive.org/web/20110727052050/http://www.lto.org/technology/generations.html">"Ultrium - LTO Technology - Ultrium GenerationsLTO"</a>. Lto.org. Archived from <a rel="nofollow" class="external text" href="http://www.lto.org/technology/generations.html">the original</a> on 2011-07-27<span class="reference-accessdate">. Retrieved <span class="nowrap">2014-07-31</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=unknown&amp;rft.btitle=Ultrium+-+LTO+Technology+-+Ultrium+GenerationsLTO&amp;rft.pub=Lto.org&amp;rft_id=http%3A%2F%2Fwww.lto.org%2Ftechnology%2Fgenerations.html&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMemory+hierarchy" class="Z3988"></span></span>
+</li>
+<li id="cite_note-pearson2010-12"><span class="mw-cite-backlink"><b><a href="#cite_ref-pearson2010_12-0">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite id="CITEREFPearson2010" class="citation web cs1">Pearson, Tony (2010). <a rel="nofollow" class="external text" href="https://web.archive.org/web/20181127020712/https://www.ibm.com/developerworks/community/blogs/InsideSystemStorage/entry/the_correct_use_of_the_term_nearline2?lang=en">"Correct use of the term Nearline"</a>. <i>IBM Developerworks, Inside System Storage</i>. Archived from <a rel="nofollow" class="external text" href="https://www.ibm.com/developerworks/community/blogs/InsideSystemStorage/entry/the_correct_use_of_the_term_nearline2">the original</a> on 2018-11-27<span class="reference-accessdate">. Retrieved <span class="nowrap">2015-08-16</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=IBM+Developerworks%2C+Inside+System+Storage&amp;rft.atitle=Correct+use+of+the+term+Nearline.&amp;rft.date=2010&amp;rft.aulast=Pearson&amp;rft.aufirst=Tony&amp;rft_id=https%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fcommunity%2Fblogs%2FInsideSystemStorage%2Fentry%2Fthe_correct_use_of_the_term_nearline2&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMemory+hierarchy" class="Z3988"></span></span>
+</li>
+</ol></div></div>
+<!-- 
+NewPP limit report
+Parsed by mw‐web.codfw.main‐6c5c9b5484‐nr8r4
+Cached time: 20240920142122
+Cache expiry: 2592000
+Reduced expiry: false
+Complications: [vary‐revision‐sha1, show‐toc]
+CPU time usage: 0.483 seconds
+Real time usage: 0.687 seconds
+Preprocessor visited node count: 3600/1000000
+Post‐expand include size: 81445/2097152 bytes
+Template argument size: 9771/2097152 bytes
+Highest expansion depth: 12/100
+Expensive parser function count: 4/500
+Unstrip recursion depth: 1/20
+Unstrip post‐expand size: 49764/5000000 bytes
+Lua time usage: 0.295/10.000 seconds
+Lua memory usage: 5833159/52428800 bytes
+Number of Wikibase entities loaded: 0/400
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  498.176      1 -total
+ 29.15%  145.218      1 Template:Reflist
+ 26.98%  134.384     15 Template:Fix
+ 20.71%  103.174      1 Template:Memory_types
+ 20.41%  101.700      7 Template:Cn
+ 20.26%  100.940      1 Template:Sidebar_with_collapsible_lists
+ 16.62%   82.802      1 Template:Cite_book
+ 13.89%   69.190      1 Template:Short_description
+ 10.47%   52.155     15 Template:Delink
+ 10.46%   52.115     23 Template:Category_handler
+-->
+
+<!-- Saved in parser cache with key enwiki:pcache:idhash:137146-0!canonical and timestamp 20240920142122 and revision id 1246695492. Rendering was triggered because: page-view
+ -->
+</div>

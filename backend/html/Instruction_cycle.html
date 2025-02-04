@@ -1,0 +1,415 @@
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr"><div class="shortdescription nomobile noexcerpt noprint searchaux" style="display:none">Basic operation cycle of a computer</div>
+<style data-mw-deduplicate="TemplateStyles:r1236091366">.mw-parser-output .ambox{border:1px solid #a2a9b1;border-left:10px solid #36c;background-color:#fbfbfb;box-sizing:border-box}.mw-parser-output .ambox+link+.ambox,.mw-parser-output .ambox+link+style+.ambox,.mw-parser-output .ambox+link+link+.ambox,.mw-parser-output .ambox+.mw-empty-elt+link+.ambox,.mw-parser-output .ambox+.mw-empty-elt+link+style+.ambox,.mw-parser-output .ambox+.mw-empty-elt+link+link+.ambox{margin-top:-1px}html body.mediawiki .mw-parser-output .ambox.mbox-small-left{margin:4px 1em 4px 0;overflow:hidden;width:238px;border-collapse:collapse;font-size:88%;line-height:1.25em}.mw-parser-output .ambox-speedy{border-left:10px solid #b32424;background-color:#fee7e6}.mw-parser-output .ambox-delete{border-left:10px solid #b32424}.mw-parser-output .ambox-content{border-left:10px solid #f28500}.mw-parser-output .ambox-style{border-left:10px solid #fc3}.mw-parser-output .ambox-move{border-left:10px solid #9932cc}.mw-parser-output .ambox-protection{border-left:10px solid #a2a9b1}.mw-parser-output .ambox .mbox-text{border:none;padding:0.25em 0.5em;width:100%}.mw-parser-output .ambox .mbox-image{border:none;padding:2px 0 2px 0.5em;text-align:center}.mw-parser-output .ambox .mbox-imageright{border:none;padding:2px 0.5em 2px 0;text-align:center}.mw-parser-output .ambox .mbox-empty-cell{border:none;padding:0;width:1px}.mw-parser-output .ambox .mbox-image-div{width:52px}html.client-js body.skin-minerva .mw-parser-output .mbox-text-span{margin-left:23px!important}@media(min-width:720px){.mw-parser-output .ambox{margin:0 10%}}@media print{body.ns-0 .mw-parser-output .ambox{display:none!important}}</style><table class="box-More_citations_needed plainlinks metadata ambox ambox-content ambox-Refimprove" role="presentation"><tbody><tr><td class="mbox-image"><div class="mbox-image-div"><span typeof="mw:File"><a href="https://en.wikipedia.org/wiki/File:Question_book-new.svg" class="mw-file-description"><img alt="" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/50px-Question_book-new.svg.png" decoding="async" width="50" height="39" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/75px-Question_book-new.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/100px-Question_book-new.svg.png 2x" data-file-width="512" data-file-height="399" /></a></span></div></td><td class="mbox-text"><div class="mbox-text-span">This article <b>needs additional citations for <a href="https://en.wikipedia.org/wiki/Wikipedia:Verifiability" title="Wikipedia:Verifiability">verification</a></b>.<span class="hide-when-compact"> Please help <a href="https://en.wikipedia.org/wiki/Special:EditPage/Instruction_cycle" title="Special:EditPage/Instruction cycle">improve this article</a> by <a href="https://en.wikipedia.org/wiki/Help:Referencing_for_beginners" title="Help:Referencing for beginners">adding citations to reliable sources</a>. Unsourced material may be challenged and removed.<br /><small><span class="plainlinks"><i>Find sources:</i>&#160;<a rel="nofollow" class="external text" href="https://www.google.com/search?as_eq=wikipedia&amp;q=%22Instruction+cycle%22">"Instruction cycle"</a>&#160;–&#160;<a rel="nofollow" class="external text" href="https://www.google.com/search?tbm=nws&amp;q=%22Instruction+cycle%22+-wikipedia&amp;tbs=ar:1">news</a>&#160;<b>·</b> <a rel="nofollow" class="external text" href="https://www.google.com/search?&amp;q=%22Instruction+cycle%22&amp;tbs=bkt:s&amp;tbm=bks">newspapers</a>&#160;<b>·</b> <a rel="nofollow" class="external text" href="https://www.google.com/search?tbs=bks:1&amp;q=%22Instruction+cycle%22+-wikipedia">books</a>&#160;<b>·</b> <a rel="nofollow" class="external text" href="https://scholar.google.com/scholar?q=%22Instruction+cycle%22">scholar</a>&#160;<b>·</b> <a rel="nofollow" class="external text" href="https://www.jstor.org/action/doBasicSearch?Query=%22Instruction+cycle%22&amp;acc=on&amp;wc=on">JSTOR</a></span></small></span>  <span class="date-container"><i>(<span class="date">October 2009</span>)</i></span><span class="hide-when-compact"><i> (<small><a href="https://en.wikipedia.org/wiki/Help:Maintenance_template_removal" title="Help:Maintenance template removal">Learn how and when to remove this message</a></small>)</i></span></div></td></tr></tbody></table>
+<p>The <b>instruction cycle</b> (also known as the <b>fetch–decode–execute cycle</b>, or simply the <b>fetch–execute cycle</b>) is the cycle that the <a href="https://en.wikipedia.org/wiki/Central_processing_unit" title="Central processing unit">central processing unit</a> (CPU) follows from <a href="https://en.wikipedia.org/wiki/Booting" title="Booting">boot-up</a> until the computer has shut down in order to process instructions. It is composed of three main stages: the fetch stage, the decode stage, and the execute stage. 
+</p>
+<figure class="mw-default-size" typeof="mw:File/Thumb"><a href="https://en.wikipedia.org/wiki/File:Fetch-Decode-Execute_Cycle.png" class="mw-file-description"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Fetch-Decode-Execute_Cycle.png/220px-Fetch-Decode-Execute_Cycle.png" decoding="async" width="220" height="362" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Fetch-Decode-Execute_Cycle.png/330px-Fetch-Decode-Execute_Cycle.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Fetch-Decode-Execute_Cycle.png/440px-Fetch-Decode-Execute_Cycle.png 2x" data-file-width="511" data-file-height="841" /></a><figcaption>This is a simple diagram illustrating the individual stages of the fetch-decode-execute cycle. Legend: <div><ul><li>PC – <a href="https://en.wikipedia.org/wiki/Program_counter" title="Program counter">Program counter</a></li><li>MAR – <a href="https://en.wikipedia.org/wiki/Memory_address_register" title="Memory address register">Memory address register</a></li><li>MDR – <a href="https://en.wikipedia.org/wiki/Memory_buffer_register" title="Memory buffer register">Memory data register</a></li><li>CIR – <a href="https://en.wikipedia.org/wiki/Instruction_register" title="Instruction register">Current instruction register</a></li><li>CU – <a href="https://en.wikipedia.org/wiki/Control_unit" title="Control unit">Control unit</a></li><li>ALU – <a href="https://en.wikipedia.org/wiki/Arithmetic_logic_unit" title="Arithmetic logic unit">Arithmetic logic unit</a></li></ul></div> </figcaption></figure>
+<p>In simpler CPUs, the instruction cycle is executed sequentially, each instruction being processed before the next one is started. In most modern CPUs, the instruction cycles are instead executed <a href="https://en.wikipedia.org/wiki/Concurrent_computing" title="Concurrent computing">concurrently</a>, and often in <a href="https://en.wikipedia.org/wiki/Parallel_computing" title="Parallel computing">parallel</a>, through an <a href="https://en.wikipedia.org/wiki/Instruction_pipeline" class="mw-redirect" title="Instruction pipeline">instruction pipeline</a>: the next instruction starts being processed before the previous instruction has finished, which is possible because the cycle is broken up into separate steps.<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span class="cite-bracket">&#91;</span>1<span class="cite-bracket">&#93;</span></a></sup>
+</p>
+<meta property="mw:PageProp/toc" />
+<div class="mw-heading mw-heading2"><h2 id="Role_of_components">Role of components</h2></span></div>
+<p>The <a href="https://en.wikipedia.org/wiki/Program_counter" title="Program counter">program counter (PC)</a> is a special <a href="https://en.wikipedia.org/wiki/Processor_register" title="Processor register">register</a> that holds the memory address of the next instruction to be executed. During the fetch stage, the address stored in the PC is copied into the <a href="https://en.wikipedia.org/wiki/Memory_address_register" title="Memory address register">memory address register (MAR)</a> and then the PC is incremented in order to "point" to the memory address of the next instruction to be executed. The CPU then takes the instruction at the memory address described by the MAR and copies it into the <a href="https://en.wikipedia.org/wiki/Memory_buffer_register" title="Memory buffer register">memory data register (MDR)</a>. The MDR also acts as a two-way register that holds data fetched from memory or data waiting to be stored in memory (it is also known as the memory buffer register (MBR) because of this). Eventually, the instruction in the MDR is copied into the <a href="https://en.wikipedia.org/wiki/Instruction_register" title="Instruction register">current instruction register (CIR)</a> which acts as a temporary holding ground for the instruction that has just been fetched from memory.
+</p><p>During the decode stage, the <a href="https://en.wikipedia.org/wiki/Control_unit" title="Control unit">control unit (CU)</a> will decode the instruction in the CIR. The CU then sends signals to other components within the CPU, such as the <a href="https://en.wikipedia.org/wiki/Arithmetic_logic_unit" title="Arithmetic logic unit">arithmetic logic unit (ALU)</a> and the <a href="https://en.wikipedia.org/wiki/Floating-point_unit" title="Floating-point unit">floating point unit (FPU)</a>. The ALU performs arithmetic operations such as addition and subtraction and also <a href="https://en.wikipedia.org/wiki/Multiplication_and_repeated_addition" title="Multiplication and repeated addition">multiplication via repeated addition</a> and division via repeated subtraction.<sup class="noprint Inline-Template" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Accuracy_dispute#Disputed_statement" title="Wikipedia:Accuracy dispute"><span title="Binary multiplier circuitry is used, not method described in the link (May 2021)">dubious</span></a>&#32;&#8211; <a href="https://en.wikipedia.org/wiki/Talk:Instruction_cycle#Dubious" title="Talk:Instruction cycle">discuss</a></i>&#93;</sup> It also performs logic operations such as <a href="https://en.wikipedia.org/wiki/AND_gate" title="AND gate">AND</a>, <a href="https://en.wikipedia.org/wiki/OR_gate" title="OR gate">OR</a>, <a href="https://en.wikipedia.org/wiki/Inverter_(logic_gate)" title="Inverter (logic gate)">NOT</a>, and <a href="https://en.wikipedia.org/wiki/Bitwise_operation" title="Bitwise operation">binary shifts</a> as well. The FPU is reserved for performing <a href="https://en.wikipedia.org/wiki/Floating-point_arithmetic" title="Floating-point arithmetic">floating-point operations</a>.
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Summary_of_stages">Summary of stages</h2></span></div>
+<p>Each computer's CPU can have different cycles based on different instruction sets, but will be similar to the following cycle:
+</p>
+<ol><li><b>Fetch stage</b>: The next instruction is fetched from the memory address that is currently stored in the program counter and stored into the instruction register. At the end of the fetch operation, the PC points to the next instruction that will be read at the next cycle.</li>
+<li><b>Decode stage</b>: During this stage, the encoded instruction presented in the instruction register is interpreted by the decoder.
+<ul><li><b>Determine effective address</b>: In the case of an instruction which references memory, the execution phase will need to have the memory address to use. Although some instructions may directly contain the address to use, often the effective address will need to be developed by combining a value from a field of the instruction with the value held in a register, and in some machine architectures there can be an optional variant requiring an extra memory access to obtain the needed address from memory.</li></ul></li>
+<li><b>Execute stage</b>: The control unit of the CPU passes the decoded information as a sequence of control signals to the relevant functional units of the CPU to perform the actions required by the instruction, such as reading values from registers, passing them to the ALU to perform mathematical or logic functions on them, and writing the result back to a register. If the ALU is involved, it sends a condition signal back to the CU. The result generated by the operation is stored in the main memory or sent to an output device. Based on the feedback from the ALU, the PC may be updated to a different address from which the next instruction will be fetched.</li>
+<li><b>Repeat cycle</b></li></ol>
+<p>In addition, on most processors <a href="https://en.wikipedia.org/wiki/Interrupt" title="Interrupt">interrupts</a> can occur. This will cause the CPU to jump to an interrupt service routine, execute that and then return. In some cases an instruction can be interrupted in the middle, the instruction will have no effect, but will be re-executed after return from the interrupt.
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Initiation">Initiation</h2></span></div>
+<p>The first instruction cycle begins as soon as power is applied to the system, with an initial PC value that is predefined by the system's architecture (for instance, in Intel <a href="https://en.wikipedia.org/wiki/IA-32" title="IA-32">IA-32</a> CPUs, the predefined PC value is <code>0xfffffff0</code>). Typically, this address points to a set of instructions in <a href="https://en.wikipedia.org/wiki/Read-only_memory" title="Read-only memory">read-only memory</a> (ROM), which begins the process of loading (or <i><a href="https://en.wikipedia.org/wiki/Booting" title="Booting">booting</a></i>) the <a href="https://en.wikipedia.org/wiki/Operating_system" title="Operating system">operating system</a>.<sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span class="cite-bracket">&#91;</span>2<span class="cite-bracket">&#93;</span></a></sup>
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Fetch_stage">Fetch stage</h2></span></div>
+<p>The fetch step is the same for each instruction:
+</p>
+<ol><li>The CPU sends the contents of the PC to the MAR and sends a read command on the <a href="https://en.wikipedia.org/wiki/Control_bus" title="Control bus">control bus</a></li>
+<li>In response to the read command (with address equal to PC), the memory returns the data stored at the memory location indicated by the PC on the <a href="https://en.wikipedia.org/wiki/Memory_bus" class="mw-redirect" title="Memory bus">data bus</a></li>
+<li>The CPU copies the data from the data bus into its MDR (also known as MBR; see <a href="#Role_of_components">Role of components</a> section above)</li>
+<li>A fraction of a second later, the CPU copies the data from the MDR to the instruction register for instruction decoding</li>
+<li>The PC is incremented so that it points to the next instruction. This step prepares the CPU for the next cycle.</li></ol>
+<p>The control unit fetches the instruction's address from the <a href="https://en.wikipedia.org/wiki/Computer_memory" title="Computer memory">memory unit</a>.
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Decode_stage">Decode stage</h2></span></div>
+<p>The decoding process allows the processor to determine what instruction is to be performed so that the CPU can tell how many operands it needs to fetch in order to perform the instruction. The opcode fetched from the memory is decoded for the next steps and moved to the appropriate registers. The decoding is typically performed by <a href="https://en.wikipedia.org/wiki/Binary_decoder" title="Binary decoder">binary decoders</a> in the <a href="https://en.wikipedia.org/wiki/CPU" class="mw-redirect" title="CPU">CPU</a>'s <a href="https://en.wikipedia.org/wiki/Control_Unit" class="mw-redirect" title="Control Unit">control unit</a>.
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Determine_the_effective_address">Determine the effective address</h3></span></div>
+<p>This step evaluates which type of operation is to be performed, and if it is a memory operation, the computer determines the effective memory address to be used in the following Execute stage.  There are various possible ways that a computer architecture can specify for determining the address, usually called the <a href="https://en.wikipedia.org/wiki/Addressing_mode" title="Addressing mode">addressing modes</a>.
+</p><p>Some common ways the effective address can be found are:
+</p>
+<ul><li>Directly taken from a field of the instruction</li>
+<li>Taken from a machine register</li>
+<li>Adding an instruction field with a machine register value</li>
+<li>Adding an instruction field and values from two machine registers (typically a base address and an indexing value)</li>
+<li><a href="https://en.wikipedia.org/wiki/Indirect_addressing" class="mw-redirect" title="Indirect addressing"><i>Indirect mode</i></a> – the effective address is read from memory at an address found by one of the above methods</li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Execute_stage">Execute stage</h2></span></div>
+<link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1236091366"><table class="box-Cleanup_rewrite plainlinks metadata ambox ambox-content" role="presentation"><tbody><tr><td class="mbox-image"><div class="mbox-image-div"><span typeof="mw:File"><a href="https://en.wikipedia.org/wiki/File:Crystal_Clear_app_kedit.svg" class="mw-file-description"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Crystal_Clear_app_kedit.svg/40px-Crystal_Clear_app_kedit.svg.png" decoding="async" width="40" height="40" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Crystal_Clear_app_kedit.svg/60px-Crystal_Clear_app_kedit.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Crystal_Clear_app_kedit.svg/80px-Crystal_Clear_app_kedit.svg.png 2x" data-file-width="128" data-file-height="128" /></a></span></div></td><td class="mbox-text"><div class="mbox-text-span">This section <b>may need to be rewritten</b> to comply with Wikipedia's <a href="https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style" title="Wikipedia:Manual of Style">quality standards</a>.<span class="hide-when-compact"> <a class="external text" href="https://en.wikipedia.org/w/index.php?title=Instruction_cycle&amp;action=edit">You can help</a>. The <a href="https://en.wikipedia.org/wiki/Talk:Instruction_cycle" title="Talk:Instruction cycle">talk page</a> may contain suggestions.</span>  <span class="date-container"><i>(<span class="date">June 2019</span>)</i></span></div></td></tr></tbody></table>
+<p>The CPU sends the decoded instruction as a set of control signals to the corresponding computer components. If the instruction involves arithmetic or logic, the ALU is utilized. This is the only stage of the instruction cycle that is useful from the perspective of the end-user. Everything else is overhead required to make the execute step happen.
+</p>
+<div class="mw-heading mw-heading2"><h2 id="See_also">See also</h2></span></div>
+<ul><li><a href="https://en.wikipedia.org/wiki/Time_slice" class="mw-redirect" title="Time slice">Time slice</a>, unit of operating system scheduling</li>
+<li><a href="https://en.wikipedia.org/wiki/Classic_RISC_pipeline" title="Classic RISC pipeline">Classic RISC pipeline</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cycles_per_instruction" title="Cycles per instruction">Cycles per instruction</a></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="References">References</h2></span></div>
+<style data-mw-deduplicate="TemplateStyles:r1239543626">.mw-parser-output .reflist{margin-bottom:0.5em;list-style-type:decimal}@media screen{.mw-parser-output .reflist{font-size:90%}}.mw-parser-output .reflist .references{font-size:100%;margin-bottom:0;list-style-type:inherit}.mw-parser-output .reflist-columns-2{column-width:30em}.mw-parser-output .reflist-columns-3{column-width:25em}.mw-parser-output .reflist-columns{margin-top:0.3em}.mw-parser-output .reflist-columns ol{margin-top:0}.mw-parser-output .reflist-columns li{page-break-inside:avoid;break-inside:avoid-column}.mw-parser-output .reflist-upper-alpha{list-style-type:upper-alpha}.mw-parser-output .reflist-upper-roman{list-style-type:upper-roman}.mw-parser-output .reflist-lower-alpha{list-style-type:lower-alpha}.mw-parser-output .reflist-lower-greek{list-style-type:lower-greek}.mw-parser-output .reflist-lower-roman{list-style-type:lower-roman}</style><div class="reflist">
+<div class="mw-references-wrap"><ol class="references">
+<li id="cite_note-1"><span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><style data-mw-deduplicate="TemplateStyles:r1238218222">.mw-parser-output cite.citation{font-style:inherit;word-wrap:break-word}.mw-parser-output .citation q{quotes:"\"""\"""'""'"}.mw-parser-output .citation:target{background-color:rgba(0,127,255,0.133)}.mw-parser-output .id-lock-free.id-lock-free a{background:url("https://upload.wikimedia.org/wikipedia/commons/6/65/Lock-green.svg")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-limited.id-lock-limited a,.mw-parser-output .id-lock-registration.id-lock-registration a{background:url("https://upload.wikimedia.org/wikipedia/commons/d/d6/Lock-gray-alt-2.svg")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-subscription.id-lock-subscription a{background:url("https://upload.wikimedia.org/wikipedia/commons/a/aa/Lock-red-alt-2.svg")right 0.1em center/9px no-repeat}.mw-parser-output .cs1-ws-icon a{background:url("https://upload.wikimedia.org/wikipedia/commons/4/4c/Wikisource-logo.svg")right 0.1em center/12px no-repeat}body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-free a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-limited a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-registration a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-subscription a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .cs1-ws-icon a{background-size:contain;padding:0 1em 0 0}.mw-parser-output .cs1-code{color:inherit;background:inherit;border:none;padding:inherit}.mw-parser-output .cs1-hidden-error{display:none;color:var(--color-error,#d33)}.mw-parser-output .cs1-visible-error{color:var(--color-error,#d33)}.mw-parser-output .cs1-maint{display:none;color:#085;margin-left:0.3em}.mw-parser-output .cs1-kern-left{padding-left:0.2em}.mw-parser-output .cs1-kern-right{padding-right:0.2em}.mw-parser-output .citation .mw-selflink{font-weight:inherit}@media screen{.mw-parser-output .cs1-format{font-size:95%}html.skin-theme-clientpref-night .mw-parser-output .cs1-maint{color:#18911f}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .cs1-maint{color:#18911f}}</style><cite id="CITEREFCrystal_Chen,_Greg_Novick_and_Kirk_Shimano2000" class="citation web cs1">Crystal Chen, Greg Novick and Kirk Shimano (2000). <a rel="nofollow" class="external text" href="https://cs.stanford.edu/people/eroberts/courses/soco/projects/risc/pipelining/index.html">"Pipelining"</a><span class="reference-accessdate">. Retrieved <span class="nowrap">2019-06-26</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=unknown&amp;rft.btitle=Pipelining&amp;rft.date=2000&amp;rft.au=Crystal+Chen%2C+Greg+Novick+and+Kirk+Shimano&amp;rft_id=https%3A%2F%2Fcs.stanford.edu%2Fpeople%2Feroberts%2Fcourses%2Fsoco%2Fprojects%2Frisc%2Fpipelining%2Findex.html&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AInstruction+cycle" class="Z3988"></span></span>
+</li>
+<li id="cite_note-2"><span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite id="CITEREFBosky_Agarwal2004" class="citation web cs1">Bosky Agarwal (2004). <a rel="nofollow" class="external text" href="https://web.archive.org/web/20090611211308/http://www.cs.montana.edu/~bosky/cs518/ife/IFE.pdf">"Instruction Fetch Execute Cycle"</a> <span class="cs1-format">(PDF)</span>. Archived from <a rel="nofollow" class="external text" href="http://www.cs.montana.edu/~bosky/cs518/ife/IFE.pdf">the original</a> <span class="cs1-format">(PDF)</span> on June 11, 2009<span class="reference-accessdate">. Retrieved <span class="nowrap">2012-10-14</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=unknown&amp;rft.btitle=Instruction+Fetch+Execute+Cycle&amp;rft.date=2004&amp;rft.au=Bosky+Agarwal&amp;rft_id=http%3A%2F%2Fwww.cs.montana.edu%2F~bosky%2Fcs518%2Fife%2FIFE.pdf&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AInstruction+cycle" class="Z3988"></span></span>
+</li>
+</ol></div></div>
+<div class="navbox-styles"><style data-mw-deduplicate="TemplateStyles:r1129693374">.mw-parser-output .hlist dl,.mw-parser-output .hlist ol,.mw-parser-output .hlist ul{margin:0;padding:0}.mw-parser-output .hlist dd,.mw-parser-output .hlist dt,.mw-parser-output .hlist li{margin:0;display:inline}.mw-parser-output .hlist.inline,.mw-parser-output .hlist.inline dl,.mw-parser-output .hlist.inline ol,.mw-parser-output .hlist.inline ul,.mw-parser-output .hlist dl dl,.mw-parser-output .hlist dl ol,.mw-parser-output .hlist dl ul,.mw-parser-output .hlist ol dl,.mw-parser-output .hlist ol ol,.mw-parser-output .hlist ol ul,.mw-parser-output .hlist ul dl,.mw-parser-output .hlist ul ol,.mw-parser-output .hlist ul ul{display:inline}.mw-parser-output .hlist .mw-empty-li{display:none}.mw-parser-output .hlist dt::after{content:": "}.mw-parser-output .hlist dd::after,.mw-parser-output .hlist li::after{content:" · ";font-weight:bold}.mw-parser-output .hlist dd:last-child::after,.mw-parser-output .hlist dt:last-child::after,.mw-parser-output .hlist li:last-child::after{content:none}.mw-parser-output .hlist dd dd:first-child::before,.mw-parser-output .hlist dd dt:first-child::before,.mw-parser-output .hlist dd li:first-child::before,.mw-parser-output .hlist dt dd:first-child::before,.mw-parser-output .hlist dt dt:first-child::before,.mw-parser-output .hlist dt li:first-child::before,.mw-parser-output .hlist li dd:first-child::before,.mw-parser-output .hlist li dt:first-child::before,.mw-parser-output .hlist li li:first-child::before{content:" (";font-weight:normal}.mw-parser-output .hlist dd dd:last-child::after,.mw-parser-output .hlist dd dt:last-child::after,.mw-parser-output .hlist dd li:last-child::after,.mw-parser-output .hlist dt dd:last-child::after,.mw-parser-output .hlist dt dt:last-child::after,.mw-parser-output .hlist dt li:last-child::after,.mw-parser-output .hlist li dd:last-child::after,.mw-parser-output .hlist li dt:last-child::after,.mw-parser-output .hlist li li:last-child::after{content:")";font-weight:normal}.mw-parser-output .hlist ol{counter-reset:listitem}.mw-parser-output .hlist ol>li{counter-increment:listitem}.mw-parser-output .hlist ol>li::before{content:" "counter(listitem)"\a0 "}.mw-parser-output .hlist dd ol>li:first-child::before,.mw-parser-output .hlist dt ol>li:first-child::before,.mw-parser-output .hlist li ol>li:first-child::before{content:" ("counter(listitem)"\a0 "}</style><style data-mw-deduplicate="TemplateStyles:r1236075235">.mw-parser-output .navbox{box-sizing:border-box;border:1px solid #a2a9b1;width:100%;clear:both;font-size:88%;text-align:center;padding:1px;margin:1em auto 0}.mw-parser-output .navbox .navbox{margin-top:0}.mw-parser-output .navbox+.navbox,.mw-parser-output .navbox+.navbox-styles+.navbox{margin-top:-1px}.mw-parser-output .navbox-inner,.mw-parser-output .navbox-subgroup{width:100%}.mw-parser-output .navbox-group,.mw-parser-output .navbox-title,.mw-parser-output .navbox-abovebelow{padding:0.25em 1em;line-height:1.5em;text-align:center}.mw-parser-output .navbox-group{white-space:nowrap;text-align:right}.mw-parser-output .navbox,.mw-parser-output .navbox-subgroup{background-color:#fdfdfd}.mw-parser-output .navbox-list{line-height:1.5em;border-color:#fdfdfd}.mw-parser-output .navbox-list-with-group{text-align:left;border-left-width:2px;border-left-style:solid}.mw-parser-output tr+tr>.navbox-abovebelow,.mw-parser-output tr+tr>.navbox-group,.mw-parser-output tr+tr>.navbox-image,.mw-parser-output tr+tr>.navbox-list{border-top:2px solid #fdfdfd}.mw-parser-output .navbox-title{background-color:#ccf}.mw-parser-output .navbox-abovebelow,.mw-parser-output .navbox-group,.mw-parser-output .navbox-subgroup .navbox-title{background-color:#ddf}.mw-parser-output .navbox-subgroup .navbox-group,.mw-parser-output .navbox-subgroup .navbox-abovebelow{background-color:#e6e6ff}.mw-parser-output .navbox-even{background-color:#f7f7f7}.mw-parser-output .navbox-odd{background-color:transparent}.mw-parser-output .navbox .hlist td dl,.mw-parser-output .navbox .hlist td ol,.mw-parser-output .navbox .hlist td ul,.mw-parser-output .navbox td.hlist dl,.mw-parser-output .navbox td.hlist ol,.mw-parser-output .navbox td.hlist ul{padding:0.125em 0}.mw-parser-output .navbox .navbar{display:block;font-size:100%}.mw-parser-output .navbox-title .navbar{float:left;text-align:left;margin-right:0.5em}body.skin--responsive .mw-parser-output .navbox-image img{max-width:none!important}@media print{body.ns-0 .mw-parser-output .navbox{display:none!important}}</style></div><div role="navigation" class="navbox" aria-labelledby="Processor_technologies" style="padding:3px"><table class="nowraplinks mw-collapsible autocollapse navbox-inner" style="border-spacing:0;background:transparent;color:inherit"><tbody><tr><th scope="col" class="navbox-title" colspan="2"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1129693374"><style data-mw-deduplicate="TemplateStyles:r1239400231">.mw-parser-output .navbar{display:inline;font-size:88%;font-weight:normal}.mw-parser-output .navbar-collapse{float:left;text-align:left}.mw-parser-output .navbar-boxtext{word-spacing:0}.mw-parser-output .navbar ul{display:inline-block;white-space:nowrap;line-height:inherit}.mw-parser-output .navbar-brackets::before{margin-right:-0.125em;content:"[ "}.mw-parser-output .navbar-brackets::after{margin-left:-0.125em;content:" ]"}.mw-parser-output .navbar li{word-spacing:-0.125em}.mw-parser-output .navbar a>span,.mw-parser-output .navbar a>abbr{text-decoration:inherit}.mw-parser-output .navbar-mini abbr{font-variant:small-caps;border-bottom:none;text-decoration:none;cursor:inherit}.mw-parser-output .navbar-ct-full{font-size:114%;margin:0 7em}.mw-parser-output .navbar-ct-mini{font-size:114%;margin:0 4em}html.skin-theme-clientpref-night .mw-parser-output .navbar li a abbr{color:var(--color-base)!important}@media(prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .navbar li a abbr{color:var(--color-base)!important}}@media print{.mw-parser-output .navbar{display:none!important}}</style><div class="navbar plainlinks hlist navbar-mini"><ul><li class="nv-view"><a href="https://en.wikipedia.org/wiki/Template:Processor_technologies" title="Template:Processor technologies"><abbr title="View this template">v</abbr></a></li><li class="nv-talk"><a href="https://en.wikipedia.org/wiki/Template_talk:Processor_technologies" title="Template talk:Processor technologies"><abbr title="Discuss this template">t</abbr></a></li><li class="nv-edit"><a href="https://en.wikipedia.org/wiki/Special:EditPage/Template:Processor_technologies" title="Special:EditPage/Template:Processor technologies"><abbr title="Edit this template">e</abbr></a></li></ul></div><div id="Processor_technologies" style="font-size:114%;margin:0 4em"><a href="https://en.wikipedia.org/wiki/Processor_(computing)" title="Processor (computing)">Processor technologies</a></div></th></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Model_of_computation" title="Model of computation">Models</a></th><td class="navbox-list-with-group navbox-list navbox-odd hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Abstract_machine" title="Abstract machine">Abstract machine</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Stored-program_computer" title="Stored-program computer">Stored-program computer</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Finite-state_machine" title="Finite-state machine">Finite-state machine</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Finite-state_machine_with_datapath" class="mw-redirect" title="Finite-state machine with datapath">with datapath</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Hierarchical_state_machine" class="mw-redirect" title="Hierarchical state machine">Hierarchical</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Deterministic_finite_automaton" title="Deterministic finite automaton">Deterministic finite automaton</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Queue_automaton" title="Queue automaton">Queue automaton</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cellular_automaton" title="Cellular automaton">Cellular automaton</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Quantum_cellular_automaton" title="Quantum cellular automaton">Quantum cellular automaton</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Turing_machine" title="Turing machine">Turing machine</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Alternating_Turing_machine" title="Alternating Turing machine">Alternating Turing machine</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Universal_Turing_machine" title="Universal Turing machine">Universal</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Post%E2%80%93Turing_machine" title="Post–Turing machine">Post–Turing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Quantum_Turing_machine" title="Quantum Turing machine">Quantum</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Nondeterministic_Turing_machine" title="Nondeterministic Turing machine">Nondeterministic Turing machine</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Probabilistic_Turing_machine" title="Probabilistic Turing machine">Probabilistic Turing machine</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Hypercomputation" title="Hypercomputation">Hypercomputation</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Zeno_machine" title="Zeno machine">Zeno machine</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/History_of_general-purpose_CPUs#Belt_machine_architecture" title="History of general-purpose CPUs">Belt machine</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Stack_machine" title="Stack machine">Stack machine</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Register_machine" title="Register machine">Register machines</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Counter_machine" title="Counter machine">Counter</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Pointer_machine" title="Pointer machine">Pointer</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Random-access_machine" title="Random-access machine">Random-access</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Random-access_stored-program_machine" title="Random-access stored-program machine">Random-access stored program</a></li></ul></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Computer_architecture" title="Computer architecture">Architecture</a></th><td class="navbox-list-with-group navbox-list navbox-even hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Microarchitecture" title="Microarchitecture">Microarchitecture</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Von_Neumann_architecture" title="Von Neumann architecture">Von Neumann</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Harvard_architecture" title="Harvard architecture">Harvard</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Modified_Harvard_architecture" title="Modified Harvard architecture">modified</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Dataflow_architecture" title="Dataflow architecture">Dataflow</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Transport_triggered_architecture" title="Transport triggered architecture">Transport-triggered</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cellular_architecture" title="Cellular architecture">Cellular</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Endianness" title="Endianness">Endianness</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Computer_data_storage" title="Computer data storage">Memory access</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Non-uniform_memory_access" title="Non-uniform memory access">NUMA</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Uniform_memory_access" title="Uniform memory access">HUMA</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Load%E2%80%93store_architecture" title="Load–store architecture">Load–store</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Register%E2%80%93memory_architecture" title="Register–memory architecture">Register/memory</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Cache_hierarchy" title="Cache hierarchy">Cache hierarchy</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_hierarchy" title="Memory hierarchy">Memory hierarchy</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Virtual_memory" title="Virtual memory">Virtual memory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Secondary_storage" class="mw-redirect" title="Secondary storage">Secondary storage</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Heterogeneous_System_Architecture" title="Heterogeneous System Architecture">Heterogeneous</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Fabric_computing" title="Fabric computing">Fabric</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Multiprocessing" title="Multiprocessing">Multiprocessing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cognitive_computing" title="Cognitive computing">Cognitive</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Neuromorphic_engineering" class="mw-redirect" title="Neuromorphic engineering">Neuromorphic</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Instruction_set_architecture" title="Instruction set architecture">Instruction set<br />architectures</a></th><td class="navbox-list-with-group navbox-list navbox-odd hlist" style="width:100%;padding:0"><div style="padding:0 0.25em"></div><table class="nowraplinks navbox-subgroup" style="border-spacing:0"><tbody><tr><th scope="row" class="navbox-group" style="width:1%">Types</th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Orthogonal_instruction_set" title="Orthogonal instruction set">Orthogonal instruction set</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Complex_instruction_set_computer" title="Complex instruction set computer">CISC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Reduced_instruction_set_computer" title="Reduced instruction set computer">RISC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Application-specific_instruction_set_processor" title="Application-specific instruction set processor">Application-specific</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Explicit_data_graph_execution" title="Explicit data graph execution">EDGE</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/TRIPS_architecture" title="TRIPS architecture">TRIPS</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Very_long_instruction_word" title="Very long instruction word">VLIW</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Explicitly_parallel_instruction_computing" title="Explicitly parallel instruction computing">EPIC</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Minimal_instruction_set_computer" title="Minimal instruction set computer">MISC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/One-instruction_set_computer" title="One-instruction set computer">OISC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/No_instruction_set_computing" title="No instruction set computing">NISC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Zero_instruction_set_computer" class="mw-redirect" title="Zero instruction set computer">ZISC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/VISC_architecture" title="VISC architecture">VISC architecture</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Quantum_computing" title="Quantum computing">Quantum computing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Comparison_of_instruction_set_architectures" title="Comparison of instruction set architectures">Comparison</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Addressing_mode" title="Addressing mode">Addressing modes</a></li></ul></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Instruction<br />sets</th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Motorola_68000_series" title="Motorola 68000 series">Motorola 68000 series</a></li>
+<li><a href="https://en.wikipedia.org/wiki/VAX" title="VAX">VAX</a></li>
+<li><a href="https://en.wikipedia.org/wiki/PDP-11_architecture" title="PDP-11 architecture">PDP-11</a></li>
+<li><a href="https://en.wikipedia.org/wiki/X86" title="X86">x86</a></li>
+<li><a href="https://en.wikipedia.org/wiki/ARM_architecture_family" title="ARM architecture family">ARM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Stanford_MIPS" title="Stanford MIPS">Stanford MIPS</a></li>
+<li><a href="https://en.wikipedia.org/wiki/MIPS_architecture" title="MIPS architecture">MIPS</a></li>
+<li><a href="https://en.wikipedia.org/wiki/MIPS-X" title="MIPS-X">MIPS-X</a></li>
+<li>Power
+<ul><li><a href="https://en.wikipedia.org/wiki/IBM_POWER_architecture" title="IBM POWER architecture">POWER</a></li>
+<li><a href="https://en.wikipedia.org/wiki/PowerPC" title="PowerPC">PowerPC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Power_ISA" title="Power ISA">Power ISA</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Clipper_architecture" title="Clipper architecture">Clipper architecture</a></li>
+<li><a href="https://en.wikipedia.org/wiki/SPARC" title="SPARC">SPARC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/SuperH" title="SuperH">SuperH</a></li>
+<li><a href="https://en.wikipedia.org/wiki/DEC_Alpha" title="DEC Alpha">DEC Alpha</a></li>
+<li><a href="https://en.wikipedia.org/wiki/ETRAX_CRIS" title="ETRAX CRIS">ETRAX CRIS</a></li>
+<li><a href="https://en.wikipedia.org/wiki/M32R" title="M32R">M32R</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Unicore" title="Unicore">Unicore</a></li>
+<li><a href="https://en.wikipedia.org/wiki/IA-64" title="IA-64">Itanium</a></li>
+<li><a href="https://en.wikipedia.org/wiki/OpenRISC" title="OpenRISC">OpenRISC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/RISC-V" title="RISC-V">RISC-V</a></li>
+<li><a href="https://en.wikipedia.org/wiki/MicroBlaze" title="MicroBlaze">MicroBlaze</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Little_man_computer" title="Little man computer">LMC</a></li>
+<li>System/3x0
+<ul><li><a href="https://en.wikipedia.org/wiki/IBM_System/360_architecture" title="IBM System/360 architecture">S/360</a></li>
+<li><a href="https://en.wikipedia.org/wiki/IBM_System/370" title="IBM System/370">S/370</a></li>
+<li><a href="https://en.wikipedia.org/wiki/IBM_System/390" title="IBM System/390">S/390</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Z/Architecture" title="Z/Architecture">z/Architecture</a></li></ul></li>
+<li>Tilera ISA</li>
+<li><a href="https://en.wikipedia.org/wiki/VISC_architecture" title="VISC architecture">VISC architecture</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Adapteva#Products" class="mw-redirect" title="Adapteva">Epiphany architecture</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Comparison_of_instruction_set_architectures" title="Comparison of instruction set architectures">Others</a></li></ul>
+</div></td></tr></tbody></table><div></div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a class="mw-selflink selflink">Execution</a></th><td class="navbox-list-with-group navbox-list navbox-odd hlist" style="width:100%;padding:0"><div style="padding:0 0.25em"></div><table class="nowraplinks navbox-subgroup" style="border-spacing:0"><tbody><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Instruction_pipelining" title="Instruction pipelining">Instruction pipelining</a></th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Pipeline_stall" title="Pipeline stall">Pipeline stall</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Operand_forwarding" title="Operand forwarding">Operand forwarding</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Classic_RISC_pipeline" title="Classic RISC pipeline">Classic RISC pipeline</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Hazard_(computer_architecture)" title="Hazard (computer architecture)">Hazards</a></th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Data_dependency" title="Data dependency">Data dependency</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Structural_hazard" class="mw-redirect" title="Structural hazard">Structural</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Control_hazard" class="mw-redirect" title="Control hazard">Control</a></li>
+<li><a href="https://en.wikipedia.org/wiki/False_sharing" title="False sharing">False sharing</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Out-of-order_execution" title="Out-of-order execution">Out-of-order</a></th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Scoreboarding" title="Scoreboarding">Scoreboarding</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Tomasulo%27s_algorithm" title="Tomasulo&#39;s algorithm">Tomasulo's algorithm</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Reservation_station" title="Reservation station">Reservation station</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Re-order_buffer" title="Re-order buffer">Re-order buffer</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Register_renaming" title="Register renaming">Register renaming</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Wide-issue" title="Wide-issue">Wide-issue</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Speculative_execution" title="Speculative execution">Speculative</a></th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Branch_predictor" title="Branch predictor">Branch prediction</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_dependence_prediction" title="Memory dependence prediction">Memory dependence prediction</a></li></ul>
+</div></td></tr></tbody></table><div></div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Parallel_computing" title="Parallel computing">Parallelism</a></th><td class="navbox-list-with-group navbox-list navbox-odd hlist" style="width:100%;padding:0"><div style="padding:0 0.25em"></div><table class="nowraplinks navbox-subgroup" style="border-spacing:0"><tbody><tr><th scope="row" class="navbox-group" style="width:1%">Level</th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Bit-level_parallelism" title="Bit-level parallelism">Bit</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Bit-serial_architecture" title="Bit-serial architecture">Bit-serial</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Word_(computer_architecture)" title="Word (computer architecture)">Word</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Instruction-level_parallelism" title="Instruction-level parallelism">Instruction</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Instruction_pipelining" title="Instruction pipelining">Pipelining</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Scalar_processor" title="Scalar processor">Scalar</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Superscalar_processor" title="Superscalar processor">Superscalar</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Task_parallelism" title="Task parallelism">Task</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Thread_(computing)" title="Thread (computing)">Thread</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Process_(computing)" title="Process (computing)">Process</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_parallelism" title="Data parallelism">Data</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Vector_processor" title="Vector processor">Vector</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory-level_parallelism" title="Memory-level parallelism">Memory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Distributed_architecture" class="mw-redirect" title="Distributed architecture">Distributed</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Multithreading_(computer_architecture)" title="Multithreading (computer architecture)">Multithreading</a></th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Temporal_multithreading" title="Temporal multithreading">Temporal</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Simultaneous_multithreading" title="Simultaneous multithreading">Simultaneous</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Hyper-threading" title="Hyper-threading">Hyperthreading</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Simultaneous_and_heterogeneous_multithreading" title="Simultaneous and heterogeneous multithreading">Simultaneous and heterogenous</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Speculative_multithreading" title="Speculative multithreading">Speculative</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Preemption_(computing)" title="Preemption (computing)">Preemptive</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cooperative_multitasking" title="Cooperative multitasking">Cooperative</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Flynn%27s_taxonomy" title="Flynn&#39;s taxonomy">Flynn's taxonomy</a></th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Single_instruction,_single_data" title="Single instruction, single data">SISD</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Single_instruction,_multiple_data" title="Single instruction, multiple data">SIMD</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Single_instruction,_multiple_threads" title="Single instruction, multiple threads">Array processing (SIMT)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Flynn%27s_taxonomy#Pipelined_processor" title="Flynn&#39;s taxonomy">Pipelined processing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Flynn%27s_taxonomy#Associative_processor" title="Flynn&#39;s taxonomy">Associative processing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/SWAR" title="SWAR">SWAR</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Multiple_instruction,_single_data" title="Multiple instruction, single data">MISD</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Multiple_instruction,_multiple_data" title="Multiple instruction, multiple data">MIMD</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Single_program,_multiple_data" title="Single program, multiple data">SPMD</a></li></ul></li></ul>
+</div></td></tr></tbody></table><div></div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Computer_performance" title="Computer performance">Processor<br />performance</a></th><td class="navbox-list-with-group navbox-list navbox-even hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Transistor_count" title="Transistor count">Transistor count</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Instructions_per_cycle" title="Instructions per cycle">Instructions per cycle</a> (IPC)
+<ul><li><a href="https://en.wikipedia.org/wiki/Cycles_per_instruction" title="Cycles per instruction">Cycles per instruction</a> (CPI)</li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Instructions_per_second" title="Instructions per second">Instructions per second</a> (IPS)</li>
+<li><a href="https://en.wikipedia.org/wiki/FLOPS" title="FLOPS">Floating-point operations per second</a> (FLOPS)</li>
+<li><a href="https://en.wikipedia.org/wiki/Transactions_per_second" title="Transactions per second">Transactions per second</a> (TPS)</li>
+<li><a href="https://en.wikipedia.org/wiki/SUPS" title="SUPS">Synaptic updates per second</a> (SUPS)</li>
+<li><a href="https://en.wikipedia.org/wiki/Performance_per_watt" title="Performance per watt">Performance per watt</a> (PPW)</li>
+<li><a href="https://en.wikipedia.org/wiki/Cache_performance_measurement_and_metric" title="Cache performance measurement and metric">Cache performance metrics</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Computer_performance_by_orders_of_magnitude" title="Computer performance by orders of magnitude">Computer performance by orders of magnitude</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Processor_(computing)" title="Processor (computing)">Types</a></th><td class="navbox-list-with-group navbox-list navbox-odd hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Central_processing_unit" title="Central processing unit">Central processing unit</a> (CPU)</li>
+<li><a href="https://en.wikipedia.org/wiki/Graphics_processing_unit" title="Graphics processing unit">Graphics processing unit</a> (GPU)
+<ul><li><a href="https://en.wikipedia.org/wiki/General-purpose_computing_on_graphics_processing_units" title="General-purpose computing on graphics processing units">GPGPU</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Vector_processor" title="Vector processor">Vector</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Barrel_processor" title="Barrel processor">Barrel</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Stream_processing" title="Stream processing">Stream</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Tile_processor" title="Tile processor">Tile processor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Coprocessor" title="Coprocessor">Coprocessor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Programmable_Array_Logic" title="Programmable Array Logic">PAL</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Application-specific_integrated_circuit" title="Application-specific integrated circuit">ASIC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Field-programmable_gate_array" title="Field-programmable gate array">FPGA</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Field-programmable_object_array" title="Field-programmable object array">FPOA</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Complex_programmable_logic_device" title="Complex programmable logic device">CPLD</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Multi-chip_module" title="Multi-chip module">Multi-chip module</a> (MCM)</li>
+<li><a href="https://en.wikipedia.org/wiki/System_in_a_package" title="System in a package">System in a package</a> (SiP)</li>
+<li><a href="https://en.wikipedia.org/wiki/Package_on_a_package" title="Package on a package">Package on a package</a> (PoP)</li></ul>
+</div><table class="nowraplinks navbox-subgroup" style="border-spacing:0"><tbody><tr><th scope="row" class="navbox-group" style="width:1%">By application</th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Embedded_system" title="Embedded system">Embedded system</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Microprocessor" title="Microprocessor">Microprocessor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Microcontroller" title="Microcontroller">Microcontroller</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Mobile_processor" title="Mobile processor">Mobile</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Ultra-low-voltage_processor" title="Ultra-low-voltage processor">Ultra-low-voltage</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Application-specific_instruction_set_processor" title="Application-specific instruction set processor">ASIP</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Soft_microprocessor" title="Soft microprocessor">Soft microprocessor</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Systems<br />on chip</th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/System_on_a_chip" title="System on a chip">System on a chip</a> (SoC)</li>
+<li><a href="https://en.wikipedia.org/wiki/Multiprocessor_system_on_a_chip" class="mw-redirect" title="Multiprocessor system on a chip">Multiprocessor</a> (MPSoC)</li>
+<li><a href="https://en.wikipedia.org/wiki/Cypress_PSoC" title="Cypress PSoC">Cypress PSoC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Network_on_a_chip" title="Network on a chip">Network on a chip</a> (NoC)</li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Hardware_acceleration" title="Hardware acceleration">Hardware<br />accelerators</a></th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Coprocessor" title="Coprocessor">Coprocessor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/AI_accelerator" title="AI accelerator">AI accelerator</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Graphics_processing_unit" title="Graphics processing unit">Graphics processing unit</a> (GPU)</li>
+<li><a href="https://en.wikipedia.org/wiki/Image_processor" title="Image processor">Image processor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Vision_processing_unit" title="Vision processing unit">Vision processing unit</a> (VPU)</li>
+<li><a href="https://en.wikipedia.org/wiki/Physics_processing_unit" title="Physics processing unit">Physics processing unit</a> (PPU)</li>
+<li><a href="https://en.wikipedia.org/wiki/Digital_signal_processor" title="Digital signal processor">Digital signal processor</a> (DSP)</li>
+<li><a href="https://en.wikipedia.org/wiki/Tensor_Processing_Unit" title="Tensor Processing Unit">Tensor Processing Unit</a> (TPU)</li>
+<li><a href="https://en.wikipedia.org/wiki/Secure_cryptoprocessor" title="Secure cryptoprocessor">Secure cryptoprocessor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Network_processor" title="Network processor">Network processor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Baseband_processor" title="Baseband processor">Baseband processor</a></li></ul>
+</div></td></tr></tbody></table><div>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Word_(computer_architecture)" title="Word (computer architecture)">Word size</a></th><td class="navbox-list-with-group navbox-list navbox-odd hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/1-bit_computing" title="1-bit computing">1-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/4-bit_computing" title="4-bit computing">4-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/8-bit_computing" title="8-bit computing">8-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/12-bit_computing" title="12-bit computing">12-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Apollo_Guidance_Computer" title="Apollo Guidance Computer">15-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/16-bit_computing" title="16-bit computing">16-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/24-bit_computing" title="24-bit computing">24-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/32-bit_computing" title="32-bit computing">32-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/48-bit_computing" title="48-bit computing">48-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/64-bit_computing" title="64-bit computing">64-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/128-bit_computing" title="128-bit computing">128-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/256-bit_computing" title="256-bit computing">256-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/512-bit_computing" title="512-bit computing">512-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Bit_slicing" title="Bit slicing">bit slicing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Word_(computer_architecture)#Table_of_word_sizes" title="Word (computer architecture)">others</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Word_(computer_architecture)#Variable-word_architectures" title="Word (computer architecture)">variable</a></li></ul></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Core count</th><td class="navbox-list-with-group navbox-list navbox-even hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Single-core" title="Single-core">Single-core</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Multi-core_processor" title="Multi-core processor">Multi-core</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Manycore_processor" title="Manycore processor">Manycore</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Heterogeneous_computing" title="Heterogeneous computing">Heterogeneous architecture</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Components</th><td class="navbox-list-with-group navbox-list navbox-odd hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Central_processing_unit" title="Central processing unit">Core</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cache_(computing)" title="Cache (computing)">Cache</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/CPU_cache" title="CPU cache">CPU cache</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Scratchpad_memory" title="Scratchpad memory">Scratchpad memory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_cache" class="mw-redirect" title="Data cache">Data cache</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Instruction_cache" class="mw-redirect" title="Instruction cache">Instruction cache</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cache_replacement_policies" title="Cache replacement policies">replacement policies</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cache_coherence" title="Cache coherence">coherence</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Bus_(computing)" title="Bus (computing)">Bus</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Clock_rate" title="Clock rate">Clock rate</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Clock_signal" title="Clock signal">Clock signal</a></li>
+<li><a href="https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)" title="FIFO (computing and electronics)">FIFO</a></li></ul>
+</div><table class="nowraplinks navbox-subgroup" style="border-spacing:0"><tbody><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Execution_unit" title="Execution unit">Functional<br />units</a></th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Arithmetic_logic_unit" title="Arithmetic logic unit">Arithmetic logic unit</a> (ALU)</li>
+<li><a href="https://en.wikipedia.org/wiki/Address_generation_unit" title="Address generation unit">Address generation unit</a> (AGU)</li>
+<li><a href="https://en.wikipedia.org/wiki/Floating-point_unit" title="Floating-point unit">Floating-point unit</a> (FPU)</li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_management_unit" title="Memory management unit">Memory management unit</a> (MMU)
+<ul><li><a href="https://en.wikipedia.org/wiki/Load%E2%80%93store_unit" title="Load–store unit">Load–store unit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Translation_lookaside_buffer" title="Translation lookaside buffer">Translation lookaside buffer</a> (TLB)</li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Branch_predictor" title="Branch predictor">Branch predictor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Branch_target_predictor" title="Branch target predictor">Branch target predictor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_controller" title="Memory controller">Integrated memory controller</a> (IMC)
+<ul><li><a href="https://en.wikipedia.org/wiki/Memory_management_unit" title="Memory management unit">Memory management unit</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Instruction_decoder" class="mw-redirect" title="Instruction decoder">Instruction decoder</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Logic_gate" title="Logic gate">Logic</a></th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Combinational_logic" title="Combinational logic">Combinational</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Sequential_logic" title="Sequential logic">Sequential</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Glue_logic" title="Glue logic">Glue</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Logic_gate" title="Logic gate">Logic gate</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Quantum_logic_gate" title="Quantum logic gate">Quantum</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Gate_array" title="Gate array">Array</a></li></ul></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Hardware_register" title="Hardware register">Registers</a></th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Processor_register" title="Processor register">Processor register</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Status_register" title="Status register">Status register</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Stack_register" title="Stack register">Stack register</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Register_file" title="Register file">Register file</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_buffer_register" title="Memory buffer register">Memory buffer</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_address_register" title="Memory address register">Memory address register</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Program_counter" title="Program counter">Program counter</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Control_unit" title="Control unit">Control unit</a></th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Hardwired_control_unit" class="mw-redirect" title="Hardwired control unit">Hardwired control unit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Instruction_unit" title="Instruction unit">Instruction unit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_buffer" title="Data buffer">Data buffer</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Write_buffer" title="Write buffer">Write buffer</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Microcode" title="Microcode">Microcode</a> <a href="https://en.wikipedia.org/wiki/ROM_image" title="ROM image">ROM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Counter_(digital)" title="Counter (digital)">Counter</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Datapath" title="Datapath">Datapath</a></th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Multiplexer" title="Multiplexer">Multiplexer</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Demultiplexer" class="mw-redirect" title="Demultiplexer">Demultiplexer</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Adder_(electronics)" title="Adder (electronics)">Adder</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Binary_multiplier" title="Binary multiplier">Multiplier</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/CPU_multiplier" title="CPU multiplier">CPU</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Binary_decoder" title="Binary decoder">Binary decoder</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Address_decoder" title="Address decoder">Address decoder</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Sum-addressed_decoder" title="Sum-addressed decoder">Sum-addressed decoder</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Barrel_shifter" title="Barrel shifter">Barrel shifter</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Electronic_circuit" title="Electronic circuit">Circuitry</a></th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Integrated_circuit" title="Integrated circuit">Integrated circuit</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Three-dimensional_integrated_circuit" title="Three-dimensional integrated circuit">3D</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Mixed-signal_integrated_circuit" title="Mixed-signal integrated circuit">Mixed-signal</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Power_management_integrated_circuit" title="Power management integrated circuit">Power management</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Boolean_circuit" title="Boolean circuit">Boolean</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Circuit_(computer_science)" title="Circuit (computer science)">Digital</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Analogue_electronics" title="Analogue electronics">Analog</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Quantum_circuit" title="Quantum circuit">Quantum</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Switch#Electronic_switches" title="Switch">Switch</a></li></ul>
+</div></td></tr></tbody></table><div>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Power_management" title="Power management">Power<br />management</a></th><td class="navbox-list-with-group navbox-list navbox-even hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Power_Management_Unit" title="Power Management Unit">PMU</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Advanced_Power_Management" title="Advanced Power Management">APM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/ACPI" title="ACPI">ACPI</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Dynamic_frequency_scaling" title="Dynamic frequency scaling">Dynamic frequency scaling</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Dynamic_voltage_scaling" title="Dynamic voltage scaling">Dynamic voltage scaling</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Clock_gating" title="Clock gating">Clock gating</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Performance_per_watt" title="Performance per watt">Performance per watt</a> (PPW)</li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Related</th><td class="navbox-list-with-group navbox-list navbox-odd hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/History_of_general-purpose_CPUs" title="History of general-purpose CPUs">History of general-purpose CPUs</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Microprocessor_chronology" title="Microprocessor chronology">Microprocessor chronology</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Processor_design" title="Processor design">Processor design</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Digital_electronics" title="Digital electronics">Digital electronics</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Hardware_security_module" title="Hardware security module">Hardware security module</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Semiconductor_device_fabrication" title="Semiconductor device fabrication">Semiconductor device fabrication</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Tick%E2%80%93tock_model" title="Tick–tock model">Tick–tock model</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Pin_grid_array" title="Pin grid array">Pin grid array</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Chip_carrier" title="Chip carrier">Chip carrier</a></li></ul>
+</div></td></tr></tbody></table></div>
+<!-- 
+NewPP limit report
+Parsed by mw‐web.codfw.main‐64fbd47cb‐sgttq
+Cached time: 20240913064550
+Cache expiry: 2592000
+Reduced expiry: false
+Complications: [vary‐revision‐sha1, show‐toc]
+CPU time usage: 0.395 seconds
+Real time usage: 0.547 seconds
+Preprocessor visited node count: 943/1000000
+Post‐expand include size: 93321/2097152 bytes
+Template argument size: 1145/2097152 bytes
+Highest expansion depth: 12/100
+Expensive parser function count: 4/500
+Unstrip recursion depth: 1/20
+Unstrip post‐expand size: 19535/5000000 bytes
+Lua time usage: 0.238/10.000 seconds
+Lua memory usage: 5018978/52428800 bytes
+Number of Wikibase entities loaded: 0/400
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  439.069      1 -total
+ 25.02%  109.869      1 Template:Reflist
+ 24.05%  105.598      6 Template:Navbox
+ 23.53%  103.332      1 Template:CPU_technologies
+ 23.16%  101.704      1 Template:Short_description
+ 21.18%   92.976      2 Template:Cite_web
+ 18.60%   81.652      1 Template:Refimprove
+ 17.79%   78.121      2 Template:Ambox
+ 10.29%   45.198      3 Template:Main_other
+  9.86%   43.293      2 Template:Pagetype
+-->
+
+<!-- Saved in parser cache with key enwiki:pcache:idhash:575535-0!canonical and timestamp 20240913064550 and revision id 1245477931. Rendering was triggered because: page-view
+ -->
+</div>

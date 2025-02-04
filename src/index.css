@@ -67,3 +67,10 @@
     font-family: 'Inter', sans-serif;
   }
 }
+
+.mw-file-element {
+  @apply border border-border rounded-sm;
+  width: 100%;
+}
+
+

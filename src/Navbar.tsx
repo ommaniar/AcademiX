@@ -8,11 +8,11 @@ const Navbar = () => {
     return (// responsive navbar in tailwind css
         <div className='bg-black text-white'>
             <div className='container mx-auto flex justify-between items-center p-4'>
-                <div className='text-2xl font-bold'>AcademiX</div>
-                <div className='hidden-tog md:flex space-x-4 hidden'>
+                <div className='text-2xl ml-16 font-bold'>AcademiX</div>
+                <div className='hidden-tog mr-16 md:flex space-x-4 hidden'>
                     <a href='/' className='hover:text-gray-300'>Home</a>
                     <a href='/tools' className='hover:text-gray-300'>Tools</a>
-                    <a href='/learn-x' className='hover:text-gray-300'>Why do we learn X</a>
+                    <a href='/articles/' className='hover:text-gray-300'>Articles</a>
                 </div>
                 <div className='md:hidden'>
                     <button className='text-white focus:outline-none' onClick={handleResponsiveNavbar}>

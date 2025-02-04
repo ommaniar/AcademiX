@@ -173,7 +173,9 @@ const WarshallAlgorithm = () => {
         <div className="m-4 flex flex-col md:flex-row gap-4">
             <div ref={outputRef}>
                 <p className="font-bold text-2xl">Floyd-Warshall Algorithm</p>
-
+                <p className="prose"><a href="https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm#Algorithm">:Definition</a></p>
+                <p className="prose"><a href="https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm#Example">:Example</a></p>
+                <p className="prose"><a href="https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm#Applications_and_generalizations">:Applications</a></p>
                 <div>
                     <label>Number of vertices: </label>
                     <input

@@ -1,0 +1,674 @@
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr"><div class="shortdescription nomobile noexcerpt noprint searchaux" style="display:none">Method of improving instruction-level parallelism</div>
+<p class="mw-empty-elt">
+</p>
+<style data-mw-deduplicate="TemplateStyles:r1236091366">.mw-parser-output .ambox{border:1px solid #a2a9b1;border-left:10px solid #36c;background-color:#fbfbfb;box-sizing:border-box}.mw-parser-output .ambox+link+.ambox,.mw-parser-output .ambox+link+style+.ambox,.mw-parser-output .ambox+link+link+.ambox,.mw-parser-output .ambox+.mw-empty-elt+link+.ambox,.mw-parser-output .ambox+.mw-empty-elt+link+style+.ambox,.mw-parser-output .ambox+.mw-empty-elt+link+link+.ambox{margin-top:-1px}html body.mediawiki .mw-parser-output .ambox.mbox-small-left{margin:4px 1em 4px 0;overflow:hidden;width:238px;border-collapse:collapse;font-size:88%;line-height:1.25em}.mw-parser-output .ambox-speedy{border-left:10px solid #b32424;background-color:#fee7e6}.mw-parser-output .ambox-delete{border-left:10px solid #b32424}.mw-parser-output .ambox-content{border-left:10px solid #f28500}.mw-parser-output .ambox-style{border-left:10px solid #fc3}.mw-parser-output .ambox-move{border-left:10px solid #9932cc}.mw-parser-output .ambox-protection{border-left:10px solid #a2a9b1}.mw-parser-output .ambox .mbox-text{border:none;padding:0.25em 0.5em;width:100%}.mw-parser-output .ambox .mbox-image{border:none;padding:2px 0 2px 0.5em;text-align:center}.mw-parser-output .ambox .mbox-imageright{border:none;padding:2px 0.5em 2px 0;text-align:center}.mw-parser-output .ambox .mbox-empty-cell{border:none;padding:0;width:1px}.mw-parser-output .ambox .mbox-image-div{width:52px}html.client-js body.skin-minerva .mw-parser-output .mbox-text-span{margin-left:23px!important}@media(min-width:720px){.mw-parser-output .ambox{margin:0 10%}}@media print{body.ns-0 .mw-parser-output .ambox{display:none!important}}</style><table class="box-More_citations_needed plainlinks metadata ambox ambox-content ambox-Refimprove" role="presentation"><tbody><tr><td class="mbox-image"><div class="mbox-image-div"><span typeof="mw:File"><a href="https://en.wikipedia.org/wiki/File:Question_book-new.svg" class="mw-file-description"><img alt="" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/50px-Question_book-new.svg.png" decoding="async" width="50" height="39" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/75px-Question_book-new.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/100px-Question_book-new.svg.png 2x" data-file-width="512" data-file-height="399" /></a></span></div></td><td class="mbox-text"><div class="mbox-text-span">This article <b>needs additional citations for <a href="https://en.wikipedia.org/wiki/Wikipedia:Verifiability" title="Wikipedia:Verifiability">verification</a></b>.<span class="hide-when-compact"> Please help <a href="https://en.wikipedia.org/wiki/Special:EditPage/Instruction_pipelining" title="Special:EditPage/Instruction pipelining">improve this article</a> by <a href="https://en.wikipedia.org/wiki/Help:Referencing_for_beginners" title="Help:Referencing for beginners">adding citations to reliable sources</a>. Unsourced material may be challenged and removed.<br /><small><span class="plainlinks"><i>Find sources:</i>&#160;<a rel="nofollow" class="external text" href="https://www.google.com/search?as_eq=wikipedia&amp;q=%22Instruction+pipelining%22">"Instruction pipelining"</a>&#160;–&#160;<a rel="nofollow" class="external text" href="https://www.google.com/search?tbm=nws&amp;q=%22Instruction+pipelining%22+-wikipedia&amp;tbs=ar:1">news</a>&#160;<b>·</b> <a rel="nofollow" class="external text" href="https://www.google.com/search?&amp;q=%22Instruction+pipelining%22&amp;tbs=bkt:s&amp;tbm=bks">newspapers</a>&#160;<b>·</b> <a rel="nofollow" class="external text" href="https://www.google.com/search?tbs=bks:1&amp;q=%22Instruction+pipelining%22+-wikipedia">books</a>&#160;<b>·</b> <a rel="nofollow" class="external text" href="https://scholar.google.com/scholar?q=%22Instruction+pipelining%22">scholar</a>&#160;<b>·</b> <a rel="nofollow" class="external text" href="https://www.jstor.org/action/doBasicSearch?Query=%22Instruction+pipelining%22&amp;acc=on&amp;wc=on">JSTOR</a></span></small></span>  <span class="date-container"><i>(<span class="date">May 2016</span>)</i></span><span class="hide-when-compact"><i> (<small><a href="https://en.wikipedia.org/wiki/Help:Maintenance_template_removal" title="Help:Maintenance template removal">Learn how and when to remove this message</a></small>)</i></span></div></td></tr></tbody></table>
+<table class="wikitable floatright" style="text-align:center; width:400px;">
+<caption><a href="https://en.wikipedia.org/wiki/Classic_RISC_pipeline" title="Classic RISC pipeline">Basic five-stage pipeline</a>
+</caption>
+<tbody><tr>
+<th style="background:#EAECF0;background:linear-gradient(to top right,#EAECF0 49%,#AAA 49.5%,#AAA 50.5%,#EAECF0 51%);line-height:1.2;padding:0.1em 0.4em;"><div style="margin-left:2em;text-align:right">Clock cycle</div><div style="margin-right:2em;text-align:left">Instr. No.</div>
+</th>
+<th style="width:2em">1
+</th>
+<th style="width:2em">2
+</th>
+<th style="width:2em">3
+</th>
+<th style="width:2em; background: Lime">4
+</th>
+<th style="width:2em">5
+</th>
+<th style="width:2em">6
+</th>
+<th style="width:2em">7
+</th></tr>
+<tr>
+<td>1
+</td>
+<td>IF
+</td>
+<td>ID
+</td>
+<td>EX
+</td>
+<td style="background: red; color: white">MEM
+</td>
+<td>WB
+</td>
+<td>
+</td>
+<td>
+</td></tr>
+<tr>
+<td>2
+</td>
+<td>
+</td>
+<td>IF
+</td>
+<td>ID
+</td>
+<td style="background: Lime">EX
+</td>
+<td>MEM
+</td>
+<td>WB
+</td>
+<td>
+</td></tr>
+<tr>
+<td>3
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>IF
+</td>
+<td style="background: Lime">ID
+</td>
+<td>EX
+</td>
+<td>MEM
+</td>
+<td>WB
+</td></tr>
+<tr>
+<td>4
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td style="background: Lime">IF
+</td>
+<td>ID
+</td>
+<td>EX
+</td>
+<td>MEM
+</td></tr>
+<tr>
+<td>5
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td style="background: Lime">
+</td>
+<td>IF
+</td>
+<td>ID
+</td>
+<td>EX
+</td></tr>
+<tr>
+<td colspan="8" style="text-align:left">(IF = Instruction Fetch, ID = Instruction Decode, EX = Execute, MEM = Memory access, WB = Register write back).
+<p>In the fourth clock cycle (the green column), the earliest instruction is in MEM stage, and the latest instruction has not yet entered the pipeline.
+</p>
+</td></tr></tbody></table>
+<p>In <a href="https://en.wikipedia.org/wiki/Computer_engineering" title="Computer engineering">computer engineering</a>, <b>instruction pipelining</b> is a technique for implementing <a href="https://en.wikipedia.org/wiki/Instruction-level_parallelism" title="Instruction-level parallelism">instruction-level parallelism</a> within a single processor. Pipelining attempts to keep every part of the processor busy with some instruction by dividing incoming <a href="https://en.wikipedia.org/wiki/Machine_code" title="Machine code">instructions</a> into a series of sequential steps (the eponymous "<a href="https://en.wikipedia.org/wiki/Pipeline_(computing)" title="Pipeline (computing)">pipeline</a>") performed by different <a href="https://en.wikipedia.org/wiki/Central_processing_unit#Structure_and_implementation" title="Central processing unit">processor units</a> with different parts of instructions processed in parallel.
+</p>
+<meta property="mw:PageProp/toc" />
+<div class="mw-heading mw-heading2"><h2 id="Concept_and_motivation">Concept and motivation</h2></span></div>
+<p>In a pipelined computer, instructions flow through the <a href="https://en.wikipedia.org/wiki/Central_processing_unit" title="Central processing unit">central processing unit</a> (CPU) in stages. For example, it might have one stage for each step of the <a href="https://en.wikipedia.org/wiki/Von_Neumann_architecture" title="Von Neumann architecture">von Neumann cycle</a>: Fetch the instruction, fetch the operands, do the instruction, write the results. A pipelined computer usually has "pipeline registers" after each stage. These store information from the instruction and calculations so that the <a href="https://en.wikipedia.org/wiki/Logic_gate" title="Logic gate">logic gates</a> of the next stage can do the next step.
+</p><p>This arrangement lets the CPU complete an instruction on each clock cycle. It is common for even-numbered stages to operate on one edge of the square-wave clock, while odd-numbered stages operate on the other edge. This allows more <a href="https://en.wikipedia.org/wiki/CPU" class="mw-redirect" title="CPU">CPU</a> <a href="https://en.wikipedia.org/wiki/Throughput" class="mw-redirect" title="Throughput">throughput</a> than a multicycle computer at a given <a href="https://en.wikipedia.org/wiki/Clock_rate" title="Clock rate">clock rate</a>, but may increase <a href="https://en.wikipedia.org/wiki/Latency_(engineering)" title="Latency (engineering)">latency</a> due to the added overhead of the pipelining process itself. Also, even though the electronic logic has a fixed maximum speed, a pipelined computer can be made faster or slower by varying the number of stages in the pipeline. With more stages, each stage does less work, and so the stage has fewer delays from the <a href="https://en.wikipedia.org/wiki/Logic_gate" title="Logic gate">logic gates</a> and could run at a higher clock rate.
+</p><p>A pipelined model of computer is often the most economical, when cost is measured as logic gates per instruction per second. At each instant, an instruction is in only one pipeline stage, and on average, a pipeline stage is less costly than a multicycle computer. Also, when made well, most of the pipelined computer's logic is in use most of the time. In contrast, out of order computers usually have large amounts of idle logic at any given instant. Similar calculations usually show that a pipelined computer uses less energy per instruction.
+</p><p>However, a pipelined computer is usually more complex and more costly than a comparable multicycle computer. It typically has more logic gates, registers and a more complex control unit. In a like way, it might use more total energy, while using less energy per instruction. Out of order CPUs can usually do more instructions per second because they can do several instructions at once.
+</p><p>In a pipelined computer, the control unit arranges for the flow to start, continue, and stop as a program commands. The instruction data is usually passed in pipeline registers from one stage to the next, with a somewhat separated piece of control logic for each stage. The control unit also assures that the instruction in each stage does not harm the operation of instructions in other stages. For example, if two stages must use the same piece of data, the control logic assures that the uses are done in the correct sequence.
+</p><p>When operating efficiently, a pipelined computer will have an instruction in each stage. It is then working on all of those instructions at the same time. It can finish about one instruction for each cycle of its clock. But when a program switches to a different sequence of instructions, the pipeline sometimes must discard the data in process and restart. This is called a "stall."
+</p><p>Much of the design of a pipelined computer prevents interference between the stages and reduces stalls.
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Number_of_steps"><span class="anchor" id="SUPER"></span>Number of steps</h3></span></div>
+<p>The number of dependent steps varies with the machine architecture. For example:
+</p>
+<ul><li>The 1956–61 <a href="https://en.wikipedia.org/wiki/IBM_Stretch" class="mw-redirect" title="IBM Stretch">IBM Stretch</a> project proposed the terms Fetch, Decode, and Execute that have become common.</li>
+<li>The <a href="https://en.wikipedia.org/wiki/Classic_RISC_pipeline" title="Classic RISC pipeline">classic RISC pipeline</a> comprises:
+<ol><li>Instruction fetch</li>
+<li>Instruction decode and register fetch</li>
+<li>Execute</li>
+<li>Memory access</li>
+<li>Register write back</li></ol></li>
+<li>The <a href="https://en.wikipedia.org/wiki/Atmel_AVR" class="mw-redirect" title="Atmel AVR">Atmel AVR</a> and the <a href="https://en.wikipedia.org/wiki/PIC_microcontroller" class="mw-redirect" title="PIC microcontroller">PIC microcontroller</a> each have a two-stage pipeline.</li>
+<li>Many designs include pipelines as long as 7, 10 and even 20 stages (as in the <a href="https://en.wikipedia.org/wiki/Intel" title="Intel">Intel</a> <a href="https://en.wikipedia.org/wiki/Pentium_4" title="Pentium 4">Pentium 4</a>).</li>
+<li>The later "Prescott" and "Cedar Mill" <a href="https://en.wikipedia.org/wiki/NetBurst" title="NetBurst">NetBurst</a> cores from Intel, used in the last Pentium&#160;4 models and their <a href="https://en.wikipedia.org/wiki/Pentium_D" title="Pentium D">Pentium D</a> and <a href="https://en.wikipedia.org/wiki/Xeon" title="Xeon">Xeon</a> derivatives, have a long 31-stage pipeline.</li>
+<li>The Xelerated X10q Network Processor has a pipeline more than a thousand stages long, although in this case 200 of these stages represent independent CPUs with individually programmed instructions. The remaining stages are used to coordinate accesses to memory and on-chip function units.<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span class="cite-bracket">&#91;</span>1<span class="cite-bracket">&#93;</span></a></sup><sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span class="cite-bracket">&#91;</span>2<span class="cite-bracket">&#93;</span></a></sup><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1236091366"><table class="box-More_citations_needed plainlinks metadata ambox ambox-content ambox-Refimprove" role="presentation"><tbody><tr><td class="mbox-image"><div class="mbox-image-div"><span typeof="mw:File"><a href="https://en.wikipedia.org/wiki/File:Question_book-new.svg" class="mw-file-description"><img alt="" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/50px-Question_book-new.svg.png" decoding="async" width="50" height="39" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/75px-Question_book-new.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/100px-Question_book-new.svg.png 2x" data-file-width="512" data-file-height="399" /></a></span></div></td><td class="mbox-text"><div class="mbox-text-span">This article <b>needs additional citations for <a href="https://en.wikipedia.org/wiki/Wikipedia:Verifiability" title="Wikipedia:Verifiability">verification</a></b>.<span class="hide-when-compact"> Please help <a href="https://en.wikipedia.org/wiki/Special:EditPage/Instruction_pipelining" title="Special:EditPage/Instruction pipelining">improve this article</a> by <a href="https://en.wikipedia.org/wiki/Help:Referencing_for_beginners" title="Help:Referencing for beginners">adding citations to reliable sources</a>. Unsourced material may be challenged and removed.<br /><small><span class="plainlinks"><i>Find sources:</i>&#160;<a rel="nofollow" class="external text" href="https://www.google.com/search?as_eq=wikipedia&amp;q=%22Instruction+pipelining%22">"Instruction pipelining"</a>&#160;–&#160;<a rel="nofollow" class="external text" href="https://www.google.com/search?tbm=nws&amp;q=%22Instruction+pipelining%22+-wikipedia&amp;tbs=ar:1">news</a>&#160;<b>·</b> <a rel="nofollow" class="external text" href="https://www.google.com/search?&amp;q=%22Instruction+pipelining%22&amp;tbs=bkt:s&amp;tbm=bks">newspapers</a>&#160;<b>·</b> <a rel="nofollow" class="external text" href="https://www.google.com/search?tbs=bks:1&amp;q=%22Instruction+pipelining%22+-wikipedia">books</a>&#160;<b>·</b> <a rel="nofollow" class="external text" href="https://scholar.google.com/scholar?q=%22Instruction+pipelining%22">scholar</a>&#160;<b>·</b> <a rel="nofollow" class="external text" href="https://www.jstor.org/action/doBasicSearch?Query=%22Instruction+pipelining%22&amp;acc=on&amp;wc=on">JSTOR</a></span></small></span>  <span class="date-container"><i>(<span class="date">October 2020</span>)</i></span><span class="hide-when-compact"><i> (<small><a href="https://en.wikipedia.org/wiki/Help:Maintenance_template_removal" title="Help:Maintenance template removal">Learn how and when to remove this message</a></small>)</i></span></div></td></tr></tbody></table></li></ul>
+<p>As the pipeline is made "deeper" (with a greater number of dependent steps), a given step can be implemented with simpler circuitry, which may let the processor clock run faster.<sup id="cite_ref-Guardian_3-0" class="reference"><a href="#cite_note-Guardian-3"><span class="cite-bracket">&#91;</span>3<span class="cite-bracket">&#93;</span></a></sup> Such pipelines may be called <i>superpipelines.</i><sup id="cite_ref-4" class="reference"><a href="#cite_note-4"><span class="cite-bracket">&#91;</span>4<span class="cite-bracket">&#93;</span></a></sup>
+</p><p>A processor is said to be <i>fully pipelined</i> if it can fetch an instruction on every cycle. Thus, if some instructions or conditions require delays that inhibit fetching new instructions, the processor is not fully pipelined.
+</p>
+<div class="mw-heading mw-heading2"><h2 id="History">History</h2></span></div>
+<link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1236091366"><table class="box-More_citations_needed_section plainlinks metadata ambox ambox-content ambox-Refimprove" role="presentation"><tbody><tr><td class="mbox-image"><div class="mbox-image-div"><span typeof="mw:File"><a href="https://en.wikipedia.org/wiki/File:Question_book-new.svg" class="mw-file-description"><img alt="" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/50px-Question_book-new.svg.png" decoding="async" width="50" height="39" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/75px-Question_book-new.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/100px-Question_book-new.svg.png 2x" data-file-width="512" data-file-height="399" /></a></span></div></td><td class="mbox-text"><div class="mbox-text-span">This section <b>needs additional citations for <a href="https://en.wikipedia.org/wiki/Wikipedia:Verifiability" title="Wikipedia:Verifiability">verification</a></b>.<span class="hide-when-compact"> Please help <a href="https://en.wikipedia.org/wiki/Special:EditPage/Instruction_pipelining" title="Special:EditPage/Instruction pipelining">improve this article</a> by <a href="https://en.wikipedia.org/wiki/Help:Referencing_for_beginners" title="Help:Referencing for beginners">adding citations to reliable sources</a>&#32;in this section. Unsourced material may be challenged and removed.</span>  <span class="date-container"><i>(<span class="date">March 2019</span>)</i></span><span class="hide-when-compact"><i> (<small><a href="https://en.wikipedia.org/wiki/Help:Maintenance_template_removal" title="Help:Maintenance template removal">Learn how and when to remove this message</a></small>)</i></span></div></td></tr></tbody></table>
+<p>Seminal uses of pipelining were in the <a href="https://en.wikipedia.org/wiki/ILLIAC_II" title="ILLIAC II">ILLIAC II</a> project and the <a href="https://en.wikipedia.org/wiki/IBM_Stretch" class="mw-redirect" title="IBM Stretch">IBM Stretch</a> project, though a simple version was used earlier in the <a href="https://en.wikipedia.org/wiki/Z1_(computer)" title="Z1 (computer)">Z1</a> in 1939 and the <a href="https://en.wikipedia.org/wiki/Z3_(computer)" title="Z3 (computer)">Z3</a> in 1941.<sup id="cite_ref-Rojas_1997_5-0" class="reference"><a href="#cite_note-Rojas_1997-5"><span class="cite-bracket">&#91;</span>5<span class="cite-bracket">&#93;</span></a></sup>
+</p><p>Pipelining began in earnest in the late 1970s in <a href="https://en.wikipedia.org/wiki/Supercomputers" class="mw-redirect" title="Supercomputers">supercomputers</a> such as vector processors and array processors.<sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources. (March 2019)">citation needed</span></a></i>&#93;</sup> One of the early supercomputers was the Cyber series built by Control Data Corporation. Its main architect, <a href="https://en.wikipedia.org/wiki/Seymour_Cray" title="Seymour Cray">Seymour Cray</a>, later headed Cray Research. Cray developed the XMP line of supercomputers, using pipelining for both multiply and add/subtract functions. Later, Star Technologies added parallelism (several pipelined functions working in parallel), developed by Roger Chen. In 1984, Star Technologies added the pipelined divide circuit developed by James Bradley. By the mid-1980s, pipelining was used by many different companies around the world.<sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources. (March 2019)">citation needed</span></a></i>&#93;</sup>
+</p><p>Pipelining was not limited to supercomputers. In 1976, the <a href="https://en.wikipedia.org/wiki/Amdahl_Corporation" title="Amdahl Corporation">Amdahl Corporation</a>'s 470 series general purpose mainframe had a 7-step pipeline, and a patented branch prediction circuit.<sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources. (March 2019)">citation needed</span></a></i>&#93;</sup>
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Hazards">Hazards</h3></span></div>
+<style data-mw-deduplicate="TemplateStyles:r1236090951">.mw-parser-output .hatnote{font-style:italic}.mw-parser-output div.hatnote{padding-left:1.6em;margin-bottom:0.5em}.mw-parser-output .hatnote i{font-style:normal}.mw-parser-output .hatnote+link+.hatnote{margin-top:-0.5em}@media print{body.ns-0 .mw-parser-output .hatnote{display:none!important}}</style><div role="note" class="hatnote navigation-not-searchable">Main article: <a href="https://en.wikipedia.org/wiki/Hazard_(computer_architecture)" title="Hazard (computer architecture)">Hazard (computer architecture)</a></div>
+<p>The model of sequential execution assumes that each instruction completes before the next one begins; this assumption is not true on a pipelined processor. A situation where the expected result is problematic is known as a <a href="https://en.wikipedia.org/wiki/Hazard_(computer_architecture)" title="Hazard (computer architecture)">hazard</a>. Imagine the following two register instructions to a hypothetical processor:
+</p>
+<pre>1: add 1 to R5
+2: copy R5 to R6
+</pre>
+<p>If the processor has the 5 steps listed in the initial illustration (the 'Basic five-stage pipeline' at the start of the article), instruction 1 would be fetched at time <i>t</i><sub>1</sub> and its execution would be complete at <i>t<sub>5</sub></i>. Instruction 2 would be fetched at <i>t<sub>2</sub></i> and would be complete at <i>t<sub>6</sub></i>. The first instruction might deposit the incremented number into R5 as its fifth step (register write back) at <i>t<sub>5</sub></i>. But the second instruction might get the number from R5 (to copy to R6) in its second step (instruction decode and register fetch) at time <i>t<sub>3</sub></i>. It seems that the first instruction would not have incremented the value by then. The above code invokes a hazard.
+</p><p>Writing computer programs in a <a href="https://en.wikipedia.org/wiki/Compiler" title="Compiler">compiled</a> language might not raise these concerns, as the compiler could be designed to generate machine code that avoids hazards.
+</p>
+<div class="mw-heading mw-heading4"><h4 id="Workarounds">Workarounds</h4></span></div>
+<p>In some early DSP and RISC processors, the documentation advises programmers to avoid such dependencies in adjacent and nearly adjacent instructions (called <a href="https://en.wikipedia.org/wiki/Delay_slot" title="Delay slot">delay slots</a>), or declares that the second instruction uses an old value rather than the desired value (in the example above, the processor might counter-intuitively copy the unincremented value), or declares that the value it uses is undefined. The programmer may have unrelated work that the processor can do in the meantime; or, to ensure correct results, the programmer may insert <a href="https://en.wikipedia.org/wiki/NOP_(code)" title="NOP (code)">NOPs</a> into the code, partly negating the advantages of pipelining.
+</p>
+<div class="mw-heading mw-heading4"><h4 id="Solutions">Solutions</h4></span></div>
+<p>Pipelined processors commonly use three techniques to work as expected when the programmer assumes that each instruction completes before the next one begins:
+</p>
+<ul><li>The pipeline could <a href="https://en.wikipedia.org/wiki/Pipeline_stall" title="Pipeline stall">stall</a>, or cease scheduling new instructions until the required values are available. This results in empty slots in the pipeline, or <i>bubbles</i>, in which no work is performed.</li>
+<li>An additional data path can be added that routes a computed value to a future instruction elsewhere in the pipeline before the instruction that produced it has been fully retired, a process called <a href="https://en.wikipedia.org/wiki/Operand_forwarding" title="Operand forwarding">operand forwarding</a>.<sup id="cite_ref-6" class="reference"><a href="#cite_note-6"><span class="cite-bracket">&#91;</span>6<span class="cite-bracket">&#93;</span></a></sup><sup id="cite_ref-7" class="reference"><a href="#cite_note-7"><span class="cite-bracket">&#91;</span>7<span class="cite-bracket">&#93;</span></a></sup></li>
+<li>The processor can locate other instructions which are not dependent on the current ones and which can be immediately executed without hazards, an optimization known as <a href="https://en.wikipedia.org/wiki/Out-of-order_execution" title="Out-of-order execution">out-of-order execution</a>.</li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Branches">Branches</h3></span></div>
+<p>A branch out of the normal instruction sequence often involves a hazard. Unless the processor can give effect to the branch in a single time cycle, the pipeline will continue fetching instructions sequentially. Such instructions cannot be allowed to take effect because the programmer has diverted control to another part of the program.
+</p><p>A conditional branch is even more problematic. The processor may or may not branch, depending on a calculation that has not yet occurred. Various processors may stall, may attempt <a href="https://en.wikipedia.org/wiki/Branch_prediction" class="mw-redirect" title="Branch prediction">branch prediction</a>, and may be able to begin to execute two different program sequences (<a href="https://en.wikipedia.org/wiki/Speculative_execution#Eager_execution" title="Speculative execution">eager execution</a>), each assuming the branch is or is not taken, discarding all work that pertains to the incorrect guess.<sup id="cite_ref-8" class="reference"><a href="#cite_note-8"><span class="cite-bracket">&#91;</span>a<span class="cite-bracket">&#93;</span></a></sup>
+</p><p>A processor with an implementation of branch prediction that usually makes correct predictions can minimize the performance penalty from branching. However, if branches are predicted poorly, it may create more work for the processor, such as <a href="https://en.wikipedia.org/wiki/Pipeline_flush" class="mw-redirect" title="Pipeline flush">flushing from the pipeline</a> the incorrect code path that has begun execution before resuming execution at the correct location.
+</p><p>Programs written for a pipelined processor deliberately avoid branching to minimize possible loss of speed. For example, the programmer can handle the usual case with sequential execution and branch only on detecting unusual cases. Using programs such as <a href="https://en.wikipedia.org/wiki/Gcov" title="Gcov">gcov</a> to analyze <a href="https://en.wikipedia.org/wiki/Code_coverage" title="Code coverage">code coverage</a> lets the programmer measure how often particular branches are actually executed and gain insight with which to optimize the code.
+In some cases, a programmer can handle both the usual case and unusual case with <a href="https://en.wikipedia.org/wiki/Branch_(computer_science)#Branch-free_code" title="Branch (computer science)">branch-free code</a>.
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Special_situations">Special situations</h3></span></div>
+<dl><dt>Self-modifying programs</dt>
+<dd>The technique of <a href="https://en.wikipedia.org/wiki/Self-modifying_code" title="Self-modifying code">self-modifying code</a> can be problematic on a pipelined processor. In this technique, one of the effects of a program is to modify its own upcoming instructions. If the processor has an <a href="https://en.wikipedia.org/wiki/Instruction_cache" class="mw-redirect" title="Instruction cache">instruction cache</a>, the original instruction may already have been copied into a <a href="https://en.wikipedia.org/wiki/Prefetch_input_queue" title="Prefetch input queue">prefetch input queue</a> and the modification will not take effect. Some processors such as the <a href="https://en.wikipedia.org/wiki/Zilog_Z280" title="Zilog Z280">Zilog Z280</a> can configure their on-chip cache memories for data-only fetches, or as part of their ordinary memory address space, and avoid such difficulties with self-modifying instructions.</dd></dl>
+<dl><dt>Uninterruptible instructions</dt>
+<dd>An instruction may be uninterruptible to ensure its <a href="https://en.wikipedia.org/wiki/Atomicity_(programming)" class="mw-redirect" title="Atomicity (programming)">atomicity</a>, such as when it swaps two items. A sequential processor permits <a href="https://en.wikipedia.org/wiki/Interrupt" title="Interrupt">interrupts</a> between instructions, but a pipelining processor overlaps instructions, so executing an uninterruptible instruction renders portions of ordinary instructions uninterruptible too. The <a href="https://en.wikipedia.org/wiki/Cyrix_coma_bug" title="Cyrix coma bug">Cyrix coma bug</a> would <a href="https://en.wikipedia.org/wiki/Hang_(computing)" title="Hang (computing)">hang</a> a single-core system using an infinite loop in which an uninterruptible instruction was always in the pipeline.</dd></dl>
+<div class="mw-heading mw-heading2"><h2 id="Design_considerations">Design considerations</h2></span></div>
+<dl><dt>Speed</dt>
+<dd>Pipelining keeps all portions of the processor occupied and increases the amount of useful work the processor can do in a given time. Pipelining typically reduces the processor's cycle time and increases the throughput of instructions. The speed advantage is diminished to the extent that execution encounters <a href="#Hazards">hazards</a> that require execution to slow below its ideal rate. A non-pipelined processor executes only a single instruction at a time. The start of the next instruction is delayed not based on hazards but unconditionally.</dd></dl>
+<dl><dd>A pipelined processor's need to organize all its work into modular steps may require the duplication of registers, which increases the latency of some instructions.</dd></dl>
+<dl><dt>Economy</dt>
+<dd>By making each dependent step simpler, pipelining can enable complex operations more economically than adding complex circuitry, such as for numerical calculations. However, a processor that declines to pursue increased speed with pipelining may be simpler and cheaper to manufacture.</dd></dl>
+<dl><dt>Predictability</dt>
+<dd>Compared to environments where the programmer needs to avoid or work around hazards, use of a non-pipelined processor may make it easier to program and to train programmers. The non-pipelined processor also makes it easier to predict the exact timing of a given sequence of instructions.</dd></dl>
+<div class="mw-heading mw-heading2"><h2 id="Illustrated_example">Illustrated example</h2></span></div>
+<p>To the right is a generic pipeline with four stages: fetch, decode, execute and write-back. The top gray box is the list of instructions waiting to be executed, the bottom gray box is the list of instructions that have had their execution completed, and the middle white box is the pipeline.
+</p><p>The execution is as follows:
+</p>
+<figure typeof="mw:File/Thumb"><a href="https://en.wikipedia.org/wiki/File:Pipeline,_4_stage.svg" class="mw-file-description"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Pipeline%2C_4_stage.svg/375px-Pipeline%2C_4_stage.svg.png" decoding="async" width="375" height="359" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Pipeline%2C_4_stage.svg/563px-Pipeline%2C_4_stage.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Pipeline%2C_4_stage.svg/750px-Pipeline%2C_4_stage.svg.png 2x" data-file-width="940" data-file-height="900" /></a><figcaption>Generic 4-stage pipeline; the colored boxes represent instructions independent of each other</figcaption></figure>
+<table class="wikitable">
+
+<tbody><tr>
+<th>Clock</th>
+<th>Execution
+</th></tr>
+<tr>
+<td>0
+</td>
+<td>
+<ul><li>Four instructions are waiting to be executed</li></ul>
+</td></tr>
+<tr>
+<td>1
+</td>
+<td>
+<ul><li>The green instruction is fetched from memory</li></ul>
+</td></tr>
+<tr>
+<td>2
+</td>
+<td>
+<ul><li>The green instruction is decoded</li>
+<li>The purple instruction is fetched from memory</li></ul>
+</td></tr>
+<tr>
+<td>3
+</td>
+<td>
+<ul><li>The green instruction is executed (actual operation is performed)</li>
+<li>The purple instruction is decoded</li>
+<li>The blue instruction is fetched</li></ul>
+</td></tr>
+<tr>
+<td>4
+</td>
+<td>
+<ul><li>The green instruction's results are written back to the register file or memory</li>
+<li>The purple instruction is executed</li>
+<li>The blue instruction is decoded</li>
+<li>The red instruction is fetched</li></ul>
+</td></tr>
+<tr>
+<td>5
+</td>
+<td>
+<ul><li>The execution of green instruction is completed</li>
+<li>The purple instruction is written back</li>
+<li>The blue instruction is executed</li>
+<li>The red instruction is decoded</li></ul>
+</td></tr>
+<tr>
+<td>6
+</td>
+<td>
+<ul><li>The execution of purple instruction is completed</li>
+<li>The blue instruction is written back</li>
+<li>The red instruction is executed</li></ul>
+</td></tr>
+<tr>
+<td>7
+</td>
+<td>
+<ul><li>The execution of blue instruction is completed</li>
+<li>The red instruction is written back</li></ul>
+</td></tr>
+<tr>
+<td>8
+</td>
+<td>
+<ul><li>The execution of red instruction is completed</li></ul>
+</td></tr>
+<tr>
+<td>9
+</td>
+<td>
+<ul><li>The execution of all four instructions is completed</li></ul>
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading3"><h3 id="Pipeline_bubble">Pipeline bubble</h3></span></div>
+<link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1236090951"><div role="note" class="hatnote navigation-not-searchable">Main article: <a href="https://en.wikipedia.org/wiki/Bubble_(computing)" class="mw-redirect" title="Bubble (computing)">Bubble (computing)</a></div>
+<figure typeof="mw:File/Thumb"><a href="https://en.wikipedia.org/wiki/File:Pipeline,_4_stage_with_bubble.svg" class="mw-file-description"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Pipeline%2C_4_stage_with_bubble.svg/350px-Pipeline%2C_4_stage_with_bubble.svg.png" decoding="async" width="350" height="315" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Pipeline%2C_4_stage_with_bubble.svg/525px-Pipeline%2C_4_stage_with_bubble.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Pipeline%2C_4_stage_with_bubble.svg/700px-Pipeline%2C_4_stage_with_bubble.svg.png 2x" data-file-width="1000" data-file-height="900" /></a><figcaption>A bubble in cycle 3 delays execution.</figcaption></figure>
+<p>A pipelined processor may deal with hazards by stalling and creating a bubble in the pipeline, resulting in one or more cycles in which nothing useful happens.
+</p><p>In the illustration at right, in cycle 3, the processor cannot decode the purple instruction, perhaps because the processor determines that decoding depends on results produced by the execution of the green instruction. The green instruction can proceed to the Execute stage and then to the Write-back stage as scheduled, but the purple instruction is stalled for one cycle at the Fetch stage. The blue instruction, which was due to be fetched during cycle 3, is stalled for one cycle, as is the red instruction after it.
+</p><p>Because of the bubble (the blue ovals in the illustration), the processor's Decode circuitry is idle during cycle 3. Its Execute circuitry is idle during cycle 4 and its Write-back circuitry is idle during cycle 5.
+</p><p>When the bubble moves out of the pipeline (at cycle 6), normal execution resumes. But everything now is one cycle late. It will take 8 cycles (cycle 1 through 8) rather than 7 to completely execute the four instructions shown in colors.<sup id="cite_ref-9" class="reference"><a href="#cite_note-9"><span class="cite-bracket">&#91;</span>b<span class="cite-bracket">&#93;</span></a></sup>
+</p>
+<div class="mw-heading mw-heading2"><h2 id="See_also">See also</h2></span></div>
+<ul><li><a href="https://en.wikipedia.org/wiki/Wait_state" title="Wait state">Wait state</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Classic_RISC_pipeline" title="Classic RISC pipeline">Classic RISC pipeline</a></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Notes">Notes</h2></span></div>
+<style data-mw-deduplicate="TemplateStyles:r1239543626">.mw-parser-output .reflist{margin-bottom:0.5em;list-style-type:decimal}@media screen{.mw-parser-output .reflist{font-size:90%}}.mw-parser-output .reflist .references{font-size:100%;margin-bottom:0;list-style-type:inherit}.mw-parser-output .reflist-columns-2{column-width:30em}.mw-parser-output .reflist-columns-3{column-width:25em}.mw-parser-output .reflist-columns{margin-top:0.3em}.mw-parser-output .reflist-columns ol{margin-top:0}.mw-parser-output .reflist-columns li{page-break-inside:avoid;break-inside:avoid-column}.mw-parser-output .reflist-upper-alpha{list-style-type:upper-alpha}.mw-parser-output .reflist-upper-roman{list-style-type:upper-roman}.mw-parser-output .reflist-lower-alpha{list-style-type:lower-alpha}.mw-parser-output .reflist-lower-greek{list-style-type:lower-greek}.mw-parser-output .reflist-lower-roman{list-style-type:lower-roman}</style><div class="reflist reflist-lower-alpha">
+<div class="mw-references-wrap"><ol class="references">
+<li id="cite_note-8"><span class="mw-cite-backlink"><b><a href="#cite_ref-8">^</a></b></span> <span class="reference-text">Early pipelined processors without any of these heuristics, such as the <a href="https://en.wikipedia.org/wiki/PA-RISC" title="PA-RISC">PA-RISC</a> processor of <a href="https://en.wikipedia.org/wiki/Hewlett-Packard" title="Hewlett-Packard">Hewlett-Packard</a>, dealt with hazards by simply warning the programmer; in this case, that one or more instructions following the branch would be executed whether or not the branch was taken. This could be useful; for instance, after computing a number in a register, a conditional branch could be followed by loading into the register a value more useful to subsequent computations in both the branch and the non-branch case.</span>
+</li>
+<li id="cite_note-9"><span class="mw-cite-backlink"><b><a href="#cite_ref-9">^</a></b></span> <span class="reference-text">Note, however, that, even with the bubble, the processor is still able - at least in this case - to run through the sequence of instructions much faster than a non-pipelined processor could.</span>
+</li>
+</ol></div></div>
+<div class="mw-heading mw-heading2"><h2 id="References">References</h2></span></div>
+<link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1239543626"><div class="reflist reflist-columns references-column-width" style="column-width: 30em;">
+<ol class="references">
+<li id="cite_note-1"><span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><style data-mw-deduplicate="TemplateStyles:r1238218222">.mw-parser-output cite.citation{font-style:inherit;word-wrap:break-word}.mw-parser-output .citation q{quotes:"\"""\"""'""'"}.mw-parser-output .citation:target{background-color:rgba(0,127,255,0.133)}.mw-parser-output .id-lock-free.id-lock-free a{background:url("https://upload.wikimedia.org/wikipedia/commons/6/65/Lock-green.svg")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-limited.id-lock-limited a,.mw-parser-output .id-lock-registration.id-lock-registration a{background:url("https://upload.wikimedia.org/wikipedia/commons/d/d6/Lock-gray-alt-2.svg")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-subscription.id-lock-subscription a{background:url("https://upload.wikimedia.org/wikipedia/commons/a/aa/Lock-red-alt-2.svg")right 0.1em center/9px no-repeat}.mw-parser-output .cs1-ws-icon a{background:url("https://upload.wikimedia.org/wikipedia/commons/4/4c/Wikisource-logo.svg")right 0.1em center/12px no-repeat}body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-free a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-limited a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-registration a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-subscription a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .cs1-ws-icon a{background-size:contain;padding:0 1em 0 0}.mw-parser-output .cs1-code{color:inherit;background:inherit;border:none;padding:inherit}.mw-parser-output .cs1-hidden-error{display:none;color:var(--color-error,#d33)}.mw-parser-output .cs1-visible-error{color:var(--color-error,#d33)}.mw-parser-output .cs1-maint{display:none;color:#085;margin-left:0.3em}.mw-parser-output .cs1-kern-left{padding-left:0.2em}.mw-parser-output .cs1-kern-right{padding-right:0.2em}.mw-parser-output .citation .mw-selflink{font-weight:inherit}@media screen{.mw-parser-output .cs1-format{font-size:95%}html.skin-theme-clientpref-night .mw-parser-output .cs1-maint{color:#18911f}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .cs1-maint{color:#18911f}}</style><cite id="CITEREFGlaskowsky2003" class="citation journal cs1">Glaskowsky, Peter (Aug 18, 2003). <a rel="nofollow" class="external text" href="http://www.linleygroup.com/mpr/h/2003/0818/173301.html">"Xelerated's Xtraordinary NPU — World's First 40Gb/s Packet Processor Has 200 CPUs"</a>. <i>Microprocessor Report</i>. <b>18</b> (8): 12–14<span class="reference-accessdate">. Retrieved <span class="nowrap">20 March</span> 2017</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.jtitle=Microprocessor+Report&amp;rft.atitle=Xelerated%27s+Xtraordinary+NPU+%E2%80%94+World%27s+First+40Gb%2Fs+Packet+Processor+Has+200+CPUs&amp;rft.volume=18&amp;rft.issue=8&amp;rft.pages=12-14&amp;rft.date=2003-08-18&amp;rft.aulast=Glaskowsky&amp;rft.aufirst=Peter&amp;rft_id=http%3A%2F%2Fwww.linleygroup.com%2Fmpr%2Fh%2F2003%2F0818%2F173301.html&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AInstruction+pipelining" class="Z3988"></span></span>
+</li>
+<li id="cite_note-2"><span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="https://www.eetimes.com/xelerated-brings-programmable-40-gbits-s-technology-to-the-mainstream-ethernet/#">"Xelerated Brings Programmable 40 Gbits/S Technology to the Mainstream Ethernet"</a>. 31 May 2003.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=unknown&amp;rft.btitle=Xelerated+Brings+Programmable+40+Gbits%2FS+Technology+to+the+Mainstream+Ethernet&amp;rft.date=2003-05-31&amp;rft_id=https%3A%2F%2Fwww.eetimes.com%2Fxelerated-brings-programmable-40-gbits-s-technology-to-the-mainstream-ethernet%2F%23&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AInstruction+pipelining" class="Z3988"></span></span>
+</li>
+<li id="cite_note-Guardian-3"><span class="mw-cite-backlink"><b><a href="#cite_ref-Guardian_3-0">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite id="CITEREFJohn_Paul_Shen,_Mikko_H._Lipasti2004" class="citation book cs1">John Paul Shen, Mikko H. Lipasti (2004). <a rel="nofollow" class="external text" href="https://books.google.com/books?id=Nibfj2aXwLYC&amp;q=deep%20pipeline%20processor&amp;pg=PA94"><i>Modern Processor Design</i></a>. <a href="https://en.wikipedia.org/wiki/McGraw-Hill_Professional" class="mw-redirect" title="McGraw-Hill Professional">McGraw-Hill Professional</a>. <a href="https://en.wikipedia.org/wiki/ISBN_(identifier)" class="mw-redirect" title="ISBN (identifier)">ISBN</a>&#160;<a href="https://en.wikipedia.org/wiki/Special:BookSources/9780070570641" title="Special:BookSources/9780070570641"><bdi>9780070570641</bdi></a>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Modern+Processor+Design&amp;rft.pub=McGraw-Hill+Professional&amp;rft.date=2004&amp;rft.isbn=9780070570641&amp;rft.au=John+Paul+Shen%2C+Mikko+H.+Lipasti&amp;rft_id=https%3A%2F%2Fbooks.google.com%2Fbooks%3Fid%3DNibfj2aXwLYC%26q%3Ddeep%2520pipeline%2520processor%26pg%3DPA94&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AInstruction+pipelining" class="Z3988"></span></span>
+</li>
+<li id="cite_note-4"><span class="mw-cite-backlink"><b><a href="#cite_ref-4">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite id="CITEREFSunggu_Lee2000" class="citation book cs1">Sunggu Lee (2000). <a rel="nofollow" class="external text" href="https://books.google.com/books?id=xgtTAAAAMAAJ&amp;q=%22a+superpipeline+is+essentially+a+deep+instruction+pipeline+with+many+stages%22"><i>Design of Computers and Other Complex Digital Devices</i></a>. <a href="https://en.wikipedia.org/wiki/Prentice_Hall" title="Prentice Hall">Prentice Hall</a>. <a href="https://en.wikipedia.org/wiki/ISBN_(identifier)" class="mw-redirect" title="ISBN (identifier)">ISBN</a>&#160;<a href="https://en.wikipedia.org/wiki/Special:BookSources/9780130402677" title="Special:BookSources/9780130402677"><bdi>9780130402677</bdi></a>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Design+of+Computers+and+Other+Complex+Digital+Devices&amp;rft.pub=Prentice+Hall&amp;rft.date=2000&amp;rft.isbn=9780130402677&amp;rft.au=Sunggu+Lee&amp;rft_id=https%3A%2F%2Fbooks.google.com%2Fbooks%3Fid%3DxgtTAAAAMAAJ%26q%3D%2522a%2Bsuperpipeline%2Bis%2Bessentially%2Ba%2Bdeep%2Binstruction%2Bpipeline%2Bwith%2Bmany%2Bstages%2522&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AInstruction+pipelining" class="Z3988"></span></span>
+</li>
+<li id="cite_note-Rojas_1997-5"><span class="mw-cite-backlink"><b><a href="#cite_ref-Rojas_1997_5-0">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite id="CITEREFRojas1997" class="citation journal cs1"><a href="https://en.wikipedia.org/wiki/Ra%C3%BAl_Rojas" title="Raúl Rojas">Rojas, Raúl</a> (April–June 1997). <a rel="nofollow" class="external text" href="http://ed-thelen.org/comp-hist/Zuse_Z1_and_Z3.pdf">"Konrad Zuse's Legacy: The Architecture of the Z1 and Z3"</a> <span class="cs1-format">(PDF)</span>. <i><a href="https://en.wikipedia.org/wiki/IEEE_Annals_of_the_History_of_Computing" title="IEEE Annals of the History of Computing">IEEE Annals of the History of Computing</a></i>. <b>19</b> (2): 5–16. <a href="https://en.wikipedia.org/wiki/Doi_(identifier)" class="mw-redirect" title="Doi (identifier)">doi</a>:<a rel="nofollow" class="external text" href="https://doi.org/10.1109%2F85.586067">10.1109/85.586067</a>. <a rel="nofollow" class="external text" href="https://web.archive.org/web/20220703082408/http://ed-thelen.org/comp-hist/Zuse_Z1_and_Z3.pdf">Archived</a> <span class="cs1-format">(PDF)</span> from the original on 2022-07-03<span class="reference-accessdate">. Retrieved <span class="nowrap">2022-07-03</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.jtitle=IEEE+Annals+of+the+History+of+Computing&amp;rft.atitle=Konrad+Zuse%27s+Legacy%3A+The+Architecture+of+the+Z1+and+Z3&amp;rft.volume=19&amp;rft.issue=2&amp;rft.pages=5-16&amp;rft.date=1997-04%2F1997-06&amp;rft_id=info%3Adoi%2F10.1109%2F85.586067&amp;rft.aulast=Rojas&amp;rft.aufirst=Ra%C3%BAl&amp;rft_id=http%3A%2F%2Fed-thelen.org%2Fcomp-hist%2FZuse_Z1_and_Z3.pdf&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AInstruction+pipelining" class="Z3988"></span> (12 pages)</span>
+</li>
+<li id="cite_note-6"><span class="mw-cite-backlink"><b><a href="#cite_ref-6">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="http://www.csee.umbc.edu/~squire/cs411_l19.html">"CMSC 411 Lecture 19, Pipelining Data Forwarding"</a>. University of Maryland Baltimore County Computer Science and Electrical Engineering Department<span class="reference-accessdate">. Retrieved <span class="nowrap">2020-01-22</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=unknown&amp;rft.btitle=CMSC+411+Lecture+19%2C+Pipelining+Data+Forwarding&amp;rft.pub=University+of+Maryland+Baltimore+County+Computer+Science+and+Electrical+Engineering+Department&amp;rft_id=http%3A%2F%2Fwww.csee.umbc.edu%2F~squire%2Fcs411_l19.html&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AInstruction+pipelining" class="Z3988"></span></span>
+</li>
+<li id="cite_note-7"><span class="mw-cite-backlink"><b><a href="#cite_ref-7">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="https://web.archive.org/web/20131227033204/http://hpc.serc.iisc.ernet.in/~govind/hpc/L10-Pipeline.txt">"High performance computing, Notes of class 11"</a>. hpc.serc.iisc.ernet.in. September 2000. Archived from <a rel="nofollow" class="external text" href="http://hpc.serc.iisc.ernet.in/~govind/hpc/L10-Pipeline.txt">the original</a> on 2013-12-27<span class="reference-accessdate">. Retrieved <span class="nowrap">2014-02-08</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=unknown&amp;rft.btitle=High+performance+computing%2C+Notes+of+class+11&amp;rft.pub=hpc.serc.iisc.ernet.in&amp;rft.date=2000-09&amp;rft_id=http%3A%2F%2Fhpc.serc.iisc.ernet.in%2F~govind%2Fhpc%2FL10-Pipeline.txt&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AInstruction+pipelining" class="Z3988"></span></span>
+</li>
+</ol></div>
+<div class="mw-heading mw-heading2"><h2 id="External_links">External links</h2></span></div>
+<style data-mw-deduplicate="TemplateStyles:r1235681985">.mw-parser-output .side-box{margin:4px 0;box-sizing:border-box;border:1px solid #aaa;font-size:88%;line-height:1.25em;background-color:var(--background-color-interactive-subtle,#f8f9fa);display:flow-root}.mw-parser-output .side-box-abovebelow,.mw-parser-output .side-box-text{padding:0.25em 0.9em}.mw-parser-output .side-box-image{padding:2px 0 2px 0.9em;text-align:center}.mw-parser-output .side-box-imageright{padding:2px 0.9em 2px 0;text-align:center}@media(min-width:500px){.mw-parser-output .side-box-flex{display:flex;align-items:center}.mw-parser-output .side-box-text{flex:1;min-width:0}}@media(min-width:720px){.mw-parser-output .side-box{width:238px}.mw-parser-output .side-box-right{clear:right;float:right;margin-left:1em}.mw-parser-output .side-box-left{margin-right:1em}}</style><style data-mw-deduplicate="TemplateStyles:r1237033735">@media print{body.ns-0 .mw-parser-output .sistersitebox{display:none!important}}@media screen{html.skin-theme-clientpref-night .mw-parser-output .sistersitebox img[src*="Wiktionary-logo-en-v2.svg"]{background-color:white}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .sistersitebox img[src*="Wiktionary-logo-en-v2.svg"]{background-color:white}}</style><div class="side-box side-box-right plainlinks sistersitebox"><style data-mw-deduplicate="TemplateStyles:r1126788409">.mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-parser-output .plainlist ul li{margin-bottom:0}</style>
+<div class="side-box-flex">
+<div class="side-box-image"><span class="noviewer" typeof="mw:File"><span><img alt="" src="https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/30px-Commons-logo.svg.png" decoding="async" width="30" height="40" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/45px-Commons-logo.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/59px-Commons-logo.svg.png 2x" data-file-width="1024" data-file-height="1376" /></span></span></div>
+<div class="side-box-text plainlist">Wikimedia Commons has media related to <a href="https://commons.wikimedia.org/wiki/Pipeline_(computer_hardware)" class="extiw" title="commons:Pipeline (computer hardware)"><span style="font-style:italic; font-weight:bold;">Pipeline (computer hardware)</span></a>.</div></div>
+</div>
+<link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1235681985"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1237033735"><div class="side-box side-box-right plainlinks sistersitebox"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1126788409">
+<div class="side-box-flex">
+<div class="side-box-image"><span class="noviewer" typeof="mw:File"><span><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Wikibooks-logo-en-noslogan.svg/40px-Wikibooks-logo-en-noslogan.svg.png" decoding="async" width="40" height="40" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Wikibooks-logo-en-noslogan.svg/60px-Wikibooks-logo-en-noslogan.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Wikibooks-logo-en-noslogan.svg/80px-Wikibooks-logo-en-noslogan.svg.png 2x" data-file-width="400" data-file-height="400" /></span></span></div>
+<div class="side-box-text plainlist">Wikibooks has a book on the topic of: <i><b><a href="https://en.wikibooks.org/wiki/Microprocessor_Design/Pipelined_Processors" class="extiw" title="wikibooks:Microprocessor Design/Pipelined Processors">Microprocessor Design/Pipelined Processors</a></b></i></div></div>
+</div>
+<ul><li><a rel="nofollow" class="external text" href="http://x86.org/articles/branch/branchprediction.htm">Branch Prediction in the Pentium Family</a> (<a rel="nofollow" class="external text" href="https://web.archive.org/web/20070927195431/http://x86.org/articles/branch/branchprediction.htm">Archive.org copy</a>)</li>
+<li><a rel="nofollow" class="external text" href="https://arstechnica.com/articles/paedia/cpu/pipelining-1.ars/1">ArsTechnica article on pipelining</a></li>
+<li><a rel="nofollow" class="external text" href="https://web.archive.org/web/20080604095314/http://research.sun.com/techrep/1994/abstract-25.html">Counterflow Pipeline Processor Architecture</a></li></ul>
+<div class="navbox-styles"><style data-mw-deduplicate="TemplateStyles:r1129693374">.mw-parser-output .hlist dl,.mw-parser-output .hlist ol,.mw-parser-output .hlist ul{margin:0;padding:0}.mw-parser-output .hlist dd,.mw-parser-output .hlist dt,.mw-parser-output .hlist li{margin:0;display:inline}.mw-parser-output .hlist.inline,.mw-parser-output .hlist.inline dl,.mw-parser-output .hlist.inline ol,.mw-parser-output .hlist.inline ul,.mw-parser-output .hlist dl dl,.mw-parser-output .hlist dl ol,.mw-parser-output .hlist dl ul,.mw-parser-output .hlist ol dl,.mw-parser-output .hlist ol ol,.mw-parser-output .hlist ol ul,.mw-parser-output .hlist ul dl,.mw-parser-output .hlist ul ol,.mw-parser-output .hlist ul ul{display:inline}.mw-parser-output .hlist .mw-empty-li{display:none}.mw-parser-output .hlist dt::after{content:": "}.mw-parser-output .hlist dd::after,.mw-parser-output .hlist li::after{content:" · ";font-weight:bold}.mw-parser-output .hlist dd:last-child::after,.mw-parser-output .hlist dt:last-child::after,.mw-parser-output .hlist li:last-child::after{content:none}.mw-parser-output .hlist dd dd:first-child::before,.mw-parser-output .hlist dd dt:first-child::before,.mw-parser-output .hlist dd li:first-child::before,.mw-parser-output .hlist dt dd:first-child::before,.mw-parser-output .hlist dt dt:first-child::before,.mw-parser-output .hlist dt li:first-child::before,.mw-parser-output .hlist li dd:first-child::before,.mw-parser-output .hlist li dt:first-child::before,.mw-parser-output .hlist li li:first-child::before{content:" (";font-weight:normal}.mw-parser-output .hlist dd dd:last-child::after,.mw-parser-output .hlist dd dt:last-child::after,.mw-parser-output .hlist dd li:last-child::after,.mw-parser-output .hlist dt dd:last-child::after,.mw-parser-output .hlist dt dt:last-child::after,.mw-parser-output .hlist dt li:last-child::after,.mw-parser-output .hlist li dd:last-child::after,.mw-parser-output .hlist li dt:last-child::after,.mw-parser-output .hlist li li:last-child::after{content:")";font-weight:normal}.mw-parser-output .hlist ol{counter-reset:listitem}.mw-parser-output .hlist ol>li{counter-increment:listitem}.mw-parser-output .hlist ol>li::before{content:" "counter(listitem)"\a0 "}.mw-parser-output .hlist dd ol>li:first-child::before,.mw-parser-output .hlist dt ol>li:first-child::before,.mw-parser-output .hlist li ol>li:first-child::before{content:" ("counter(listitem)"\a0 "}</style><style data-mw-deduplicate="TemplateStyles:r1236075235">.mw-parser-output .navbox{box-sizing:border-box;border:1px solid #a2a9b1;width:100%;clear:both;font-size:88%;text-align:center;padding:1px;margin:1em auto 0}.mw-parser-output .navbox .navbox{margin-top:0}.mw-parser-output .navbox+.navbox,.mw-parser-output .navbox+.navbox-styles+.navbox{margin-top:-1px}.mw-parser-output .navbox-inner,.mw-parser-output .navbox-subgroup{width:100%}.mw-parser-output .navbox-group,.mw-parser-output .navbox-title,.mw-parser-output .navbox-abovebelow{padding:0.25em 1em;line-height:1.5em;text-align:center}.mw-parser-output .navbox-group{white-space:nowrap;text-align:right}.mw-parser-output .navbox,.mw-parser-output .navbox-subgroup{background-color:#fdfdfd}.mw-parser-output .navbox-list{line-height:1.5em;border-color:#fdfdfd}.mw-parser-output .navbox-list-with-group{text-align:left;border-left-width:2px;border-left-style:solid}.mw-parser-output tr+tr>.navbox-abovebelow,.mw-parser-output tr+tr>.navbox-group,.mw-parser-output tr+tr>.navbox-image,.mw-parser-output tr+tr>.navbox-list{border-top:2px solid #fdfdfd}.mw-parser-output .navbox-title{background-color:#ccf}.mw-parser-output .navbox-abovebelow,.mw-parser-output .navbox-group,.mw-parser-output .navbox-subgroup .navbox-title{background-color:#ddf}.mw-parser-output .navbox-subgroup .navbox-group,.mw-parser-output .navbox-subgroup .navbox-abovebelow{background-color:#e6e6ff}.mw-parser-output .navbox-even{background-color:#f7f7f7}.mw-parser-output .navbox-odd{background-color:transparent}.mw-parser-output .navbox .hlist td dl,.mw-parser-output .navbox .hlist td ol,.mw-parser-output .navbox .hlist td ul,.mw-parser-output .navbox td.hlist dl,.mw-parser-output .navbox td.hlist ol,.mw-parser-output .navbox td.hlist ul{padding:0.125em 0}.mw-parser-output .navbox .navbar{display:block;font-size:100%}.mw-parser-output .navbox-title .navbar{float:left;text-align:left;margin-right:0.5em}body.skin--responsive .mw-parser-output .navbox-image img{max-width:none!important}@media print{body.ns-0 .mw-parser-output .navbox{display:none!important}}</style></div><div role="navigation" class="navbox" aria-labelledby="Processor_technologies" style="padding:3px"><table class="nowraplinks mw-collapsible autocollapse navbox-inner" style="border-spacing:0;background:transparent;color:inherit"><tbody><tr><th scope="col" class="navbox-title" colspan="2"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1129693374"><style data-mw-deduplicate="TemplateStyles:r1239400231">.mw-parser-output .navbar{display:inline;font-size:88%;font-weight:normal}.mw-parser-output .navbar-collapse{float:left;text-align:left}.mw-parser-output .navbar-boxtext{word-spacing:0}.mw-parser-output .navbar ul{display:inline-block;white-space:nowrap;line-height:inherit}.mw-parser-output .navbar-brackets::before{margin-right:-0.125em;content:"[ "}.mw-parser-output .navbar-brackets::after{margin-left:-0.125em;content:" ]"}.mw-parser-output .navbar li{word-spacing:-0.125em}.mw-parser-output .navbar a>span,.mw-parser-output .navbar a>abbr{text-decoration:inherit}.mw-parser-output .navbar-mini abbr{font-variant:small-caps;border-bottom:none;text-decoration:none;cursor:inherit}.mw-parser-output .navbar-ct-full{font-size:114%;margin:0 7em}.mw-parser-output .navbar-ct-mini{font-size:114%;margin:0 4em}html.skin-theme-clientpref-night .mw-parser-output .navbar li a abbr{color:var(--color-base)!important}@media(prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .navbar li a abbr{color:var(--color-base)!important}}@media print{.mw-parser-output .navbar{display:none!important}}</style><div class="navbar plainlinks hlist navbar-mini"><ul><li class="nv-view"><a href="https://en.wikipedia.org/wiki/Template:Processor_technologies" title="Template:Processor technologies"><abbr title="View this template">v</abbr></a></li><li class="nv-talk"><a href="https://en.wikipedia.org/wiki/Template_talk:Processor_technologies" title="Template talk:Processor technologies"><abbr title="Discuss this template">t</abbr></a></li><li class="nv-edit"><a href="https://en.wikipedia.org/wiki/Special:EditPage/Template:Processor_technologies" title="Special:EditPage/Template:Processor technologies"><abbr title="Edit this template">e</abbr></a></li></ul></div><div id="Processor_technologies" style="font-size:114%;margin:0 4em"><a href="https://en.wikipedia.org/wiki/Processor_(computing)" title="Processor (computing)">Processor technologies</a></div></th></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Model_of_computation" title="Model of computation">Models</a></th><td class="navbox-list-with-group navbox-list navbox-odd hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Abstract_machine" title="Abstract machine">Abstract machine</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Stored-program_computer" title="Stored-program computer">Stored-program computer</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Finite-state_machine" title="Finite-state machine">Finite-state machine</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Finite-state_machine_with_datapath" class="mw-redirect" title="Finite-state machine with datapath">with datapath</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Hierarchical_state_machine" class="mw-redirect" title="Hierarchical state machine">Hierarchical</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Deterministic_finite_automaton" title="Deterministic finite automaton">Deterministic finite automaton</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Queue_automaton" title="Queue automaton">Queue automaton</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cellular_automaton" title="Cellular automaton">Cellular automaton</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Quantum_cellular_automaton" title="Quantum cellular automaton">Quantum cellular automaton</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Turing_machine" title="Turing machine">Turing machine</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Alternating_Turing_machine" title="Alternating Turing machine">Alternating Turing machine</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Universal_Turing_machine" title="Universal Turing machine">Universal</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Post%E2%80%93Turing_machine" title="Post–Turing machine">Post–Turing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Quantum_Turing_machine" title="Quantum Turing machine">Quantum</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Nondeterministic_Turing_machine" title="Nondeterministic Turing machine">Nondeterministic Turing machine</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Probabilistic_Turing_machine" title="Probabilistic Turing machine">Probabilistic Turing machine</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Hypercomputation" title="Hypercomputation">Hypercomputation</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Zeno_machine" title="Zeno machine">Zeno machine</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/History_of_general-purpose_CPUs#Belt_machine_architecture" title="History of general-purpose CPUs">Belt machine</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Stack_machine" title="Stack machine">Stack machine</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Register_machine" title="Register machine">Register machines</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Counter_machine" title="Counter machine">Counter</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Pointer_machine" title="Pointer machine">Pointer</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Random-access_machine" title="Random-access machine">Random-access</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Random-access_stored-program_machine" title="Random-access stored-program machine">Random-access stored program</a></li></ul></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Computer_architecture" title="Computer architecture">Architecture</a></th><td class="navbox-list-with-group navbox-list navbox-even hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Microarchitecture" title="Microarchitecture">Microarchitecture</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Von_Neumann_architecture" title="Von Neumann architecture">Von Neumann</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Harvard_architecture" title="Harvard architecture">Harvard</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Modified_Harvard_architecture" title="Modified Harvard architecture">modified</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Dataflow_architecture" title="Dataflow architecture">Dataflow</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Transport_triggered_architecture" title="Transport triggered architecture">Transport-triggered</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cellular_architecture" title="Cellular architecture">Cellular</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Endianness" title="Endianness">Endianness</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Computer_data_storage" title="Computer data storage">Memory access</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Non-uniform_memory_access" title="Non-uniform memory access">NUMA</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Uniform_memory_access" title="Uniform memory access">HUMA</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Load%E2%80%93store_architecture" title="Load–store architecture">Load–store</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Register%E2%80%93memory_architecture" title="Register–memory architecture">Register/memory</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Cache_hierarchy" title="Cache hierarchy">Cache hierarchy</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_hierarchy" title="Memory hierarchy">Memory hierarchy</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Virtual_memory" title="Virtual memory">Virtual memory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Secondary_storage" class="mw-redirect" title="Secondary storage">Secondary storage</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Heterogeneous_System_Architecture" title="Heterogeneous System Architecture">Heterogeneous</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Fabric_computing" title="Fabric computing">Fabric</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Multiprocessing" title="Multiprocessing">Multiprocessing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cognitive_computing" title="Cognitive computing">Cognitive</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Neuromorphic_engineering" class="mw-redirect" title="Neuromorphic engineering">Neuromorphic</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Instruction_set_architecture" title="Instruction set architecture">Instruction set<br />architectures</a></th><td class="navbox-list-with-group navbox-list navbox-odd hlist" style="width:100%;padding:0"><div style="padding:0 0.25em"></div><table class="nowraplinks navbox-subgroup" style="border-spacing:0"><tbody><tr><th scope="row" class="navbox-group" style="width:1%">Types</th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Orthogonal_instruction_set" title="Orthogonal instruction set">Orthogonal instruction set</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Complex_instruction_set_computer" title="Complex instruction set computer">CISC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Reduced_instruction_set_computer" title="Reduced instruction set computer">RISC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Application-specific_instruction_set_processor" title="Application-specific instruction set processor">Application-specific</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Explicit_data_graph_execution" title="Explicit data graph execution">EDGE</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/TRIPS_architecture" title="TRIPS architecture">TRIPS</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Very_long_instruction_word" title="Very long instruction word">VLIW</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Explicitly_parallel_instruction_computing" title="Explicitly parallel instruction computing">EPIC</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Minimal_instruction_set_computer" title="Minimal instruction set computer">MISC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/One-instruction_set_computer" title="One-instruction set computer">OISC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/No_instruction_set_computing" title="No instruction set computing">NISC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Zero_instruction_set_computer" class="mw-redirect" title="Zero instruction set computer">ZISC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/VISC_architecture" title="VISC architecture">VISC architecture</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Quantum_computing" title="Quantum computing">Quantum computing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Comparison_of_instruction_set_architectures" title="Comparison of instruction set architectures">Comparison</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Addressing_mode" title="Addressing mode">Addressing modes</a></li></ul></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Instruction<br />sets</th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Motorola_68000_series" title="Motorola 68000 series">Motorola 68000 series</a></li>
+<li><a href="https://en.wikipedia.org/wiki/VAX" title="VAX">VAX</a></li>
+<li><a href="https://en.wikipedia.org/wiki/PDP-11_architecture" title="PDP-11 architecture">PDP-11</a></li>
+<li><a href="https://en.wikipedia.org/wiki/X86" title="X86">x86</a></li>
+<li><a href="https://en.wikipedia.org/wiki/ARM_architecture_family" title="ARM architecture family">ARM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Stanford_MIPS" title="Stanford MIPS">Stanford MIPS</a></li>
+<li><a href="https://en.wikipedia.org/wiki/MIPS_architecture" title="MIPS architecture">MIPS</a></li>
+<li><a href="https://en.wikipedia.org/wiki/MIPS-X" title="MIPS-X">MIPS-X</a></li>
+<li>Power
+<ul><li><a href="https://en.wikipedia.org/wiki/IBM_POWER_architecture" title="IBM POWER architecture">POWER</a></li>
+<li><a href="https://en.wikipedia.org/wiki/PowerPC" title="PowerPC">PowerPC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Power_ISA" title="Power ISA">Power ISA</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Clipper_architecture" title="Clipper architecture">Clipper architecture</a></li>
+<li><a href="https://en.wikipedia.org/wiki/SPARC" title="SPARC">SPARC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/SuperH" title="SuperH">SuperH</a></li>
+<li><a href="https://en.wikipedia.org/wiki/DEC_Alpha" title="DEC Alpha">DEC Alpha</a></li>
+<li><a href="https://en.wikipedia.org/wiki/ETRAX_CRIS" title="ETRAX CRIS">ETRAX CRIS</a></li>
+<li><a href="https://en.wikipedia.org/wiki/M32R" title="M32R">M32R</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Unicore" title="Unicore">Unicore</a></li>
+<li><a href="https://en.wikipedia.org/wiki/IA-64" title="IA-64">Itanium</a></li>
+<li><a href="https://en.wikipedia.org/wiki/OpenRISC" title="OpenRISC">OpenRISC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/RISC-V" title="RISC-V">RISC-V</a></li>
+<li><a href="https://en.wikipedia.org/wiki/MicroBlaze" title="MicroBlaze">MicroBlaze</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Little_man_computer" title="Little man computer">LMC</a></li>
+<li>System/3x0
+<ul><li><a href="https://en.wikipedia.org/wiki/IBM_System/360_architecture" title="IBM System/360 architecture">S/360</a></li>
+<li><a href="https://en.wikipedia.org/wiki/IBM_System/370" title="IBM System/370">S/370</a></li>
+<li><a href="https://en.wikipedia.org/wiki/IBM_System/390" title="IBM System/390">S/390</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Z/Architecture" title="Z/Architecture">z/Architecture</a></li></ul></li>
+<li>Tilera ISA</li>
+<li><a href="https://en.wikipedia.org/wiki/VISC_architecture" title="VISC architecture">VISC architecture</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Adapteva#Products" class="mw-redirect" title="Adapteva">Epiphany architecture</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Comparison_of_instruction_set_architectures" title="Comparison of instruction set architectures">Others</a></li></ul>
+</div></td></tr></tbody></table><div></div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Instruction_cycle" title="Instruction cycle">Execution</a></th><td class="navbox-list-with-group navbox-list navbox-odd hlist" style="width:100%;padding:0"><div style="padding:0 0.25em"></div><table class="nowraplinks navbox-subgroup" style="border-spacing:0"><tbody><tr><th scope="row" class="navbox-group" style="width:1%"><a class="mw-selflink selflink">Instruction pipelining</a></th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Pipeline_stall" title="Pipeline stall">Pipeline stall</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Operand_forwarding" title="Operand forwarding">Operand forwarding</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Classic_RISC_pipeline" title="Classic RISC pipeline">Classic RISC pipeline</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Hazard_(computer_architecture)" title="Hazard (computer architecture)">Hazards</a></th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Data_dependency" title="Data dependency">Data dependency</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Structural_hazard" class="mw-redirect" title="Structural hazard">Structural</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Control_hazard" class="mw-redirect" title="Control hazard">Control</a></li>
+<li><a href="https://en.wikipedia.org/wiki/False_sharing" title="False sharing">False sharing</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Out-of-order_execution" title="Out-of-order execution">Out-of-order</a></th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Scoreboarding" title="Scoreboarding">Scoreboarding</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Tomasulo%27s_algorithm" title="Tomasulo&#39;s algorithm">Tomasulo's algorithm</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Reservation_station" title="Reservation station">Reservation station</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Re-order_buffer" title="Re-order buffer">Re-order buffer</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Register_renaming" title="Register renaming">Register renaming</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Wide-issue" title="Wide-issue">Wide-issue</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Speculative_execution" title="Speculative execution">Speculative</a></th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Branch_predictor" title="Branch predictor">Branch prediction</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_dependence_prediction" title="Memory dependence prediction">Memory dependence prediction</a></li></ul>
+</div></td></tr></tbody></table><div></div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Parallel_computing" title="Parallel computing">Parallelism</a></th><td class="navbox-list-with-group navbox-list navbox-odd hlist" style="width:100%;padding:0"><div style="padding:0 0.25em"></div><table class="nowraplinks navbox-subgroup" style="border-spacing:0"><tbody><tr><th scope="row" class="navbox-group" style="width:1%">Level</th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Bit-level_parallelism" title="Bit-level parallelism">Bit</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Bit-serial_architecture" title="Bit-serial architecture">Bit-serial</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Word_(computer_architecture)" title="Word (computer architecture)">Word</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Instruction-level_parallelism" title="Instruction-level parallelism">Instruction</a></li>
+<li><a class="mw-selflink selflink">Pipelining</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Scalar_processor" title="Scalar processor">Scalar</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Superscalar_processor" title="Superscalar processor">Superscalar</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Task_parallelism" title="Task parallelism">Task</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Thread_(computing)" title="Thread (computing)">Thread</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Process_(computing)" title="Process (computing)">Process</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_parallelism" title="Data parallelism">Data</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Vector_processor" title="Vector processor">Vector</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory-level_parallelism" title="Memory-level parallelism">Memory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Distributed_architecture" class="mw-redirect" title="Distributed architecture">Distributed</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Multithreading_(computer_architecture)" title="Multithreading (computer architecture)">Multithreading</a></th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Temporal_multithreading" title="Temporal multithreading">Temporal</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Simultaneous_multithreading" title="Simultaneous multithreading">Simultaneous</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Hyper-threading" title="Hyper-threading">Hyperthreading</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Simultaneous_and_heterogeneous_multithreading" title="Simultaneous and heterogeneous multithreading">Simultaneous and heterogenous</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Speculative_multithreading" title="Speculative multithreading">Speculative</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Preemption_(computing)" title="Preemption (computing)">Preemptive</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cooperative_multitasking" title="Cooperative multitasking">Cooperative</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Flynn%27s_taxonomy" title="Flynn&#39;s taxonomy">Flynn's taxonomy</a></th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Single_instruction,_single_data" title="Single instruction, single data">SISD</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Single_instruction,_multiple_data" title="Single instruction, multiple data">SIMD</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Single_instruction,_multiple_threads" title="Single instruction, multiple threads">Array processing (SIMT)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Flynn%27s_taxonomy#Pipelined_processor" title="Flynn&#39;s taxonomy">Pipelined processing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Flynn%27s_taxonomy#Associative_processor" title="Flynn&#39;s taxonomy">Associative processing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/SWAR" title="SWAR">SWAR</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Multiple_instruction,_single_data" title="Multiple instruction, single data">MISD</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Multiple_instruction,_multiple_data" title="Multiple instruction, multiple data">MIMD</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Single_program,_multiple_data" title="Single program, multiple data">SPMD</a></li></ul></li></ul>
+</div></td></tr></tbody></table><div></div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Computer_performance" title="Computer performance">Processor<br />performance</a></th><td class="navbox-list-with-group navbox-list navbox-even hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Transistor_count" title="Transistor count">Transistor count</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Instructions_per_cycle" title="Instructions per cycle">Instructions per cycle</a> (IPC)
+<ul><li><a href="https://en.wikipedia.org/wiki/Cycles_per_instruction" title="Cycles per instruction">Cycles per instruction</a> (CPI)</li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Instructions_per_second" title="Instructions per second">Instructions per second</a> (IPS)</li>
+<li><a href="https://en.wikipedia.org/wiki/FLOPS" title="FLOPS">Floating-point operations per second</a> (FLOPS)</li>
+<li><a href="https://en.wikipedia.org/wiki/Transactions_per_second" title="Transactions per second">Transactions per second</a> (TPS)</li>
+<li><a href="https://en.wikipedia.org/wiki/SUPS" title="SUPS">Synaptic updates per second</a> (SUPS)</li>
+<li><a href="https://en.wikipedia.org/wiki/Performance_per_watt" title="Performance per watt">Performance per watt</a> (PPW)</li>
+<li><a href="https://en.wikipedia.org/wiki/Cache_performance_measurement_and_metric" title="Cache performance measurement and metric">Cache performance metrics</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Computer_performance_by_orders_of_magnitude" title="Computer performance by orders of magnitude">Computer performance by orders of magnitude</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Processor_(computing)" title="Processor (computing)">Types</a></th><td class="navbox-list-with-group navbox-list navbox-odd hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Central_processing_unit" title="Central processing unit">Central processing unit</a> (CPU)</li>
+<li><a href="https://en.wikipedia.org/wiki/Graphics_processing_unit" title="Graphics processing unit">Graphics processing unit</a> (GPU)
+<ul><li><a href="https://en.wikipedia.org/wiki/General-purpose_computing_on_graphics_processing_units" title="General-purpose computing on graphics processing units">GPGPU</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Vector_processor" title="Vector processor">Vector</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Barrel_processor" title="Barrel processor">Barrel</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Stream_processing" title="Stream processing">Stream</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Tile_processor" title="Tile processor">Tile processor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Coprocessor" title="Coprocessor">Coprocessor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Programmable_Array_Logic" title="Programmable Array Logic">PAL</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Application-specific_integrated_circuit" title="Application-specific integrated circuit">ASIC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Field-programmable_gate_array" title="Field-programmable gate array">FPGA</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Field-programmable_object_array" title="Field-programmable object array">FPOA</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Complex_programmable_logic_device" title="Complex programmable logic device">CPLD</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Multi-chip_module" title="Multi-chip module">Multi-chip module</a> (MCM)</li>
+<li><a href="https://en.wikipedia.org/wiki/System_in_a_package" title="System in a package">System in a package</a> (SiP)</li>
+<li><a href="https://en.wikipedia.org/wiki/Package_on_a_package" title="Package on a package">Package on a package</a> (PoP)</li></ul>
+</div><table class="nowraplinks navbox-subgroup" style="border-spacing:0"><tbody><tr><th scope="row" class="navbox-group" style="width:1%">By application</th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Embedded_system" title="Embedded system">Embedded system</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Microprocessor" title="Microprocessor">Microprocessor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Microcontroller" title="Microcontroller">Microcontroller</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Mobile_processor" title="Mobile processor">Mobile</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Ultra-low-voltage_processor" title="Ultra-low-voltage processor">Ultra-low-voltage</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Application-specific_instruction_set_processor" title="Application-specific instruction set processor">ASIP</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Soft_microprocessor" title="Soft microprocessor">Soft microprocessor</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Systems<br />on chip</th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/System_on_a_chip" title="System on a chip">System on a chip</a> (SoC)</li>
+<li><a href="https://en.wikipedia.org/wiki/Multiprocessor_system_on_a_chip" class="mw-redirect" title="Multiprocessor system on a chip">Multiprocessor</a> (MPSoC)</li>
+<li><a href="https://en.wikipedia.org/wiki/Cypress_PSoC" title="Cypress PSoC">Cypress PSoC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Network_on_a_chip" title="Network on a chip">Network on a chip</a> (NoC)</li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Hardware_acceleration" title="Hardware acceleration">Hardware<br />accelerators</a></th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Coprocessor" title="Coprocessor">Coprocessor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/AI_accelerator" title="AI accelerator">AI accelerator</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Graphics_processing_unit" title="Graphics processing unit">Graphics processing unit</a> (GPU)</li>
+<li><a href="https://en.wikipedia.org/wiki/Image_processor" title="Image processor">Image processor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Vision_processing_unit" title="Vision processing unit">Vision processing unit</a> (VPU)</li>
+<li><a href="https://en.wikipedia.org/wiki/Physics_processing_unit" title="Physics processing unit">Physics processing unit</a> (PPU)</li>
+<li><a href="https://en.wikipedia.org/wiki/Digital_signal_processor" title="Digital signal processor">Digital signal processor</a> (DSP)</li>
+<li><a href="https://en.wikipedia.org/wiki/Tensor_Processing_Unit" title="Tensor Processing Unit">Tensor Processing Unit</a> (TPU)</li>
+<li><a href="https://en.wikipedia.org/wiki/Secure_cryptoprocessor" title="Secure cryptoprocessor">Secure cryptoprocessor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Network_processor" title="Network processor">Network processor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Baseband_processor" title="Baseband processor">Baseband processor</a></li></ul>
+</div></td></tr></tbody></table><div>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Word_(computer_architecture)" title="Word (computer architecture)">Word size</a></th><td class="navbox-list-with-group navbox-list navbox-odd hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/1-bit_computing" title="1-bit computing">1-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/4-bit_computing" title="4-bit computing">4-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/8-bit_computing" title="8-bit computing">8-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/12-bit_computing" title="12-bit computing">12-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Apollo_Guidance_Computer" title="Apollo Guidance Computer">15-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/16-bit_computing" title="16-bit computing">16-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/24-bit_computing" title="24-bit computing">24-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/32-bit_computing" title="32-bit computing">32-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/48-bit_computing" title="48-bit computing">48-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/64-bit_computing" title="64-bit computing">64-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/128-bit_computing" title="128-bit computing">128-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/256-bit_computing" title="256-bit computing">256-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/512-bit_computing" title="512-bit computing">512-bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Bit_slicing" title="Bit slicing">bit slicing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Word_(computer_architecture)#Table_of_word_sizes" title="Word (computer architecture)">others</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Word_(computer_architecture)#Variable-word_architectures" title="Word (computer architecture)">variable</a></li></ul></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Core count</th><td class="navbox-list-with-group navbox-list navbox-even hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Single-core" title="Single-core">Single-core</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Multi-core_processor" title="Multi-core processor">Multi-core</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Manycore_processor" title="Manycore processor">Manycore</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Heterogeneous_computing" title="Heterogeneous computing">Heterogeneous architecture</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Components</th><td class="navbox-list-with-group navbox-list navbox-odd hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Central_processing_unit" title="Central processing unit">Core</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cache_(computing)" title="Cache (computing)">Cache</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/CPU_cache" title="CPU cache">CPU cache</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Scratchpad_memory" title="Scratchpad memory">Scratchpad memory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_cache" class="mw-redirect" title="Data cache">Data cache</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Instruction_cache" class="mw-redirect" title="Instruction cache">Instruction cache</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cache_replacement_policies" title="Cache replacement policies">replacement policies</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cache_coherence" title="Cache coherence">coherence</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Bus_(computing)" title="Bus (computing)">Bus</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Clock_rate" title="Clock rate">Clock rate</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Clock_signal" title="Clock signal">Clock signal</a></li>
+<li><a href="https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)" title="FIFO (computing and electronics)">FIFO</a></li></ul>
+</div><table class="nowraplinks navbox-subgroup" style="border-spacing:0"><tbody><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Execution_unit" title="Execution unit">Functional<br />units</a></th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Arithmetic_logic_unit" title="Arithmetic logic unit">Arithmetic logic unit</a> (ALU)</li>
+<li><a href="https://en.wikipedia.org/wiki/Address_generation_unit" title="Address generation unit">Address generation unit</a> (AGU)</li>
+<li><a href="https://en.wikipedia.org/wiki/Floating-point_unit" title="Floating-point unit">Floating-point unit</a> (FPU)</li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_management_unit" title="Memory management unit">Memory management unit</a> (MMU)
+<ul><li><a href="https://en.wikipedia.org/wiki/Load%E2%80%93store_unit" title="Load–store unit">Load–store unit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Translation_lookaside_buffer" title="Translation lookaside buffer">Translation lookaside buffer</a> (TLB)</li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Branch_predictor" title="Branch predictor">Branch predictor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Branch_target_predictor" title="Branch target predictor">Branch target predictor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_controller" title="Memory controller">Integrated memory controller</a> (IMC)
+<ul><li><a href="https://en.wikipedia.org/wiki/Memory_management_unit" title="Memory management unit">Memory management unit</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Instruction_decoder" class="mw-redirect" title="Instruction decoder">Instruction decoder</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Logic_gate" title="Logic gate">Logic</a></th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Combinational_logic" title="Combinational logic">Combinational</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Sequential_logic" title="Sequential logic">Sequential</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Glue_logic" title="Glue logic">Glue</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Logic_gate" title="Logic gate">Logic gate</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Quantum_logic_gate" title="Quantum logic gate">Quantum</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Gate_array" title="Gate array">Array</a></li></ul></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Hardware_register" title="Hardware register">Registers</a></th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Processor_register" title="Processor register">Processor register</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Status_register" title="Status register">Status register</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Stack_register" title="Stack register">Stack register</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Register_file" title="Register file">Register file</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_buffer_register" title="Memory buffer register">Memory buffer</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Memory_address_register" title="Memory address register">Memory address register</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Program_counter" title="Program counter">Program counter</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Control_unit" title="Control unit">Control unit</a></th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Hardwired_control_unit" class="mw-redirect" title="Hardwired control unit">Hardwired control unit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Instruction_unit" title="Instruction unit">Instruction unit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_buffer" title="Data buffer">Data buffer</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Write_buffer" title="Write buffer">Write buffer</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Microcode" title="Microcode">Microcode</a> <a href="https://en.wikipedia.org/wiki/ROM_image" title="ROM image">ROM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Counter_(digital)" title="Counter (digital)">Counter</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Datapath" title="Datapath">Datapath</a></th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Multiplexer" title="Multiplexer">Multiplexer</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Demultiplexer" class="mw-redirect" title="Demultiplexer">Demultiplexer</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Adder_(electronics)" title="Adder (electronics)">Adder</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Binary_multiplier" title="Binary multiplier">Multiplier</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/CPU_multiplier" title="CPU multiplier">CPU</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Binary_decoder" title="Binary decoder">Binary decoder</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Address_decoder" title="Address decoder">Address decoder</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Sum-addressed_decoder" title="Sum-addressed decoder">Sum-addressed decoder</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Barrel_shifter" title="Barrel shifter">Barrel shifter</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Electronic_circuit" title="Electronic circuit">Circuitry</a></th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Integrated_circuit" title="Integrated circuit">Integrated circuit</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Three-dimensional_integrated_circuit" title="Three-dimensional integrated circuit">3D</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Mixed-signal_integrated_circuit" title="Mixed-signal integrated circuit">Mixed-signal</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Power_management_integrated_circuit" title="Power management integrated circuit">Power management</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Boolean_circuit" title="Boolean circuit">Boolean</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Circuit_(computer_science)" title="Circuit (computer science)">Digital</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Analogue_electronics" title="Analogue electronics">Analog</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Quantum_circuit" title="Quantum circuit">Quantum</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Switch#Electronic_switches" title="Switch">Switch</a></li></ul>
+</div></td></tr></tbody></table><div>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Power_management" title="Power management">Power<br />management</a></th><td class="navbox-list-with-group navbox-list navbox-even hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Power_Management_Unit" title="Power Management Unit">PMU</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Advanced_Power_Management" title="Advanced Power Management">APM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/ACPI" title="ACPI">ACPI</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Dynamic_frequency_scaling" title="Dynamic frequency scaling">Dynamic frequency scaling</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Dynamic_voltage_scaling" title="Dynamic voltage scaling">Dynamic voltage scaling</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Clock_gating" title="Clock gating">Clock gating</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Performance_per_watt" title="Performance per watt">Performance per watt</a> (PPW)</li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Related</th><td class="navbox-list-with-group navbox-list navbox-odd hlist" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/History_of_general-purpose_CPUs" title="History of general-purpose CPUs">History of general-purpose CPUs</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Microprocessor_chronology" title="Microprocessor chronology">Microprocessor chronology</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Processor_design" title="Processor design">Processor design</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Digital_electronics" title="Digital electronics">Digital electronics</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Hardware_security_module" title="Hardware security module">Hardware security module</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Semiconductor_device_fabrication" title="Semiconductor device fabrication">Semiconductor device fabrication</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Tick%E2%80%93tock_model" title="Tick–tock model">Tick–tock model</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Pin_grid_array" title="Pin grid array">Pin grid array</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Chip_carrier" title="Chip carrier">Chip carrier</a></li></ul>
+</div></td></tr></tbody></table></div>
+<!-- 
+NewPP limit report
+Parsed by mw‐web.codfw.main‐56cf88c994‐7bb25
+Cached time: 20240909201551
+Cache expiry: 2592000
+Reduced expiry: false
+Complications: [vary‐revision‐sha1, show‐toc]
+CPU time usage: 0.469 seconds
+Real time usage: 0.639 seconds
+Preprocessor visited node count: 2204/1000000
+Post‐expand include size: 127723/2097152 bytes
+Template argument size: 4377/2097152 bytes
+Highest expansion depth: 13/100
+Expensive parser function count: 8/500
+Unstrip recursion depth: 1/20
+Unstrip post‐expand size: 45554/5000000 bytes
+Lua time usage: 0.275/10.000 seconds
+Lua memory usage: 6183657/52428800 bytes
+Number of Wikibase entities loaded: 1/400
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  518.242      1 -total
+ 24.68%  127.917      2 Template:Reflist
+ 19.47%  100.885      6 Template:Navbox
+ 18.59%   96.330      1 Template:CPU_technologies
+ 17.11%   88.672      1 Template:Short_description
+ 16.97%   87.931      2 Template:Cite_journal
+ 13.47%   69.805      3 Template:More_citations_needed
+ 12.81%   66.399      3 Template:Ambox
+  7.67%   39.768      2 Template:Sister_project
+  7.56%   39.180      2 Template:Pagetype
+-->
+
+<!-- Saved in parser cache with key enwiki:pcache:idhash:220314-0!canonical and timestamp 20240909201551 and revision id 1233616698. Rendering was triggered because: page-view
+ -->
+</div>

@@ -2,6 +2,10 @@ import logging
 from django.http import JsonResponse
 from django.views import View
 from .helpers import add_binary, shift_right, negate
+from .models import Article
+from .utils import GetRecommendation
+import requests
+from bs4 import BeautifulSoup
 
 class BoothsAlgorithm(View):
     def get(self, request):
@@ -44,3 +48,76 @@ class BoothsAlgorithm(View):
         
         steps.append({'ac': ac, 'qr': qr, 'q_1': num_result, 'operation': 'Result'})
         return JsonResponse({'result': num_result, 'steps': steps})
+
+class GetAllArticles(View):
+    def get(self, request):
+        articles = Article.objects.all()
+        data = [{'title': article.title, 'content': article.html, 'original-link': article.original_link} for article in articles]
+        return JsonResponse(data, safe=False)
+
+class GetArticle(View):
+    def get(self, request, *args, **kwargs):
+        title = self.kwargs.get('title')
+        try:
+            assert title, 'title is required'
+        except AssertionError as e:
+            return JsonResponse({'error': str(e)}, status=400)
+        try:
+            article = Article.objects.get(title=title)
+            data = {'title': article.title, 'content': article.html, 'original-link': article.original_link}
+        except Article.DoesNotExist:
+            data = {'error': 'Article not found', 'title': title}
+        return JsonResponse(data)
+
+class GetSimilarArticles(View):
+    def get(self, request, *args, **kwargs):
+        title = self.kwargs.get('title')
+        try:
+            assert title, 'title is required'
+        except AssertionError as e:
+            return JsonResponse({'error': str(e)}, status=400)
+        try:
+            article = Article.objects.get(title=title)
+            # Compare article.html with other articles with cosine similarity
+            # Return top 5 similar articles
+            # Escape the html tags and use the content for comparison
+            data = {
+                     'title': article.title, 
+            }
+            
+            gr = GetRecommendation(title)
+            gr.train()
+            result = gr.get_result_posts()
+            data['recommendations'] = []
+            for r in result:
+                data['recommendations'].append({'title': r.title}) 
+            
+            return JsonResponse(data, safe=False)
+        except Article.DoesNotExist:
+            data = {'error': 'Article not found', 'title': title}
+        return JsonResponse(data)
+
+class AddArticle(View):
+    def get(self, request):
+        original_link = self.request.GET.get('url')
+        try:
+            assert original_link, 'url is required'
+        except AssertionError as e:
+            return JsonResponse({'error': str(e)}, status=400)
+        try:
+            article = Article.objects.get(original_link=original_link)
+            return JsonResponse({'error': 'Article already exists'})
+        except Exception as e:
+            try:
+                response = requests.get(original_link)
+                soup = BeautifulSoup(response.text, 'html.parser')
+                # Remove elements with class .kicker.paragraph, .pw-subtitle-paragraph, .speechify-ignore
+                for element in soup.select('.kicker, .paragraph, .pw-subtitle-paragraph, .speechify-ignore, strong.al'):
+                    element.decompose()
+                html = soup.find('section').prettify()
+                title = soup.title.string
+                Article.objects.create(title=title, html=html, original_link=original_link)
+                return JsonResponse({'message': 'Article added successfully'})
+            except requests.exceptions.RequestException as e:
+                return JsonResponse({'error': str(e)}, status=400)
+            

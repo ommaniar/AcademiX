@@ -12,7 +12,6 @@ We, at academix have just one little goal - we want you to think of the nitty gr
 - [Number Conversion](https://academixdemo.netlify.app/tools/number-conversion)
 - [Binary Addition](https://academixdemo.netlify.app/tools/binary-arithmetic)
 - [POSET](https://academixdemo.netlify.app/tools/poset)
-- [Eulerian Path](https://academixdemo.netlify.app/tools/eulerian-path)
 - [Booth's Division Algorithm](https://academixdemo.netlify.app/tools/division-algorithm)
 
 - ...It is a work in progress. We are constantly adding new tools and content to make your learning experience better.

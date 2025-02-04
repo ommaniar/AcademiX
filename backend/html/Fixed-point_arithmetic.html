@@ -1,0 +1,813 @@
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr"><div class="shortdescription nomobile noexcerpt noprint searchaux" style="display:none">Computer format for representing real numbers</div>
+<style data-mw-deduplicate="TemplateStyles:r1236090951">.mw-parser-output .hatnote{font-style:italic}.mw-parser-output div.hatnote{padding-left:1.6em;margin-bottom:0.5em}.mw-parser-output .hatnote i{font-style:normal}.mw-parser-output .hatnote+link+.hatnote{margin-top:-0.5em}@media print{body.ns-0 .mw-parser-output .hatnote{display:none!important}}</style><div role="note" class="hatnote navigation-not-searchable">This article is about fixed-precision fractions. For the invariant points of a function, see <a href="https://en.wikipedia.org/wiki/Fixed_point_(mathematics)" title="Fixed point (mathematics)">Fixed point (mathematics)</a>.</div>
+<style data-mw-deduplicate="TemplateStyles:r1236091366">.mw-parser-output .ambox{border:1px solid #a2a9b1;border-left:10px solid #36c;background-color:#fbfbfb;box-sizing:border-box}.mw-parser-output .ambox+link+.ambox,.mw-parser-output .ambox+link+style+.ambox,.mw-parser-output .ambox+link+link+.ambox,.mw-parser-output .ambox+.mw-empty-elt+link+.ambox,.mw-parser-output .ambox+.mw-empty-elt+link+style+.ambox,.mw-parser-output .ambox+.mw-empty-elt+link+link+.ambox{margin-top:-1px}html body.mediawiki .mw-parser-output .ambox.mbox-small-left{margin:4px 1em 4px 0;overflow:hidden;width:238px;border-collapse:collapse;font-size:88%;line-height:1.25em}.mw-parser-output .ambox-speedy{border-left:10px solid #b32424;background-color:#fee7e6}.mw-parser-output .ambox-delete{border-left:10px solid #b32424}.mw-parser-output .ambox-content{border-left:10px solid #f28500}.mw-parser-output .ambox-style{border-left:10px solid #fc3}.mw-parser-output .ambox-move{border-left:10px solid #9932cc}.mw-parser-output .ambox-protection{border-left:10px solid #a2a9b1}.mw-parser-output .ambox .mbox-text{border:none;padding:0.25em 0.5em;width:100%}.mw-parser-output .ambox .mbox-image{border:none;padding:2px 0 2px 0.5em;text-align:center}.mw-parser-output .ambox .mbox-imageright{border:none;padding:2px 0.5em 2px 0;text-align:center}.mw-parser-output .ambox .mbox-empty-cell{border:none;padding:0;width:1px}.mw-parser-output .ambox .mbox-image-div{width:52px}html.client-js body.skin-minerva .mw-parser-output .mbox-text-span{margin-left:23px!important}@media(min-width:720px){.mw-parser-output .ambox{margin:0 10%}}@media print{body.ns-0 .mw-parser-output .ambox{display:none!important}}</style><table class="box-Original_research plainlinks metadata ambox ambox-content ambox-Original_research" role="presentation"><tbody><tr><td class="mbox-image"><div class="mbox-image-div"><span typeof="mw:File"><span><img alt="" src="https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Ambox_important.svg/40px-Ambox_important.svg.png" decoding="async" width="40" height="40" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Ambox_important.svg/60px-Ambox_important.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Ambox_important.svg/80px-Ambox_important.svg.png 2x" data-file-width="40" data-file-height="40" /></span></span></div></td><td class="mbox-text"><div class="mbox-text-span">This article <b>possibly contains <a href="https://en.wikipedia.org/wiki/Wikipedia:No_original_research" title="Wikipedia:No original research">original research</a></b>.<span class="hide-when-compact"> Please <a class="external text" href="https://en.wikipedia.org/w/index.php?title=Fixed-point_arithmetic&amp;action=edit">improve it</a> by <a href="https://en.wikipedia.org/wiki/Wikipedia:Verifiability" title="Wikipedia:Verifiability">verifying</a> the claims made and adding <a href="https://en.wikipedia.org/wiki/Wikipedia:Citing_sources#Inline_citations" title="Wikipedia:Citing sources">inline citations</a>. Statements consisting only of original research should be removed.</span>  <span class="date-container"><i>(<span class="date">September 2019</span>)</i></span><span class="hide-when-compact"><i> (<small><a href="https://en.wikipedia.org/wiki/Help:Maintenance_template_removal" title="Help:Maintenance template removal">Learn how and when to remove this message</a></small>)</i></span></div></td></tr></tbody></table>
+<p class="mw-empty-elt">
+
+
+</p><p>In <a href="https://en.wikipedia.org/wiki/Computing" title="Computing">computing</a>, <b>fixed-point</b> is a method of representing <a href="https://en.wikipedia.org/wiki/Fraction_(mathematics)" class="mw-redirect" title="Fraction (mathematics)">fractional</a> (non-integer) numbers by storing a fixed number of digits of their fractional part.  <a href="https://en.wikipedia.org/wiki/US_dollar" class="mw-redirect" title="US dollar">Dollar</a> amounts, for example, are often stored with exactly two fractional digits, representing the <a href="https://en.wikipedia.org/wiki/Cent_(currency)" title="Cent (currency)">cents</a> (1/100 of dollar). More generally, the term may refer to representing fractional values as integer multiples of some fixed small unit, e.g. a fractional amount of hours as an integer multiple of ten-minute intervals. Fixed-point number representation is often contrasted to the more complicated and computationally demanding <a href="https://en.wikipedia.org/wiki/Floating-point_representation" class="mw-redirect" title="Floating-point representation">floating-point representation</a>.
+</p><p>In the fixed-point representation, the fraction is often expressed in the same <a href="https://en.wikipedia.org/wiki/Number_base" class="mw-redirect" title="Number base">number base</a> as the integer part, but using negative <a href="https://en.wikipedia.org/wiki/Exponentiation" title="Exponentiation">powers</a> of the base <i>b</i>.  The most common variants are <a href="https://en.wikipedia.org/wiki/Decimal" title="Decimal">decimal</a> (base 10) and <a href="https://en.wikipedia.org/wiki/Binary_number" title="Binary number">binary</a> (base 2). The latter is commonly known also as <b>binary scaling</b>.  Thus, if <i>n</i> fraction digits are stored, the value will always be an integer <a href="https://en.wikipedia.org/wiki/Multiple_(mathematics)" title="Multiple (mathematics)">multiple</a> of <i>b</i><sup>−<i>n</i></sup>.  Fixed-point representation can also be used to omit the low-order digits of integer values, e.g. when representing large dollar values as multiples of $1000.
+</p><p>When decimal fixed-point numbers are displayed for human reading, the fraction digits are usually separated from those of the integer part by a <a href="https://en.wikipedia.org/wiki/Radix_character" class="mw-redirect" title="Radix character">radix character</a> (usually '.' in English, but ',' or some other symbol in many other languages).  Internally, however, there is no separation, and the distinction between the two groups of digits is defined only by the programs that handle such numbers.
+</p><p>Fixed-point representation was the norm in <a href="https://en.wikipedia.org/wiki/Mechanical_calculator" title="Mechanical calculator">mechanical calculators</a>. Since most modern <a href="https://en.wikipedia.org/wiki/Processor_(computing)" title="Processor (computing)">processors</a> have fast <a href="https://en.wikipedia.org/wiki/Floating-point_unit" title="Floating-point unit">floating-point unit</a> (FPU), fixed-point representations in processor-based implementations are now used only in special situations, such as in low-cost <a href="https://en.wikipedia.org/wiki/Embedded_system" title="Embedded system">embedded</a> <a href="https://en.wikipedia.org/wiki/Microprocessor" title="Microprocessor">microprocessors</a> and <a href="https://en.wikipedia.org/wiki/Microcontroller" title="Microcontroller">microcontrollers</a>; in applications that demand high speed or low <a href="https://en.wikipedia.org/wiki/Electric_power" title="Electric power">power</a> consumption or small <a href="https://en.wikipedia.org/wiki/Integrated_circuit" title="Integrated circuit">chip</a> area, like <a href="https://en.wikipedia.org/wiki/Image_processing" class="mw-redirect" title="Image processing">image</a>, <a href="https://en.wikipedia.org/wiki/Video_processing" title="Video processing">video</a>, and <a href="https://en.wikipedia.org/wiki/Digital_signal_processing" title="Digital signal processing">digital signal processing</a>; or when their use is more natural for the problem.  Examples of the latter are <a href="https://en.wikipedia.org/wiki/Accounting" title="Accounting">accounting</a> of dollar amounts, when fractions of cents must be rounded to whole cents in strictly prescribed ways; and the evaluation of <a href="https://en.wikipedia.org/wiki/Function_(mathematics)" title="Function (mathematics)">functions</a> by <a href="https://en.wikipedia.org/wiki/Table_lookup" class="mw-redirect" title="Table lookup">table lookup</a>, or any application where rational numbers need to be represented without rounding errors (which fixed-point does but floating-point cannot). Fixed-point representation is still the norm for <a href="https://en.wikipedia.org/wiki/Field-programmable_gate_array" title="Field-programmable gate array">field-programmable gate array</a> (FPGA) implementations, as floating-point support in an FPGA requires significantly more resources than fixed-point support.<sup id="cite_ref-Wong_2017_1-0" class="reference"><a href="#cite_note-Wong_2017-1"><span class="cite-bracket">&#91;</span>1<span class="cite-bracket">&#93;</span></a></sup> 
+</p>
+<meta property="mw:PageProp/toc" />
+<div class="mw-heading mw-heading2"><h2 id="Representation">Representation</h2></span></div>
+<table class="wikitable" style="margin:0 0 0 1em; text-align:right; float:right;">
+<caption>Fixed-point representation
+</caption>
+<caption>with scaling 1/100
+</caption>
+<tbody><tr>
+<th>Value<br />represented</th>
+<th>Internal<br />representation
+</th></tr>
+<tr>
+<td>0.00</td>
+<td>0
+</td></tr>
+<tr>
+<td>0.5</td>
+<td>50
+</td></tr>
+<tr>
+<td>0.99</td>
+<td>99
+</td></tr>
+<tr>
+<td>2</td>
+<td>200
+</td></tr>
+<tr>
+<td>−14.1</td>
+<td>−1410
+</td></tr>
+<tr>
+<td>314.160</td>
+<td>31416
+</td></tr></tbody></table>
+<p>A fixed-point representation of a fractional number is essentially an <a href="https://en.wikipedia.org/wiki/Integer" title="Integer">integer</a> that is to be implicitly multiplied by a fixed scaling factor. For example, the value 1.23 can be stored in a variable as the integer value 1230 with implicit scaling factor of 1/1000 (meaning that the last 3 decimal digits are implicitly assumed to be a decimal fraction), and the value <span style="white-space: nowrap;">1&#8201;230&#8201;000</span> can be represented as 1230 with an implicit scaling factor of 1000 (with "minus 3" implied decimal fraction digits, that is, with 3 implicit zero digits at right).  This representation allows standard integer <a href="https://en.wikipedia.org/wiki/Arithmetic_logic_unit" title="Arithmetic logic unit">arithmetic logic units</a> to perform <a href="https://en.wikipedia.org/wiki/Rational_number" title="Rational number">rational number</a> calculations.
+</p><p>Negative values are usually represented in binary fixed-point format as a signed integer in <a href="https://en.wikipedia.org/wiki/Two%27s_complement" title="Two&#39;s complement">two's complement</a> representation with an implicit scaling factor as above.  The sign of the value will always be indicated by the <a href="https://en.wikipedia.org/wiki/Bit_numbering" title="Bit numbering">first stored bit</a> (1 = negative, 0 = non-negative), even if the number of fraction bits is greater than or equal to the total number of bits.  For example, the 8-bit signed binary integer (11110101)<sub>2</sub> = −11, taken with -3, +5, and +12 implied fraction bits, would represent the values −11/2<sup>−3</sup> = −88, −11/2<sup>5</sup> = −0.<span style="white-space: nowrap;">343&#8201;75</span>, and −11/2<sup>12</sup> = −0.<span style="white-space: nowrap;">002&#8201;685&#8201;546&#8201;875</span>, respectively.
+</p><p>Alternatively, negative values can be represented by an integer in the <a href="https://en.wikipedia.org/wiki/Sign-magnitude" class="mw-redirect" title="Sign-magnitude">sign-magnitude</a> format, in which case the sign is never included in the number of implied fraction bits.  This variant is more commonly used in decimal fixed-point arithmetic. Thus the signed 5-digit decimal integer (−00025)<sub>10</sub>, taken with -3, +5, and +12 implied decimal fraction digits, would represent the values −25/10<sup>−3</sup> = −25000, −25/10<sup>5</sup> = −0.00025, and −25/10<sup>12</sup> = −0.<span style="white-space: nowrap;">000&#8201;000&#8201;000&#8201;025</span>, respectively.
+</p><p>A program will usually assume that all fixed-point values that will be stored into a given variable, or will be produced by a given <a href="https://en.wikipedia.org/wiki/Instruction_(computing)" class="mw-redirect" title="Instruction (computing)">instruction</a>, will have the same scaling factor. This parameter can usually be chosen by the programmer depending on the <a href="https://en.wikipedia.org/wiki/Accuracy_and_precision" title="Accuracy and precision">precision</a> needed and range of values to be stored.
+</p><p>The scaling factor of a variable or formula may not appear explicitly in the program.  <a href="https://en.wikipedia.org/wiki/Software_engineering" title="Software engineering">Good programming practice</a> then requires that it be provided in the <a href="https://en.wikipedia.org/wiki/Software_documentation" title="Software documentation">documentation</a>, at least as a <a href="https://en.wikipedia.org/wiki/Comment_(computing)" class="mw-redirect" title="Comment (computing)">comment</a> in the <a href="https://en.wikipedia.org/wiki/Source_code" title="Source code">source code</a>.
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Choice_of_scaling_factors">Choice of scaling factors</h3></span></div>
+<p>For greater efficiency, scaling factors are often chosen to be <a href="https://en.wikipedia.org/wiki/Exponentiation" title="Exponentiation">powers</a> (positive or negative) of the base <i>b</i> used to represent the integers internally.  However, often the best scaling factor is dictated by the application.  Thus one often uses scaling factors that are powers of 10 (e.g. 1/100 for dollar values), for human convenience, even when the integers are represented internally in binary.  Decimal scaling factors also mesh well with the <a href="https://en.wikipedia.org/wiki/International_System_of_Units" title="International System of Units">metric (SI) system</a>, since the choice of the fixed-point scaling factor is often equivalent to the choice of a unit of measure (like <a href="https://en.wikipedia.org/wiki/Centimeter" class="mw-redirect" title="Centimeter">centimeters</a> or <a href="https://en.wikipedia.org/wiki/Micron" class="mw-redirect" title="Micron">microns</a>  instead of <a href="https://en.wikipedia.org/wiki/Meter" class="mw-redirect" title="Meter">meters</a>).
+</p><p>However, other scaling factors may be used occasionally, e.g. a fractional amount of hours may be represented as an integer number of seconds; that is, as a fixed-point number with scale factor of 1/3600.
+</p><p>Even with the most careful rounding, fixed-point values represented with a scaling factor <i>S</i> may have an error of up to ±0.5 in the stored integer, that is, ±0.5 <i>S</i> in the value.  Therefore, smaller scaling factors generally produce more accurate results.
+</p><p>On the other hand, a smaller scaling factor means a smaller range of the values that can be stored in a given program variable.  The maximum fixed-point value that can be stored into a variable is the largest integer value that can be stored into it, multiplied by the scaling factor; and similarly for the minimum value.  For example, the table below gives the implied scaling factor <i>S</i>, the minimum and maximum representable values <i>V</i><sub>min</sub> and <i>V</i><sub>max</sub>, and the accuracy <i>δ</i> = <i>S</i>/2 of values that could be represented in 16-bit signed binary fixed point format, depending on the number <i>f</i> of implied fraction bits.
+</p>
+<table class="wikitable" style="margin:0 0 0 1em; float:center;">
+<caption>Parameters of some 16-bit signed binary fixed-point formats
+</caption>
+<tbody><tr>
+<th><i>f</i></th>
+<th><i>S</i></th>
+<th><i>δ</i></th>
+<th><i>V</i><sub>min</sub></th>
+<th><i>V</i><sub>max</sub>
+</th></tr>
+<tr>
+<td>−3</td>
+<td>1/2<sup>−3</sup> = 8</td>
+<td>4</td>
+<td>−<span style="white-space: nowrap;">262&#8201;144</span></td>
+<td>+<span style="white-space: nowrap;">262&#8201;136</span>
+</td></tr>
+<tr>
+<td>0</td>
+<td>1/2<sup>0</sup> = 1</td>
+<td>0.5</td>
+<td>−<span style="white-space: nowrap;">32&#8201;768</span></td>
+<td>+<span style="white-space: nowrap;">32&#8201;767</span>
+</td></tr>
+<tr>
+<td>5</td>
+<td>1/2<sup>5</sup> = 1/32</td>
+<td>&lt; 0.016</td>
+<td>−1024.<span style="white-space: nowrap;">000&#8201;00</span></td>
+<td>+1023.<span style="white-space: nowrap;">968&#8201;75</span>
+</td></tr>
+<tr>
+<td>14</td>
+<td>1/2<sup>14</sup> = 1/<span style="white-space: nowrap;">16&#8201;384</span></td>
+<td>&lt; 0.<span style="white-space: nowrap;">000&#8201;031</span></td>
+<td>−2.<span style="white-space: nowrap;">000&#8201;000&#8201;000&#8201;000&#8201;00</span></td>
+<td>+1.<span style="white-space: nowrap;">999&#8201;938&#8201;964&#8201;843&#8201;75</span>
+</td></tr>
+<tr>
+<td>15</td>
+<td>1/2<sup>15</sup> = 1/<span style="white-space: nowrap;">32&#8201;768</span></td>
+<td>&lt; 0.<span style="white-space: nowrap;">000&#8201;016</span></td>
+<td>−1.<span style="white-space: nowrap;">000&#8201;000&#8201;000&#8201;000&#8201;000</span></td>
+<td>+0.<span style="white-space: nowrap;">999&#8201;969&#8201;482&#8201;421&#8201;875</span>
+</td></tr>
+<tr>
+<td>16</td>
+<td>1/2<sup>16</sup> = 1/<span style="white-space: nowrap;">65&#8201;536</span></td>
+<td>&lt; 0.<span style="white-space: nowrap;">000&#8201;008</span></td>
+<td>−0.<span style="white-space: nowrap;">500&#8201;000&#8201;000&#8201;000&#8201;000&#8201;0</span></td>
+<td>+0.<span style="white-space: nowrap;">499&#8201;984&#8201;741&#8201;210&#8201;937&#8201;5</span>
+</td></tr>
+<tr>
+<td>20</td>
+<td>1/2<sup>20</sup> = 1/<span style="white-space: nowrap;">1&#8201;048&#8201;576</span></td>
+<td>&lt; 0.<span style="white-space: nowrap;">000&#8201;000&#8201;5</span></td>
+<td>−0.<span style="white-space: nowrap;">031&#8201;250&#8201;000&#8201;000&#8201;000&#8201;000&#8201;00</span></td>
+<td>+0.<span style="white-space: nowrap;">031&#8201;249&#8201;046&#8201;325&#8201;683&#8201;593&#8201;75</span>
+</td></tr></tbody></table>
+<p>Fixed-point formats with scaling factors of the form 2<sup><i>n</i></sup>-1 (namely 1, 3, 7, 15, 31, etc.) have been said to be appropriate for image processing and other digital signal processing tasks. They are supposed to provide more consistent conversions between fixed- and floating-point values than the usual 2<sup><i>n</i></sup> scaling. The <a href="https://en.wikipedia.org/wiki/Julia_(programming_language)" title="Julia (programming language)">Julia</a> programming language implements both versions.<sup id="cite_ref-julia_2-0" class="reference"><a href="#cite_note-julia-2"><span class="cite-bracket">&#91;</span>2<span class="cite-bracket">&#93;</span></a></sup>
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Exact_values">Exact values</h3></span></div>
+<p>Any binary fraction <i>a</i>/2<sup><i>m</i></sup>, such as 1/16 or 17/32, can be exactly represented in fixed-point, with a power-of-two scaling factor 1/2<sup><i>n</i></sup> with any <i>n</i> ≥ <i>m</i>.  However, most decimal fractions like 0.1 or 0.123 are infinite <a href="https://en.wikipedia.org/wiki/Repeating_fraction" class="mw-redirect" title="Repeating fraction">repeating fractions</a> in base 2. and hence cannot be represented that way.
+</p><p>Similarly, any decimal fraction <i>a</i>/10<sup><i>m</i></sup>, such as 1/100 or 37/1000, can be exactly represented in fixed point with a power-of-ten scaling factor 1/10<sup><i>n</i></sup> with any <i>n</i> ≥ <i>m</i>.  This decimal format can also represent any binary fraction <i>a</i>/2<sup><i>m</i></sup>, such as 1/8 (0.125) or 17/32 (0.53125).
+</p><p>More generally, a <a href="https://en.wikipedia.org/wiki/Rational_number" title="Rational number">rational number</a> <i>a</i>/<i>b</i>, with <i>a</i> and <i>b</i> <a href="https://en.wikipedia.org/wiki/Relatively_prime" class="mw-redirect" title="Relatively prime">relatively prime</a> and <i>b</i> positive, can be exactly represented in binary fixed point only if <i>b</i> is a power of 2; and in decimal fixed point only if <i>b</i> has no <a href="https://en.wikipedia.org/wiki/Prime" class="mw-redirect" title="Prime">prime</a> factors other than 2 and/or 5.
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Comparison_with_floating-point">Comparison with floating-point</h3></span></div>
+<p>Fixed-point computations can be faster and/or use less hardware than floating-point ones.  If the range of the values to be represented is known in advance and is sufficiently limited, fixed point can make better use of the available bits.  For example, if 32 bits are available to represent a number between 0 and 1, a fixed-point representation can have error less than 1.2 × 10<sup>−10</sup>, whereas the standard floating-point representation may have error up to 596 × 10<sup>−10</sup> — because 9 of the bits are wasted with the sign and exponent of the dynamic scaling factor. Specifically, comparing 32-bit fixed-point to <a href="https://en.wikipedia.org/wiki/IEEE_754" title="IEEE 754">floating-point</a> audio, a recording requiring less than 40 <a href="https://en.wikipedia.org/wiki/Decibel" title="Decibel">dB</a> of <a href="https://en.wikipedia.org/wiki/Headroom_(audio_signal_processing)" title="Headroom (audio signal processing)">headroom</a> has a higher <a href="https://en.wikipedia.org/wiki/Signal-to-noise_ratio" title="Signal-to-noise ratio">signal-to-noise ratio</a> using 32-bit fixed.
+</p><p>Programs using fixed-point computations are usually more portable than those using floating-point, since they do not depend on the availability of an FPU. This advantage was particularly strong before the <a href="https://en.wikipedia.org/wiki/IEEE_Floating_Point_Standard" class="mw-redirect" title="IEEE Floating Point Standard">IEEE Floating Point Standard</a> was widely adopted, when floating-point computations with the same data would yield different results depending on the manufacturer, and often on the computer model.
+</p><p>Many embedded processors lack an FPU, because integer arithmetic units require substantially fewer <a href="https://en.wikipedia.org/wiki/Logic_gate" title="Logic gate">logic gates</a> and consume much smaller <a href="https://en.wikipedia.org/wiki/Integrated_circuit" title="Integrated circuit">chip</a> area than an FPU; and software <a href="https://en.wikipedia.org/wiki/Emulation_(computing)" class="mw-redirect" title="Emulation (computing)">emulation</a> of floating-point on low-speed devices would be too slow for most applications. CPU chips for the earlier <a href="https://en.wikipedia.org/wiki/Personal_computer" title="Personal computer">personal computers</a> and <a href="https://en.wikipedia.org/wiki/Game_console" class="mw-redirect" title="Game console">game consoles</a>, like the <a href="https://en.wikipedia.org/wiki/Intel_386" class="mw-redirect" title="Intel 386">Intel 386</a> and <a href="https://en.wikipedia.org/wiki/Intel_486" class="mw-redirect" title="Intel 486">486SX</a>, also lacked an FPU.
+</p><p>The <i>absolute</i> resolution (difference between successive values) of any fixed-point format is constant over the whole range, namely the scaling factor <i>S</i>. In contrast, the <i>relative</i> resolution of a floating-point format is approximately constant over their whole range, varying within a factor of the base <i>b</i>; whereas their <i>absolute</i> resolution varies by many orders of magnitude, like the values themselves.
+</p><p>In many cases, the <a href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" title="Quantization (signal processing)">rounding and truncation</a> errors of fixed-point computations are easier to analyze than those of the equivalent floating-point computations.  Applying linearization techniques to truncation, such as <a href="https://en.wikipedia.org/wiki/Dither" title="Dither">dithering</a> and/or <a href="https://en.wikipedia.org/wiki/Noise_shaping" title="Noise shaping">noise shaping</a> is more straight-forward within fixed-point arithmetic. On the other hand, the use of fixed point requires greater care by the programmer.  Avoidance of overflow requires much tighter estimates for the ranges of variables and all intermediate values in the computation, and often also extra code to adjust their scaling factors.  Fixed-point programming normally requires the use of <a href="https://en.wikipedia.org/wiki/C_data_types#Main_types" title="C data types">integer types of different widths</a>.  Fixed-point applications can make use of <a href="https://en.wikipedia.org/wiki/Block_floating_point" title="Block floating point">block floating point</a>, which is a fixed-point environment having each array (block) of fixed-point data be scaled with a common exponent in a single word.
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Applications">Applications</h2></span></div>
+<link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1236091366"><table class="box-Unreferenced_section plainlinks metadata ambox ambox-content ambox-Unreferenced" role="presentation"><tbody><tr><td class="mbox-image"><div class="mbox-image-div"><span typeof="mw:File"><a href="https://en.wikipedia.org/wiki/File:Question_book-new.svg" class="mw-file-description"><img alt="" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/50px-Question_book-new.svg.png" decoding="async" width="50" height="39" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/75px-Question_book-new.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/100px-Question_book-new.svg.png 2x" data-file-width="512" data-file-height="399" /></a></span></div></td><td class="mbox-text"><div class="mbox-text-span">This section <b>does not <a href="https://en.wikipedia.org/wiki/Wikipedia:Citing_sources" title="Wikipedia:Citing sources">cite</a> any <a href="https://en.wikipedia.org/wiki/Wikipedia:Verifiability" title="Wikipedia:Verifiability">sources</a></b>.<span class="hide-when-compact"> Please help <a href="https://en.wikipedia.org/wiki/Special:EditPage/Fixed-point_arithmetic" title="Special:EditPage/Fixed-point arithmetic">improve this section</a> by <a href="https://en.wikipedia.org/wiki/Help:Referencing_for_beginners" title="Help:Referencing for beginners">adding citations to reliable sources</a>. Unsourced material may be challenged and <a href="https://en.wikipedia.org/wiki/Wikipedia:Verifiability#Burden_of_evidence" title="Wikipedia:Verifiability">removed</a>.</span>  <span class="date-container"><i>(<span class="date">May 2023</span>)</i></span><span class="hide-when-compact"><i> (<small><a href="https://en.wikipedia.org/wiki/Help:Maintenance_template_removal" title="Help:Maintenance template removal">Learn how and when to remove this message</a></small>)</i></span></div></td></tr></tbody></table>
+<p>A common use of decimal fixed-point is for storing monetary values, for which the complicated rounding rules of floating-point numbers are often a liability.  For example, the open-source money management application <a href="https://en.wikipedia.org/wiki/GnuCash" title="GnuCash">GnuCash</a>, written in C,  switched from floating-point to fixed-point as of version 1.6, for this reason.
+</p><p>Binary fixed-point (binary scaling) was widely used from the late 1960s to the 1980s for real-time computing that was mathematically intensive, such as <a href="https://en.wikipedia.org/wiki/Flight_simulation" class="mw-redirect" title="Flight simulation">flight simulation</a> and in <a href="https://en.wikipedia.org/wiki/Nuclear_power_plant" title="Nuclear power plant">nuclear power plant</a> control algorithms. It is still used in many <a href="https://en.wikipedia.org/wiki/Digital_signal_processing" title="Digital signal processing">DSP</a> applications and custom-made microprocessors. Computations involving angles would use <a href="https://en.wikipedia.org/wiki/Binary_angular_measurement" title="Binary angular measurement">binary angular measurement</a>.
+</p><p>Binary fixed point is used in the <a href="https://en.wikipedia.org/wiki/STM32" title="STM32">STM32G4</a> series <a href="https://en.wikipedia.org/wiki/CORDIC" title="CORDIC">CORDIC</a> co-processors and in the <a href="https://en.wikipedia.org/wiki/Discrete_cosine_transform" title="Discrete cosine transform">discrete cosine transform</a> algorithms used to compress <a href="https://en.wikipedia.org/wiki/JPEG" title="JPEG">JPEG</a> images.
+</p><p>Electronic instruments such as <a href="https://en.wikipedia.org/wiki/Electricity_meter" title="Electricity meter">electricity meters</a> and <a href="https://en.wikipedia.org/wiki/Real-time_clock" title="Real-time clock">digital clocks</a> often use polynomials to compensate for introduced errors, e.g. from temperature or power supply voltage. The coefficients are produced by <a href="https://en.wikipedia.org/wiki/Polynomial_regression" title="Polynomial regression">polynomial regression</a>. Binary fixed-point polynomials can utilize more bits of precision than floating-point, and do so in fast code using inexpensive CPUs. Accuracy, crucial for instruments, compares well to equivalent-bit floating-point calculations, if the fixed-point polynomials are evaluated using <a href="https://en.wikipedia.org/wiki/Horner%27s_method" title="Horner&#39;s method">Horner's method</a> (e.g. <span class="texhtml"><i>y</i> = ((<i>ax</i> + <i>b</i>)<i>x</i> + <i>c</i>)<i>x</i> + <i>d</i></span>) to reduce the number of times that rounding occurs, and the fixed-point multiplications utilize rounding addends.
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Operations">Operations</h2></span></div>
+<link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1236091366"><table class="box-Unreferenced_section plainlinks metadata ambox ambox-content ambox-Unreferenced" role="presentation"><tbody><tr><td class="mbox-image"><div class="mbox-image-div"><span typeof="mw:File"><a href="https://en.wikipedia.org/wiki/File:Question_book-new.svg" class="mw-file-description"><img alt="" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/50px-Question_book-new.svg.png" decoding="async" width="50" height="39" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/75px-Question_book-new.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/100px-Question_book-new.svg.png 2x" data-file-width="512" data-file-height="399" /></a></span></div></td><td class="mbox-text"><div class="mbox-text-span">This section <b>does not <a href="https://en.wikipedia.org/wiki/Wikipedia:Citing_sources" title="Wikipedia:Citing sources">cite</a> any <a href="https://en.wikipedia.org/wiki/Wikipedia:Verifiability" title="Wikipedia:Verifiability">sources</a></b>.<span class="hide-when-compact"> Please help <a href="https://en.wikipedia.org/wiki/Special:EditPage/Fixed-point_arithmetic" title="Special:EditPage/Fixed-point arithmetic">improve this section</a> by <a href="https://en.wikipedia.org/wiki/Help:Referencing_for_beginners" title="Help:Referencing for beginners">adding citations to reliable sources</a>. Unsourced material may be challenged and <a href="https://en.wikipedia.org/wiki/Wikipedia:Verifiability#Burden_of_evidence" title="Wikipedia:Verifiability">removed</a>.</span>  <span class="date-container"><i>(<span class="date">May 2023</span>)</i></span><span class="hide-when-compact"><i> (<small><a href="https://en.wikipedia.org/wiki/Help:Maintenance_template_removal" title="Help:Maintenance template removal">Learn how and when to remove this message</a></small>)</i></span></div></td></tr></tbody></table>
+<div class="mw-heading mw-heading3"><h3 id="Addition_and_subtraction">Addition and subtraction</h3></span></div>
+<p>To add or subtract two values with the same implicit scaling factor, it is sufficient to add or subtract the underlying integers; the result will have their common implicit scaling factor, can thus can be stored in the same program variables as the operands.  These operations yield the exact mathematical result, as long as no <a href="https://en.wikipedia.org/wiki/Arithmetic_overflow" class="mw-redirect" title="Arithmetic overflow">overflow</a> occurs—that is, as long as the resulting integer can be stored in the receiving program <a href="https://en.wikipedia.org/wiki/Variable_(computing)" class="mw-redirect" title="Variable (computing)">variable</a>. If the operands have different scaling factors, then they must be converted to a common scaling factor before the operation.
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Multiplication">Multiplication</h3></span></div>
+<p>To multiply two fixed-point numbers, it suffices to multiply the two underlying integers, and assume that the scaling factor of the result is the product of their scaling factors. The result will be exact, with no rounding, provided that it does not overflow the receiving variable.
+</p><p>For example, multiplying the numbers 123 scaled by 1/1000 (0.123) and 25 scaled by 1/10 (2.5) yields the integer 123×25 = 3075 scaled by (1/1000)×(1/10) = 1/10000, that is 3075/10000 = 0.3075.   As another example, multiplying the first number by 155 implicitly scaled by 1/32 (155/32 = 4.84375) yields the integer 123×155 = 19065 with implicit scaling factor (1/1000)×(1/32) = 1/32000, that is 19065/32000 = 0.59578125.
+</p><p>In binary, it is common to use a scaling factor that is a power of two. After the multiplication, the scaling factor can be divided away by shifting right. Shifting is simple and fast in most computers. Rounding is possible by adding a 'rounding addend' of half of the scaling factor before shifting; The proof: round(x/y) = floor(x/y + 0.5) = floor((x + y/2)/y) = shift-of-n(x + 2^(n-1)) A similar method is usable in any scaling.
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Division">Division</h3></span></div>
+<p>To divide two fixed-point numbers, one takes the integer quotient of their underlying integers, and assumes that the scaling factor is the quotient of their scaling factors.  In general, the first division requires rounding and therefore the result is not exact.
+</p><p>For example, division of 3456 scaled by 1/100 (34.56) and 1234 scaled by 1/1000 (1.234) yields the integer 3456÷1234 = 3 (rounded) with scale factor (1/100)/(1/1000) = 10, that is, 30.  As another example, the division of the first number by 155 implicitly scaled by 1/32 (155/32 = 4.84375) yields the integer 3456÷155 = 22 (rounded) with implicit scaling factor (1/100)/(1/32) = 32/100 = 8/25, that is 22×32/100 = 7.04.
+</p><p>If the result is not exact, the error introduced by the rounding can be reduced or even eliminated by converting the dividend to a smaller scaling factor.  For example, if <i>r</i> = 1.23 is represented as 123 with scaling 1/100, and <i>s</i> = 6.25 is represented as 6250 with scaling 1/1000, then simple division of the integers yields 123÷6250 = 0 (rounded) with scaling factor (1/100)/(1/1000) = 10.  If <i>r</i> is first converted to 1,230,000 with scaling factor 1/1000000, the result will be 1,230,000÷6250 = 197 (rounded) with scale factor 1/1000 (0.197).  The exact value 1.23/6.25 is 0.1968.
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Scaling_conversion">Scaling conversion</h3></span></div>
+<p>In fixed-point computing it is often necessary to convert a value to a different scaling factor.  This operation is necessary, for example:
+</p>
+<ul><li>To store a value into a program variable that has a different implicit scaling factor;</li>
+<li>To convert two values to the same scaling factor, so that they can be added or subtracted;</li>
+<li>To restore the original scaling factor of a value after multiplying or dividing it by another;</li>
+<li>To improve the accuracy of the result of a division;</li>
+<li>To ensure that the scaling factor of a product or quotient is a simple power like 10<sup><i>n</i></sup> or  2<sup><i>n</i></sup>;</li>
+<li>To ensure that the result of an operation can be stored into a program variable without overflow;</li>
+<li>To reduce the cost of hardware that processes fixed-point data.</li></ul>
+<p>To convert a number from a fixed point type with scaling factor <i>R</i> to another type with scaling factor <i>S</i>, the underlying integer must be multiplied by the ratio <i>R</i>/<i>S</i>.  Thus, for example, to convert the value 1.23 = 123/100 from scaling factor <i>R</i>=1/100 to one with scaling factor <i>S</i>=1/1000, the integer 123 must be multiplied by (1/100)/(1/1000) = 10, yielding the representation 1230/1000.
+</p><p>If the scaling factor is a power of the base used internally to represent the integer, changing the scaling factor requires only dropping low-order digits of the integer, or appending zero digits.  However, this operation must preserve the sign of the number. In two's complement representation, that means extending the sign bit as in <a href="https://en.wikipedia.org/wiki/Arithmetic_shift" title="Arithmetic shift">arithmetic shift</a> operations.
+</p><p>If <i>S</i> does not divide <i>R</i> (in particular, if the new scaling factor <i>S</i> is greater than the original <i>R</i>), the new integer may have to be <a href="https://en.wikipedia.org/wiki/Rounding" title="Rounding">rounded</a>.
+</p><p>In particular, if <i>r</i> and <i>s</i> are fixed-point variables with implicit scaling factors <i>R</i> and <i>S</i>, the operation <i>r</i> ← <i>r</i>×<i>s</i> require multiplying the respective integers and explicitly dividing the result by <i>S</i>.  The result may have to be rounded, and overflow may occur.
+</p><p>For example, if the common scaling factor is 1/100, multiplying 1.23 by 0.25 entails multiplying 123 by 25 to yield 3075 with an intermediate scaling factor of 1/10000.  In order to return to the original scaling factor 1/100, the integer 3075 then must be multiplied by 1/100, that is, divided by 100, to yield either 31 (0.31) or 30 (0.30), depending on the <a href="https://en.wikipedia.org/wiki/Rounding" title="Rounding">rounding policy</a> used.
+</p><p>Similarly, the operation <i>r</i> ← <i>r</i>/<i>s</i> will require dividing the integers and explicitly multiplying the quotient by <i>S</i>. Rounding and/or overflow may occur here too.
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Conversion_to_and_from_floating-point">Conversion to and from floating-point</h3></span></div>
+<p>To convert a number from floating point to fixed point, one may multiply it by the scaling factor <i>S</i>, then round the result to the nearest integer.  Care must be taken to ensure that the result fits in the destination variable or register.  Depending on the scaling factor and storage size, and on the range input numbers, the conversion may not entail any rounding.
+</p><p>To convert a fixed-point number to floating-point, one may convert the integer to floating-point and then divide it by the scaling factor <i>S</i>.  This conversion may entail rounding if the integer's absolute value is greater than 2<sup>24</sup> (for binary single-precision IEEE floating point) or of 2<sup>53</sup> (for double-precision). Overflow or <a href="https://en.wikipedia.org/wiki/Underflow" class="mw-redirect" title="Underflow">underflow</a> may occur if |<i>S</i>| is <i>very</i> large or <i>very</i> small, respectively.
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Hardware_support">Hardware support</h2></span></div>
+<link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1236091366"><table class="box-Unreferenced_section plainlinks metadata ambox ambox-content ambox-Unreferenced" role="presentation"><tbody><tr><td class="mbox-image"><div class="mbox-image-div"><span typeof="mw:File"><a href="https://en.wikipedia.org/wiki/File:Question_book-new.svg" class="mw-file-description"><img alt="" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/50px-Question_book-new.svg.png" decoding="async" width="50" height="39" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/75px-Question_book-new.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/100px-Question_book-new.svg.png 2x" data-file-width="512" data-file-height="399" /></a></span></div></td><td class="mbox-text"><div class="mbox-text-span">This section <b>does not <a href="https://en.wikipedia.org/wiki/Wikipedia:Citing_sources" title="Wikipedia:Citing sources">cite</a> any <a href="https://en.wikipedia.org/wiki/Wikipedia:Verifiability" title="Wikipedia:Verifiability">sources</a></b>.<span class="hide-when-compact"> Please help <a href="https://en.wikipedia.org/wiki/Special:EditPage/Fixed-point_arithmetic" title="Special:EditPage/Fixed-point arithmetic">improve this section</a> by <a href="https://en.wikipedia.org/wiki/Help:Referencing_for_beginners" title="Help:Referencing for beginners">adding citations to reliable sources</a>. Unsourced material may be challenged and <a href="https://en.wikipedia.org/wiki/Wikipedia:Verifiability#Burden_of_evidence" title="Wikipedia:Verifiability">removed</a>.</span>  <span class="date-container"><i>(<span class="date">May 2023</span>)</i></span><span class="hide-when-compact"><i> (<small><a href="https://en.wikipedia.org/wiki/Help:Maintenance_template_removal" title="Help:Maintenance template removal">Learn how and when to remove this message</a></small>)</i></span></div></td></tr></tbody></table>
+<div class="mw-heading mw-heading3"><h3 id="Scaling_and_renormalization">Scaling and renormalization</h3></span></div>
+<p>Typical processors do not have specific support for fixed-point arithmetic. However, most computers with binary arithmetic have fast <a href="https://en.wikipedia.org/wiki/Bit_shift" class="mw-redirect" title="Bit shift">bit shift</a> instructions that can multiply or divide an integer by any power of 2; in particular, an <a href="https://en.wikipedia.org/wiki/Arithmetic_shift" title="Arithmetic shift">arithmetic shift</a> instruction.  These instructions can be used to quickly change scaling factors that are powers of 2, while preserving the sign of the number.
+</p><p>Early computers like the <a href="https://en.wikipedia.org/wiki/IBM_1620" title="IBM 1620">IBM 1620</a> and the <a href="https://en.wikipedia.org/wiki/Burroughs_Medium_Systems" title="Burroughs Medium Systems">Burroughs B3500</a> used a <a href="https://en.wikipedia.org/wiki/Binary-coded_decimal" title="Binary-coded decimal">binary-coded decimal</a> (BCD) representation for integers, namely base 10 where each decimal digit was independently encoded with 4 bits. Some processors, such as microcontrollers, may still use it.  In such machines, conversion of decimal scaling factors can be performed by bit shifts and/or by memory address manipulation.
+</p><p>Some DSP architectures offer native support for specific fixed-point formats, for example, signed <i>n</i>-bit numbers with <i>n</i>−1 fraction bits (whose values may range between −1 and almost +1). The support may include a multiply instruction that includes renormalization—the scaling conversion of the product from 2<i>n</i>−2 to <i>n</i>−1 fraction bits.<sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources. (July 2021)">citation needed</span></a></i>&#93;</sup> If the CPU does not provide that feature, the programmer must save the product in a large enough register or temporary variable, and code the renormalization explicitly.
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Overflow">Overflow</h3></span></div>
+<p>Overflow happens when the result of an arithmetic operation is too large to be stored in the designated destination area. In addition and subtraction, the result may require one bit more than the operands. In multiplication of two unsigned integers with <i>m</i> and <i>n</i> bits, the result may have <i>m</i>+<i>n</i> bits.
+</p><p>In case of overflow, the high-order bits are usually lost, as the un-scaled integer gets reduced modulo 2<sup><i>n</i></sup> where <i>n</i> is the size of the storage area. The sign bit, in particular, is lost, which may radically change the sign and the magnitude of the value.
+</p><p>Some processors can set a hardware <a href="https://en.wikipedia.org/wiki/Overflow_flag" title="Overflow flag">overflow flag</a> and/or generate an <a href="https://en.wikipedia.org/wiki/Exception_handling" title="Exception handling">exception</a> on the occurrence of an overflow.  Some processors may instead provide <a href="https://en.wikipedia.org/wiki/Saturation_arithmetic" title="Saturation arithmetic">saturation arithmetic</a>: if the result of an addition or subtraction were to overflow, they store instead the value with the largest magnitude that can fit in the receiving area and has the correct sign.<sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources. (July 2021)">citation needed</span></a></i>&#93;</sup> 
+</p><p>However, these features are not very useful in practice; it is generally easier and safer to select scaling factors and word sizes so as to exclude the possibility of overflow, or to check the operands for excessive values before executing the operation.
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Computer_language_support">Computer language support</h2></span></div>
+<p>Explicit support for fixed-point numbers is provided by a few computer languages, notably <a href="https://en.wikipedia.org/wiki/PL/I" title="PL/I">PL/I</a>, <a href="https://en.wikipedia.org/wiki/COBOL" title="COBOL">COBOL</a>, <a href="https://en.wikipedia.org/wiki/Ada_programming_language" class="mw-redirect" title="Ada programming language">Ada</a>, <a href="https://en.wikipedia.org/wiki/JOVIAL" title="JOVIAL">JOVIAL</a>, and <a href="https://en.wikipedia.org/wiki/Coral_66" class="mw-redirect" title="Coral 66">Coral 66</a>. They provide fixed-point  <a href="https://en.wikipedia.org/wiki/Data_type" title="Data type">data types</a>, with a binary or decimal scaling factor. The compiler automatically generates code to do the appropriate scaling conversions when doing operations on these data-types, when reading or writing variables, or when converting the values to other data types such as floating-point.
+</p><p>Most of those languages were designed between 1955 and 1990.  More modern languages usually do not offer any fixed-point data types or support for scaling factor conversion. That is also the case for several older languages that are still very popular, like  <a href="https://en.wikipedia.org/wiki/FORTRAN" class="mw-redirect" title="FORTRAN">FORTRAN</a>,  <a href="https://en.wikipedia.org/wiki/C_(programming_language)" title="C (programming language)">C</a> and <a href="https://en.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a>.  The wide availability of fast floating-point processors, with strictly standardized behavior, have greatly reduced the demand for binary fixed-point support.<sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">&#91;<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources. (October 2021)">citation needed</span></a></i>&#93;</sup>  Similarly, the support for <a href="https://en.wikipedia.org/wiki/Decimal_floating_point" title="Decimal floating point">decimal floating point</a> in some programming languages, like <a href="https://en.wikipedia.org/wiki/C_Sharp_language" class="mw-redirect" title="C Sharp language">C#</a> and <a href="https://en.wikipedia.org/wiki/Python_(programming_language)" title="Python (programming language)">Python</a>, has removed most of the need for decimal fixed-point support. In the few situations that call for fixed-point operations, they can be implemented by the programmer, with explicit scaling conversion, in any programming language.
+</p><p>On the other hand, all relational <a href="https://en.wikipedia.org/wiki/Database" title="Database">databases</a> and the <a href="https://en.wikipedia.org/wiki/SQL" title="SQL">SQL</a> notation support fixed-point decimal arithmetic and storage of numbers. <a href="https://en.wikipedia.org/wiki/PostgreSQL" title="PostgreSQL">PostgreSQL</a> has a special <samp>numeric</samp> type for exact storage of numbers with up to 1000 digits.<sup id="cite_ref-PostgreSQL_3-0" class="reference"><a href="#cite_note-PostgreSQL-3"><span class="cite-bracket">&#91;</span>3<span class="cite-bracket">&#93;</span></a></sup>
+</p><p>Moreover, in 2008 the <a href="https://en.wikipedia.org/wiki/International_Organization_for_Standardization" title="International Organization for Standardization">International Organization for Standardization</a> (ISO) issued a proposal to extend the C programming language with fixed-point data types, for the benefit of programs running on embedded processors.<sup id="cite_ref-JTC1_2008_4-0" class="reference"><a href="#cite_note-JTC1_2008-4"><span class="cite-bracket">&#91;</span>4<span class="cite-bracket">&#93;</span></a></sup> Also, the <a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection" title="GNU Compiler Collection">GNU Compiler Collection</a> (GCC) has <a href="https://en.wikipedia.org/wiki/Compiler#Back_end" title="Compiler">back-end</a> support for fixed-point.<sup id="cite_ref-gccback_5-0" class="reference"><a href="#cite_note-gccback-5"><span class="cite-bracket">&#91;</span>5<span class="cite-bracket">&#93;</span></a></sup><sup id="cite_ref-gccuse_6-0" class="reference"><a href="#cite_note-gccuse-6"><span class="cite-bracket">&#91;</span>6<span class="cite-bracket">&#93;</span></a></sup>
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Detailed_examples">Detailed examples</h2></span></div>
+<div class="mw-heading mw-heading3"><h3 id="Decimal_fixed_point_multiplication">Decimal fixed point multiplication</h3></span></div>
+<p>Suppose there is the following multiplication with 2 fixed point 3 decimal place numbers.
+</p>
+<dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle {\begin{aligned}(10.500)(1.050)&amp;=1\times 10.500+0.050\times 10.500\\&amp;=10.500+0.525000=11.025000\end{aligned}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mtable columnalign="right left right left right left right left right left right left" rowspacing="3pt" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" displaystyle="true">
+            <mtr>
+              <mtd>
+                <mo stretchy="false">(</mo>
+                <mn>10.500</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mn>1.050</mn>
+                <mo stretchy="false">)</mo>
+              </mtd>
+              <mtd>
+                <mi></mi>
+                <mo>=</mo>
+                <mn>1</mn>
+                <mo>&#x00D7;<!-- × --></mo>
+                <mn>10.500</mn>
+                <mo>+</mo>
+                <mn>0.050</mn>
+                <mo>&#x00D7;<!-- × --></mo>
+                <mn>10.500</mn>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd />
+              <mtd>
+                <mi></mi>
+                <mo>=</mo>
+                <mn>10.500</mn>
+                <mo>+</mo>
+                <mn>0.525000</mn>
+                <mo>=</mo>
+                <mn>11.025000</mn>
+              </mtd>
+            </mtr>
+          </mtable>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\begin{aligned}(10.500)(1.050)&amp;=1\times 10.500+0.050\times 10.500\\&amp;=10.500+0.525000=11.025000\end{aligned}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/3a83a981a8dce4dfbb707287c8d088889e63dddc" class="mwe-math-fallback-image-inline mw-invert skin-invert" aria-hidden="true" style="vertical-align: -2.338ex; width:50.353ex; height:5.843ex;" alt="{\displaystyle {\begin{aligned}(10.500)(1.050)&amp;=1\times 10.500+0.050\times 10.500\\&amp;=10.500+0.525000=11.025000\end{aligned}}}"></span></dd></dl>
+<p>Note how since there are 3 decimal places we show the trailing zeros.  To re-characterize this as an integer multiplication we must first multiply by <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle 1000\ (=10^{3})}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mn>1000</mn>
+        <mtext>&#xA0;</mtext>
+        <mo stretchy="false">(</mo>
+        <mo>=</mo>
+        <msup>
+          <mn>10</mn>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>3</mn>
+          </mrow>
+        </msup>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle 1000\ (=10^{3})}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/cbd6dcea6b156b1a91cbebc5c88a08992f9f1ae8" class="mwe-math-fallback-image-inline mw-invert skin-invert" aria-hidden="true" style="vertical-align: -0.838ex; width:12.872ex; height:3.176ex;" alt="{\displaystyle 1000\ (=10^{3})}"></span> moving all the decimal places in to integer places, then we will multiply by <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle 1/1000\ (=10^{-3})}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mn>1</mn>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mo>/</mo>
+        </mrow>
+        <mn>1000</mn>
+        <mtext>&#xA0;</mtext>
+        <mo stretchy="false">(</mo>
+        <mo>=</mo>
+        <msup>
+          <mn>10</mn>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mo>&#x2212;<!-- − --></mo>
+            <mn>3</mn>
+          </mrow>
+        </msup>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle 1/1000\ (=10^{-3})}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c65939284c6d101cf21bb3d74153058e9cdea4f0" class="mwe-math-fallback-image-inline mw-invert skin-invert" aria-hidden="true" style="vertical-align: -0.838ex; width:16.476ex; height:3.176ex;" alt="{\displaystyle 1/1000\ (=10^{-3})}"></span>  to put them back the equation now looks like
+</p>
+<dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle {\begin{aligned}(10.500)(10^{3})(1.050)(10^{3})(10^{-3})(10^{-3})&amp;=(10500)(1050)(10^{-6})\\&amp;=11\,025\,000(10^{-6})\\&amp;=11.025000\end{aligned}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mtable columnalign="right left right left right left right left right left right left" rowspacing="3pt" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" displaystyle="true">
+            <mtr>
+              <mtd>
+                <mo stretchy="false">(</mo>
+                <mn>10.500</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <msup>
+                  <mn>10</mn>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>3</mn>
+                  </mrow>
+                </msup>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mn>1.050</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <msup>
+                  <mn>10</mn>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>3</mn>
+                  </mrow>
+                </msup>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <msup>
+                  <mn>10</mn>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mo>&#x2212;<!-- − --></mo>
+                    <mn>3</mn>
+                  </mrow>
+                </msup>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <msup>
+                  <mn>10</mn>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mo>&#x2212;<!-- − --></mo>
+                    <mn>3</mn>
+                  </mrow>
+                </msup>
+                <mo stretchy="false">)</mo>
+              </mtd>
+              <mtd>
+                <mi></mi>
+                <mo>=</mo>
+                <mo stretchy="false">(</mo>
+                <mn>10500</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mn>1050</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <msup>
+                  <mn>10</mn>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mo>&#x2212;<!-- − --></mo>
+                    <mn>6</mn>
+                  </mrow>
+                </msup>
+                <mo stretchy="false">)</mo>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd />
+              <mtd>
+                <mi></mi>
+                <mo>=</mo>
+                <mn>11</mn>
+                <mspace width="thinmathspace" />
+                <mn>025</mn>
+                <mspace width="thinmathspace" />
+                <mn>000</mn>
+                <mo stretchy="false">(</mo>
+                <msup>
+                  <mn>10</mn>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mo>&#x2212;<!-- − --></mo>
+                    <mn>6</mn>
+                  </mrow>
+                </msup>
+                <mo stretchy="false">)</mo>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd />
+              <mtd>
+                <mi></mi>
+                <mo>=</mo>
+                <mn>11.025000</mn>
+              </mtd>
+            </mtr>
+          </mtable>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\begin{aligned}(10.500)(10^{3})(1.050)(10^{3})(10^{-3})(10^{-3})&amp;=(10500)(1050)(10^{-6})\\&amp;=11\,025\,000(10^{-6})\\&amp;=11.025000\end{aligned}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/fc17c0966cafb5ed2f9208614a292498e65d5b58" class="mwe-math-fallback-image-inline mw-invert skin-invert" aria-hidden="true" style="vertical-align: -4.171ex; width:63.083ex; height:9.509ex;" alt="{\displaystyle {\begin{aligned}(10.500)(10^{3})(1.050)(10^{3})(10^{-3})(10^{-3})&amp;=(10500)(1050)(10^{-6})\\&amp;=11\,025\,000(10^{-6})\\&amp;=11.025000\end{aligned}}}"></span></dd></dl>
+<p>This works equivalently if we choose a different base, notably base 2 for computing, since a bit shift is the same as a multiplication or division by an order of 2. Three decimal digits is equivalent to about 10 binary digits, so we should round 0.05 to 10 bits after the binary point.  The closest approximation is then 0.0000110011.
+</p>
+<dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle {\begin{aligned}10&amp;=8+2=2^{3}+2^{1}\\1&amp;=2^{0}\\0.5&amp;=2^{-1}\\0.05&amp;=0.0000110011_{2}\end{aligned}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mtable columnalign="right left right left right left right left right left right left" rowspacing="3pt" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" displaystyle="true">
+            <mtr>
+              <mtd>
+                <mn>10</mn>
+              </mtd>
+              <mtd>
+                <mi></mi>
+                <mo>=</mo>
+                <mn>8</mn>
+                <mo>+</mo>
+                <mn>2</mn>
+                <mo>=</mo>
+                <msup>
+                  <mn>2</mn>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>3</mn>
+                  </mrow>
+                </msup>
+                <mo>+</mo>
+                <msup>
+                  <mn>2</mn>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>1</mn>
+                  </mrow>
+                </msup>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd>
+                <mn>1</mn>
+              </mtd>
+              <mtd>
+                <mi></mi>
+                <mo>=</mo>
+                <msup>
+                  <mn>2</mn>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>0</mn>
+                  </mrow>
+                </msup>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd>
+                <mn>0.5</mn>
+              </mtd>
+              <mtd>
+                <mi></mi>
+                <mo>=</mo>
+                <msup>
+                  <mn>2</mn>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mo>&#x2212;<!-- − --></mo>
+                    <mn>1</mn>
+                  </mrow>
+                </msup>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd>
+                <mn>0.05</mn>
+              </mtd>
+              <mtd>
+                <mi></mi>
+                <mo>=</mo>
+                <msub>
+                  <mn>0.0000110011</mn>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>2</mn>
+                  </mrow>
+                </msub>
+              </mtd>
+            </mtr>
+          </mtable>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\begin{aligned}10&amp;=8+2=2^{3}+2^{1}\\1&amp;=2^{0}\\0.5&amp;=2^{-1}\\0.05&amp;=0.0000110011_{2}\end{aligned}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/09542566b76e3e301dc371d1f72a67f55aa2508f" class="mwe-math-fallback-image-inline mw-invert skin-invert" aria-hidden="true" style="vertical-align: -5.671ex; width:23.522ex; height:12.509ex;" alt="{\displaystyle {\begin{aligned}10&amp;=8+2=2^{3}+2^{1}\\1&amp;=2^{0}\\0.5&amp;=2^{-1}\\0.05&amp;=0.0000110011_{2}\end{aligned}}}"></span></dd></dl>
+<p>Thus our multiplication becomes
+</p>
+<dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle {\begin{aligned}(1010.100)(2^{3})(1.0000110011)(2^{10})(2^{-13})&amp;=(1010100)(10000110011)(2^{-13})\\&amp;=(10110000010111100)(2^{-13})\\&amp;=1011.0000010111100\end{aligned}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mtable columnalign="right left right left right left right left right left right left" rowspacing="3pt" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" displaystyle="true">
+            <mtr>
+              <mtd>
+                <mo stretchy="false">(</mo>
+                <mn>1010.100</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <msup>
+                  <mn>2</mn>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>3</mn>
+                  </mrow>
+                </msup>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mn>1.0000110011</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <msup>
+                  <mn>2</mn>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>10</mn>
+                  </mrow>
+                </msup>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <msup>
+                  <mn>2</mn>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mo>&#x2212;<!-- − --></mo>
+                    <mn>13</mn>
+                  </mrow>
+                </msup>
+                <mo stretchy="false">)</mo>
+              </mtd>
+              <mtd>
+                <mi></mi>
+                <mo>=</mo>
+                <mo stretchy="false">(</mo>
+                <mn>1010100</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mn>10000110011</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <msup>
+                  <mn>2</mn>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mo>&#x2212;<!-- − --></mo>
+                    <mn>13</mn>
+                  </mrow>
+                </msup>
+                <mo stretchy="false">)</mo>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd />
+              <mtd>
+                <mi></mi>
+                <mo>=</mo>
+                <mo stretchy="false">(</mo>
+                <mn>10110000010111100</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <msup>
+                  <mn>2</mn>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mo>&#x2212;<!-- − --></mo>
+                    <mn>13</mn>
+                  </mrow>
+                </msup>
+                <mo stretchy="false">)</mo>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd />
+              <mtd>
+                <mi></mi>
+                <mo>=</mo>
+                <mn>1011.0000010111100</mn>
+              </mtd>
+            </mtr>
+          </mtable>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\begin{aligned}(1010.100)(2^{3})(1.0000110011)(2^{10})(2^{-13})&amp;=(1010100)(10000110011)(2^{-13})\\&amp;=(10110000010111100)(2^{-13})\\&amp;=1011.0000010111100\end{aligned}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/799dec8044032266c699e8744bd7e45b30ab2f68" class="mwe-math-fallback-image-inline mw-invert skin-invert" aria-hidden="true" style="vertical-align: -4.171ex; width:75.356ex; height:9.509ex;" alt="{\displaystyle {\begin{aligned}(1010.100)(2^{3})(1.0000110011)(2^{10})(2^{-13})&amp;=(1010100)(10000110011)(2^{-13})\\&amp;=(10110000010111100)(2^{-13})\\&amp;=1011.0000010111100\end{aligned}}}"></span></dd></dl>
+<p>This rounds to 11.023 with three digits after the decimal point.
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Binary_fixed-point_multiplication">Binary fixed-point multiplication</h3></span></div>
+<p>Consider the task of computing the product of 1.2 and 5.6 with binary fixed point using 16 fraction bits.  To represent the two numbers, one multiplies them by 2<sup>16</sup>, obtaining <span style="white-space: nowrap;">78&#8201;643</span>.2 and <span style="white-space: nowrap;">367&#8201;001</span>.6; and round these values the nearest integers, obtaining <span style="white-space: nowrap;">78&#8201;643</span> and <span style="white-space: nowrap;">367&#8201;002</span>.  These numbers will fit comfortably into a 32-bit  word with two's complement signed format.
+</p><p>Multiplying these integers together gives the 35-bit integer <span style="white-space: nowrap;">28&#8201;862&#8201;138&#8201;286</span> with 32 fraction bits, without any rounding. Note that storing this value directly into a 32-bit integer variable would result in overflow and loss of the most significant bits. In practice, it would probably be stored in a signed 64-bit integer variable or <a href="https://en.wikipedia.org/wiki/Register_(computing)" class="mw-redirect" title="Register (computing)">register</a>.
+</p><p>If the result is to be stored in the same format as the data, with 16 fraction bits, that integer should be divided by 2<sup>16</sup>, which gives approximately <span style="white-space: nowrap;">440&#8201;401</span>.28, and then rounded to the nearest integer. This effect can be achieved by adding 2<sup>15</sup> and then shifting the result by 16 bits. The result is <span style="white-space: nowrap;">440&#8201;401</span>, which represents the value 6.<span style="white-space: nowrap;">719&#8201;985&#8201;961&#8201;914&#8201;062&#8201;5</span>. Taking into account the precision of the format, that value is better expressed as  6.<span style="white-space: nowrap;">719&#8201;986</span> ± 0.<span style="white-space: nowrap;">000&#8201;008</span> (not counting the error that comes from the operand approximations). The correct result would be 1.2 × 5.6 = 6.72.
+</p><p>For a more complicated example, suppose that the two numbers 1.2 and 5.6 are represented in 32-bit fixed point format with 30 and 20 fraction bits, respectively.  Scaling by 2<sup>30</sup> and 2<sup>20</sup> gives <span style="white-space: nowrap;">1&#8201;288&#8201;490&#8201;188</span>.8 and <span style="white-space: nowrap;">5&#8201;872&#8201;025</span>.6, that round to <span style="white-space: nowrap;">1&#8201;288&#8201;490&#8201;189</span> and <span style="white-space: nowrap;">5&#8201;872&#8201;026</span>, respectively.  Both numbers still fit in a 32-bit signed integer variable, and represent the fractions
+</p>
+<dl><dd>1.<span style="white-space: nowrap;">200&#8201;000&#8201;000&#8201;186&#8201;264&#8201;514&#8201;923&#8201;095&#8201;703&#8201;125</span> and</dd>
+<dd>5.<span style="white-space: nowrap;">600&#8201;000&#8201;381&#8201;469&#8201;726&#8201;562&#8201;50</span></dd></dl>
+<p>Their product is (exactly) the 53-bit integer <span style="white-space: nowrap;">7&#8201;566&#8201;047&#8201;890&#8201;552&#8201;914</span>, which has 30+20 = 50 implied fraction bits and therefore represents the fraction 
+</p>
+<dl><dd>6.<span style="white-space: nowrap;">720&#8201;000&#8201;458&#8201;806&#8201;753&#8201;229&#8201;623&#8201;609&#8201;513&#8201;510</span></dd></dl>
+<p>If we choose to represent this value in signed 16-bit fixed format with 8 fraction bits, we must divide the integer product by 2<sup>50-8</sup> = 2<sup>42</sup> and round the result; which can be achieved by adding 2<sup>41</sup> and shifting by 42 bits. The result is 1720, representing the value 1720/2<sup>8</sup> = 6.<span style="white-space: nowrap;">718&#8201;75</span>, or approximately 6.719 ± 0.002.
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Notations">Notations</h2></span></div>
+<p>Various notations have been used to concisely specify the parameters of a fixed-point format. In the following list, <i>f</i> represents the number of fractional bits, <i>m</i> the number of magnitude or integer bits, <i>s</i> the number of sign bits, and <i>b</i> the total number of bits.
+</p>
+<ul><li>The <a href="https://en.wikipedia.org/wiki/COBOL" title="COBOL">COBOL</a> programming language originally supported decimal fixed-precision with arbitrary size and decimal scaling, whose format was specified "graphically" with the <style data-mw-deduplicate="TemplateStyles:r886049734">.mw-parser-output .monospaced{font-family:monospace,monospace}</style><span class="monospaced">PIC</span> directive.  For example, <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">PIC S9999V99</span> specified a sign-magnitude 6-digit decimal integer with two decimal fraction digits.<sup id="cite_ref-cobibm_7-0" class="reference"><a href="#cite_note-cobibm-7"><span class="cite-bracket">&#91;</span>7<span class="cite-bracket">&#93;</span></a></sup></li>
+<li>The construct <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">REAL FIXED BINARY (</span><i>p</i><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">,</span><i>f</i><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">)</span> is used in the <a href="https://en.wikipedia.org/wiki/PL/I" title="PL/I">PL/I</a> programming language, to specify a fixed-point signed binary data type with <i>p</i> total bits (not including sign) with <i>f</i> bits in the fraction part; that is a <i>p</i>+1 bit signed integer with a scaling factor of 1/2<sup><i>f</i></sup>. The latter could be positive or negative. One could specify <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">COMPLEX</span> instead of <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">REAL</span>, and <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">DECIMAL</span> instead of <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">BINARY</span> for base 10.</li>
+<li>In the <a href="https://en.wikipedia.org/wiki/Ada_programming_language" class="mw-redirect" title="Ada programming language">Ada programming language</a>, a numeric data type can be specified by, for example,<code class="mw-highlight mw-highlight-lang-ada mw-content-ltr" id="" style="" dir="ltr"><span class="kd">type</span> <span class="kt">F</span> <span class="kr">is</span> <span class="kr">delta</span> <span class="mf">0.01</span> <span class="kr">range</span> <span class="o">-</span><span class="mf">100.0</span> <span class="p">..</span> <span class="mf">100.0</span></code>, meaning a fixed-point representation consisting of a signed binary integer in two's complement format with 7 implied fraction bits (providing a scaling factor 1/128) and at least 15 bits total (ensuring an actual range from -128.00 to almost +128.00).<sup id="cite_ref-adafix_8-0" class="reference"><a href="#cite_note-adafix-8"><span class="cite-bracket">&#91;</span>8<span class="cite-bracket">&#93;</span></a></sup></li>
+<li>The <a href="https://en.wikipedia.org/wiki/Q_(number_format)" title="Q (number format)">Q notation</a> was defined by <a href="https://en.wikipedia.org/wiki/Texas_Instruments" title="Texas Instruments">Texas Instruments</a>.<sup id="cite_ref-TI_2003_9-0" class="reference"><a href="#cite_note-TI_2003-9"><span class="cite-bracket">&#91;</span>9<span class="cite-bracket">&#93;</span></a></sup> One writes <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">Q</span><i>f</i> to specify a signed binary fixed-point value with <i>f</i> fraction bits; for example, <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">Q15</span> specifies a signed integer in two's complement notation with a scaling factor 1/2<sup>15</sup>. The code <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">Q</span><i>m</i><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">.</span><i>f</i> specifies additionally that the number has <i>m</i> bits in the integer part of the value, not counting the sign bit.  Thus <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">Q1.30</span> would describe a binary fixed-point format with 1 integer bit and 30 fractional bits, which could be stored as a 32-bit 2's complement integer with scaling factor 1/2<sup>30</sup>.<sup id="cite_ref-TI_2003_9-1" class="reference"><a href="#cite_note-TI_2003-9"><span class="cite-bracket">&#91;</span>9<span class="cite-bracket">&#93;</span></a></sup><sup id="cite_ref-mwork_10-0" class="reference"><a href="#cite_note-mwork-10"><span class="cite-bracket">&#91;</span>10<span class="cite-bracket">&#93;</span></a></sup> A similar notation has been used by <a href="https://en.wikipedia.org/wiki/ARM_architecture" class="mw-redirect" title="ARM architecture">ARM</a>, except that they count the sign bit in the value of <i>m</i>; so the same format above would be specified as <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">Q2.30</span>.<sup id="cite_ref-ARM_2001_11-0" class="reference"><a href="#cite_note-ARM_2001-11"><span class="cite-bracket">&#91;</span>11<span class="cite-bracket">&#93;</span></a></sup><sup id="cite_ref-ARM_2006_12-0" class="reference"><a href="#cite_note-ARM_2006-12"><span class="cite-bracket">&#91;</span>12<span class="cite-bracket">&#93;</span></a></sup></li>
+<li>The notation <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">B</span><i>m</i> has been used to mean a fixed binary format with <i>m</i> bits in the integer part; the rest of the word being fraction bits.  For example, the maximum and minimum values that can be stored in a signed <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">B16</span> number are ≈32767.9999847 and −32768.0, respectively.</li>
+<li>The <a href="https://en.wikipedia.org/wiki/VisSim" title="VisSim">VisSim</a> company used <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">fx</span><i>m</i><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">.</span><i>b</i> to denote a binary fixed-point value with <i>b</i> total bits and <i>m</i> bits in the integer part; that is, a <i>b</i>-bit integer with scaling factor 1/2<sup><i>b</i>−<i>m</i></sup>.  Thus <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">fx1.16</span> would mean a 16-bit number with 1 bit in the integer part and 15 in the fraction.<sup id="cite_ref-vsi_13-0" class="reference"><a href="#cite_note-vsi-13"><span class="cite-bracket">&#91;</span>13<span class="cite-bracket">&#93;</span></a></sup></li>
+<li>The <a href="https://en.wikipedia.org/wiki/PS2" class="mw-redirect" title="PS2">PS2</a> GS (<a href="https://en.wikipedia.org/wiki/PlayStation_2_technical_specifications#Graphics_processing_unit" title="PlayStation 2 technical specifications">"Graphics Synthesizer"</a>) User's Guide uses the notation <i>s</i><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">:</span><i>m</i><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">:</span><i>f</i>, where <i>s</i> specifies the presence (0 or 1) of sign bit.<sup id="cite_ref-PS2_14-0" class="reference"><a href="#cite_note-PS2-14"><span class="cite-bracket">&#91;</span>14<span class="cite-bracket">&#93;</span></a></sup> For example, <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">0:5:3</span> represents an unsigned 8-bit integer with a scaling factor of 1/2<sup>3</sup>.</li>
+<li>The <a href="https://en.wikipedia.org/wiki/LabVIEW" title="LabVIEW">LabVIEW</a> programming language uses the notation <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">&lt;</span><i>s</i><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">,</span><i>b</i><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">,</span><i>m</i><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r886049734"><span class="monospaced">&gt;</span> to specify the parameters of an 'FXP' fixed point numbers. The <i>s</i> component can be either '+' or '±', signifying either an unsigned or 2's complement signed number, respectively. The <i>b</i> component is the total number of bits, and <i>m</i> is the number of bits in the integer part.</li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Software_application_examples">Software application examples</h2></span></div>
+<ul><li>The popular <a href="https://en.wikipedia.org/wiki/TrueType" title="TrueType">TrueType</a> font format uses  32-bit signed binary fixed-point with 26 bits to the left of the decimal for some numeric values in its instructions.<sup id="cite_ref-TTS_15-0" class="reference"><a href="#cite_note-TTS-15"><span class="cite-bracket">&#91;</span>15<span class="cite-bracket">&#93;</span></a></sup> This format was chosen to provide the minimal amount of precision required for <a href="https://en.wikipedia.org/wiki/Hinting" class="mw-redirect" title="Hinting">hinting</a> and for performance reasons.<sup id="cite_ref-Freetype_16-0" class="reference"><a href="#cite_note-Freetype-16"><span class="cite-bracket">&#91;</span>16<span class="cite-bracket">&#93;</span></a></sup></li>
+<li>With the exception of the <a href="https://en.wikipedia.org/wiki/Nintendo_64" title="Nintendo 64">Nintendo 64</a>, all 3D games for the <a href="https://en.wikipedia.org/wiki/Fifth_generation_of_video_game_consoles" title="Fifth generation of video game consoles">fifth generation of video game consoles</a>, including the <a href="https://en.wikipedia.org/wiki/3DO_Interactive_Multiplayer" class="mw-redirect" title="3DO Interactive Multiplayer">3DO Interactive Multiplayer</a>, <a href="https://en.wikipedia.org/wiki/PlayStation" title="PlayStation">PlayStation</a>, <a href="https://en.wikipedia.org/wiki/Sega_Saturn" title="Sega Saturn">Saturn</a>, and <a href="https://en.wikipedia.org/wiki/Atari_Jaguar" title="Atari Jaguar">Jaguar</a><sup id="cite_ref-Dolphin_2014_17-0" class="reference"><a href="#cite_note-Dolphin_2014-17"><span class="cite-bracket">&#91;</span>17<span class="cite-bracket">&#93;</span></a></sup> use fixed-point arithmetic, as the systems lack hardware floating-point units. The PlayStation transformation coprocessor supports 16-bit fixed point with 12 fraction bits - whereas the Sega Saturn VDP coprocessors used a 32-bit fixed point format reserving the lower 16 bits for the fractional part.</li>
+<li>The <a href="https://en.wikipedia.org/wiki/TeX" title="TeX">TeX</a> typesetting software, widely used by scientists and mathematicians, uses 32-bit signed binary fixed point with 16 fraction bits for all position calculations. The values are interpreted as fractions of a <a href="https://en.wikipedia.org/wiki/Point_(typography)" title="Point (typography)">typographer's point</a>. <a href="https://en.wikipedia.org/wiki/TeX_font_metric" title="TeX font metric">TeX font metric</a> files use 32-bit signed fixed-point numbers, with 12 fraction bits.</li>
+<li><a href="https://en.wikipedia.org/wiki/Tremor_(software)" title="Tremor (software)">Tremor</a>, <a href="/w/index.php?title=Toast_(GSM)&amp;action=edit&amp;redlink=1" class="new" title="Toast (GSM) (page does not exist)">Toast</a> and <a href="https://en.wikipedia.org/wiki/MPEG_Audio_Decoder" title="MPEG Audio Decoder">MAD</a> are software libraries which decode the <a href="https://en.wikipedia.org/wiki/Ogg_Vorbis" class="mw-redirect" title="Ogg Vorbis">Ogg Vorbis</a>, <a href="https://en.wikipedia.org/wiki/GSM_Full_Rate" class="mw-redirect" title="GSM Full Rate">GSM Full Rate</a> and <a href="https://en.wikipedia.org/wiki/MP3" title="MP3">MP3</a> audio formats respectively. These codecs use fixed-point arithmetic because many audio decoding hardware devices do not have an FPU.</li>
+<li>The <a href="https://en.wikipedia.org/wiki/WavPack" title="WavPack">WavPack</a> lossless audio compressor uses fixed point arithmetic. The choice was justified by, among other things, the worry that different floating-point rounding rules in different hardware could corrupt the lossless nature of the compression.<sup id="cite_ref-WavPack_18-0" class="reference"><a href="#cite_note-WavPack-18"><span class="cite-bracket">&#91;</span>18<span class="cite-bracket">&#93;</span></a></sup></li>
+<li>The Nest Labs Utilities library,<sup id="cite_ref-nlu_19-0" class="reference"><a href="#cite_note-nlu-19"><span class="cite-bracket">&#91;</span>19<span class="cite-bracket">&#93;</span></a></sup> provides a limited set of macros and functions for fixed point numbers, particularly when dealing with those numbers in the context of sensor sampling and sensor outputs.</li>
+<li>The <a href="https://en.wikipedia.org/wiki/OpenGL_ES" title="OpenGL ES">OpenGL ES</a> 1.x specification includes a fixed point profile, as it is an API aimed for embedded systems, which do not always have an FPU.</li>
+<li>The <a href="https://en.wikipedia.org/wiki/Dc_(computer_program)" title="Dc (computer program)">dc</a> and <a href="https://en.wikipedia.org/wiki/Bc_programming_language" class="mw-redirect" title="Bc programming language">bc</a> programs are <a href="https://en.wikipedia.org/wiki/Arbitrary_precision" class="mw-redirect" title="Arbitrary precision">arbitrary precision</a> calculators, but only keep track of a (user-specified) fixed number of fractional digits.</li>
+<li><a href="https://en.wikipedia.org/wiki/Fractint" title="Fractint">Fractint</a> represents numbers as <a href="https://en.wikipedia.org/wiki/Q_(number_format)" title="Q (number format)">Q2.29</a> fixed-point numbers,<sup id="cite_ref-Fractint_2005_20-0" class="reference"><a href="#cite_note-Fractint_2005-20"><span class="cite-bracket">&#91;</span>20<span class="cite-bracket">&#93;</span></a></sup> to speed up drawing on old PCs with <a href="https://en.wikipedia.org/wiki/Intel_80386" class="mw-redirect" title="Intel 80386">386</a> or <a href="https://en.wikipedia.org/wiki/486SX" class="mw-redirect" title="486SX">486SX</a> processors, which lacked an FPU.</li>
+<li><i><a href="https://en.wikipedia.org/wiki/Doom_(1993_video_game)" title="Doom (1993 video game)">Doom</a></i> was the last <a href="https://en.wikipedia.org/wiki/First-person_shooter" title="First-person shooter">first-person shooter</a> game by <a href="https://en.wikipedia.org/wiki/Id_Software" title="Id Software">id Software</a> to use a 16.16 fixed point representation for all of its non-integer computations, including map system, geometry, rendering, and player movement. This representation is still used in modern <a href="https://en.wikipedia.org/wiki/List_of_Doom_source_ports" class="mw-redirect" title="List of Doom source ports"><i>Doom</i> source ports</a>.</li>
+<li>The <a href="https://en.wikipedia.org/wiki/Q_Sharp" title="Q Sharp">Q#</a> programming language for the <a href="https://en.wikipedia.org/wiki/Microsoft_Azure" title="Microsoft Azure">Azure</a> <a href="https://en.wikipedia.org/wiki/Quantum_computer" class="mw-redirect" title="Quantum computer">quantum computers</a>, that implement <a href="https://en.wikipedia.org/wiki/Quantum_logic_gates" class="mw-redirect" title="Quantum logic gates">quantum logic gates</a>, contains a standard numeric library for performing fixed-point arithmetic on <a href="https://en.wikipedia.org/wiki/Quantum_register" title="Quantum register">registers</a> of <a href="https://en.wikipedia.org/wiki/Qubit" title="Qubit">qubits</a>.<sup id="cite_ref-Quantum_21-0" class="reference"><a href="#cite_note-Quantum-21"><span class="cite-bracket">&#91;</span>21<span class="cite-bracket">&#93;</span></a></sup></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="See_also">See also</h2></span></div>
+<ul><li><a href="https://en.wikipedia.org/wiki/Q_(number_format)" title="Q (number format)">Q (number format)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Libfixmath" title="Libfixmath">Libfixmath</a> - a library written in C for fixed-point math</li>
+<li><a href="https://en.wikipedia.org/wiki/Logarithmic_number_system" title="Logarithmic number system">Logarithmic number system</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Minifloat" title="Minifloat">Minifloat</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Block_floating-point_scaling" class="mw-redirect" title="Block floating-point scaling">Block floating-point scaling</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Modulo_operation" class="mw-redirect" title="Modulo operation">Modulo operation</a></li>
+<li><a href="https://en.wikipedia.org/wiki/%CE%9C-law_algorithm" title="Μ-law algorithm">μ-law algorithm</a></li>
+<li><a href="https://en.wikipedia.org/wiki/A-law_algorithm" title="A-law algorithm">A-law algorithm</a></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="References">References</h2></span></div>
+<style data-mw-deduplicate="TemplateStyles:r1239543626">.mw-parser-output .reflist{margin-bottom:0.5em;list-style-type:decimal}@media screen{.mw-parser-output .reflist{font-size:90%}}.mw-parser-output .reflist .references{font-size:100%;margin-bottom:0;list-style-type:inherit}.mw-parser-output .reflist-columns-2{column-width:30em}.mw-parser-output .reflist-columns-3{column-width:25em}.mw-parser-output .reflist-columns{margin-top:0.3em}.mw-parser-output .reflist-columns ol{margin-top:0}.mw-parser-output .reflist-columns li{page-break-inside:avoid;break-inside:avoid-column}.mw-parser-output .reflist-upper-alpha{list-style-type:upper-alpha}.mw-parser-output .reflist-upper-roman{list-style-type:upper-roman}.mw-parser-output .reflist-lower-alpha{list-style-type:lower-alpha}.mw-parser-output .reflist-lower-greek{list-style-type:lower-greek}.mw-parser-output .reflist-lower-roman{list-style-type:lower-roman}</style><div class="reflist reflist-columns references-column-width" style="column-width: 30em;">
+<ol class="references">
+<li id="cite_note-Wong_2017-1"><span class="mw-cite-backlink"><b><a href="#cite_ref-Wong_2017_1-0">^</a></b></span> <span class="reference-text"><style data-mw-deduplicate="TemplateStyles:r1238218222">.mw-parser-output cite.citation{font-style:inherit;word-wrap:break-word}.mw-parser-output .citation q{quotes:"\"""\"""'""'"}.mw-parser-output .citation:target{background-color:rgba(0,127,255,0.133)}.mw-parser-output .id-lock-free.id-lock-free a{background:url("https://upload.wikimedia.org/wikipedia/commons/6/65/Lock-green.svg")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-limited.id-lock-limited a,.mw-parser-output .id-lock-registration.id-lock-registration a{background:url("https://upload.wikimedia.org/wikipedia/commons/d/d6/Lock-gray-alt-2.svg")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-subscription.id-lock-subscription a{background:url("https://upload.wikimedia.org/wikipedia/commons/a/aa/Lock-red-alt-2.svg")right 0.1em center/9px no-repeat}.mw-parser-output .cs1-ws-icon a{background:url("https://upload.wikimedia.org/wikipedia/commons/4/4c/Wikisource-logo.svg")right 0.1em center/12px no-repeat}body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-free a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-limited a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-registration a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-subscription a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .cs1-ws-icon a{background-size:contain;padding:0 1em 0 0}.mw-parser-output .cs1-code{color:inherit;background:inherit;border:none;padding:inherit}.mw-parser-output .cs1-hidden-error{display:none;color:var(--color-error,#d33)}.mw-parser-output .cs1-visible-error{color:var(--color-error,#d33)}.mw-parser-output .cs1-maint{display:none;color:#085;margin-left:0.3em}.mw-parser-output .cs1-kern-left{padding-left:0.2em}.mw-parser-output .cs1-kern-right{padding-right:0.2em}.mw-parser-output .citation .mw-selflink{font-weight:inherit}@media screen{.mw-parser-output .cs1-format{font-size:95%}html.skin-theme-clientpref-night .mw-parser-output .cs1-maint{color:#18911f}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .cs1-maint{color:#18911f}}</style><cite class="citation web cs1"><a rel="nofollow" class="external text" href="https://www.electronicdesign.com/technologies/embedded/article/21805517/whats-the-difference-between-fixed-point-floating-point-and-numerical-formats">"What's the Difference Between Fixed-Point, Floating-Point, and Numerical Formats?"</a>. <i>ElectronicDesign</i>. 2017-08-31.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=ElectronicDesign&amp;rft.atitle=What%E2%80%99s+the+Difference+Between+Fixed-Point%2C+Floating-Point%2C+and+Numerical+Formats%3F&amp;rft.date=2017-08-31&amp;rft_id=https%3A%2F%2Fwww.electronicdesign.com%2Ftechnologies%2Fembedded%2Farticle%2F21805517%2Fwhats-the-difference-between-fixed-point-floating-point-and-numerical-formats&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AFixed-point+arithmetic" class="Z3988"></span></span>
+</li>
+<li id="cite_note-julia-2"><span class="mw-cite-backlink"><b><a href="#cite_ref-julia_2-0">^</a></b></span> <span class="reference-text">Julia programming language documentation <a rel="nofollow" class="external text" href="https://github.com/JuliaMath/FixedPointNumbers.jl">FixedPointNumbers package</a>.</span>
+</li>
+<li id="cite_note-PostgreSQL-3"><span class="mw-cite-backlink"><b><a href="#cite_ref-PostgreSQL_3-0">^</a></b></span> <span class="reference-text">PostgreSQL manual, <a rel="nofollow" class="external text" href="http://www.postgresql.org/docs/8.3/static/datatype-numeric.html#DATATYPE-NUMERIC-DECIMAL">section 8.1.2. Arbitrary Precision Numbers</a></span>
+</li>
+<li id="cite_note-JTC1_2008-4"><span class="mw-cite-backlink"><b><a href="#cite_ref-JTC1_2008_4-0">^</a></b></span> <span class="reference-text">JTC1/SC22/WG14 (2008), <a rel="nofollow" class="external text" href="http://www.open-std.org/JTC1/SC22/WG14/www/projects#18037">status of TR 18037: Embedded C</a></span>
+</li>
+<li id="cite_note-gccback-5"><span class="mw-cite-backlink"><b><a href="#cite_ref-gccback_5-0">^</a></b></span> <span class="reference-text">GCC wiki, <a rel="nofollow" class="external text" href="https://gcc.gnu.org/wiki/FixedPointArithmetic">Fixed-Point Arithmetic Support</a></span>
+</li>
+<li id="cite_note-gccuse-6"><span class="mw-cite-backlink"><b><a href="#cite_ref-gccuse_6-0">^</a></b></span> <span class="reference-text">Using GCC, <a rel="nofollow" class="external text" href="https://gcc.gnu.org/onlinedocs/gcc/Fixed-Point.html">section 5.13 Fixed-Point Types</a></span>
+</li>
+<li id="cite_note-cobibm-7"><span class="mw-cite-backlink"><b><a href="#cite_ref-cobibm_7-0">^</a></b></span> <span class="reference-text">IBM Corporation, "<a rel="nofollow" class="external text" href="https://www.ibm.com/docs/en/i/7.2?topic=rules-numeric-items#dcaprnu">Numeric items</a>". Online documentation site, accessed on 2021-07-05.</span>
+</li>
+<li id="cite_note-adafix-8"><span class="mw-cite-backlink"><b><a href="#cite_ref-adafix_8-0">^</a></b></span> <span class="reference-text">Ada 83 documentation: "<a rel="nofollow" class="external text" href="http://archive.adaic.com/standards/83rat/html/ratl-05-03.html#5.3.2">Rationale, 5.3.2: Fixed Point Types</a>". Accessed on 2021-07-05.</span>
+</li>
+<li id="cite_note-TI_2003-9"><span class="mw-cite-backlink">^ <a href="#cite_ref-TI_2003_9-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-TI_2003_9-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation book cs1">"Appendix A.2". <a rel="nofollow" class="external text" href="http://focus.ti.com/lit/ug/spru565b/spru565b.pdf"><i>TMS320C64x DSP Library Programmer's Reference</i></a> <span class="cs1-format">(PDF)</span>. Dallas, Texas, USA: <a href="https://en.wikipedia.org/wiki/Texas_Instruments_Incorporated" class="mw-redirect" title="Texas Instruments Incorporated">Texas Instruments Incorporated</a>. October 2003. SPRU565. <a rel="nofollow" class="external text" href="https://web.archive.org/web/20221222210046/https://www.ti.com/lit/ug/spru565b/spru565b.pdf">Archived</a> <span class="cs1-format">(PDF)</span> from the original on 2022-12-22<span class="reference-accessdate">. Retrieved <span class="nowrap">2022-12-22</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.atitle=Appendix+A.2&amp;rft.btitle=TMS320C64x+DSP+Library+Programmer%27s+Reference&amp;rft.place=Dallas%2C+Texas%2C+USA&amp;rft.pub=Texas+Instruments+Incorporated&amp;rft.date=2003-10&amp;rft_id=http%3A%2F%2Ffocus.ti.com%2Flit%2Fug%2Fspru565b%2Fspru565b.pdf&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AFixed-point+arithmetic" class="Z3988"></span></span>
+</li>
+<li id="cite_note-mwork-10"><span class="mw-cite-backlink"><b><a href="#cite_ref-mwork_10-0">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="https://web.archive.org/web/20110316070605/http://www.mathworks.com/help/toolbox/fixedpoint/ref/bp7g699.html#f6811">"MathWorks Fixed-Point Toolbox Documentation Glossary"</a>. <i>mathworks.com</i>. Archived from <a rel="nofollow" class="external text" href="http://www.mathworks.com/help/toolbox/fixedpoint/ref/bp7g699.html#f6811">the original</a> on 2011-03-16<span class="reference-accessdate">. Retrieved <span class="nowrap">2011-01-28</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=mathworks.com&amp;rft.atitle=MathWorks+Fixed-Point+Toolbox+Documentation+Glossary&amp;rft_id=http%3A%2F%2Fwww.mathworks.com%2Fhelp%2Ftoolbox%2Ffixedpoint%2Fref%2Fbp7g699.html%23f6811&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AFixed-point+arithmetic" class="Z3988"></span></span>
+</li>
+<li id="cite_note-ARM_2001-11"><span class="mw-cite-backlink"><b><a href="#cite_ref-ARM_2001_11-0">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="http://infocenter.arm.com/help/topic/com.arm.doc.dui0066d/CHDFAAEI.html?resultof=%22%51%2d%66%6f%72%6d%61%74%22%20%22%71%2d%66%6f%72%6d%61%74%22%20">"ARM Developer Suite AXD and armsd Debuggers Guide"</a>. 1.2. <a href="https://en.wikipedia.org/wiki/ARM_Limited" class="mw-redirect" title="ARM Limited">ARM Limited</a>. 2001 [1999]. Chapter 4.7.9. AXD &gt; AXD Facilities &gt; Data formatting &gt; Q-format. ARM DUI 0066D. <a rel="nofollow" class="external text" href="https://archive.today/20171104110547/http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0066d/CHDFAAEI.html">Archived</a> from the original on 2017-11-04.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=unknown&amp;rft.btitle=ARM+Developer+Suite+AXD+and+armsd+Debuggers+Guide&amp;rft.series=1.2&amp;rft.pages=Chapter+4.7.9.+AXD+%3E+AXD+Facilities+%3E+Data+formatting+%3E+Q-format&amp;rft.pub=ARM+Limited&amp;rft.date=2001&amp;rft_id=http%3A%2F%2Finfocenter.arm.com%2Fhelp%2Ftopic%2Fcom.arm.doc.dui0066d%2FCHDFAAEI.html%3Fresultof%3D%2522%2551%252d%2566%256f%2572%256d%2561%2574%2522%2520%2522%2571%252d%2566%256f%2572%256d%2561%2574%2522%2520&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AFixed-point+arithmetic" class="Z3988"></span></span>
+</li>
+<li id="cite_note-ARM_2006-12"><span class="mw-cite-backlink"><b><a href="#cite_ref-ARM_2006_12-0">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation book cs1">"Chapter 4.7.9. AXD &gt; AXD Facilities &gt; Data formatting &gt; Q-format". <a rel="nofollow" class="external text" href="http://infocenter.arm.com/help/topic/com.arm.doc.dui0066g/DUI0066.pdf"><i>RealView Development Suite AXD and armsd Debuggers Guide</i></a> <span class="cs1-format">(PDF)</span>. 3.0. <a href="https://en.wikipedia.org/wiki/ARM_Limited" class="mw-redirect" title="ARM Limited">ARM Limited</a>. 2006 [1999]. pp.&#160;4–24. ARM DUI 0066G. <a rel="nofollow" class="external text" href="https://web.archive.org/web/20171104105632/http://infocenter.arm.com/help/topic/com.arm.doc.dui0066g/DUI0066.pdf">Archived</a> <span class="cs1-format">(PDF)</span> from the original on 2017-11-04.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.atitle=Chapter+4.7.9.+AXD+%3E+AXD+Facilities+%3E+Data+formatting+%3E+Q-format&amp;rft.btitle=RealView+Development+Suite+AXD+and+armsd+Debuggers+Guide&amp;rft.series=3.0&amp;rft.pages=4-24&amp;rft.pub=ARM+Limited&amp;rft.date=2006&amp;rft_id=http%3A%2F%2Finfocenter.arm.com%2Fhelp%2Ftopic%2Fcom.arm.doc.dui0066g%2FDUI0066.pdf&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AFixed-point+arithmetic" class="Z3988"></span></span>
+</li>
+<li id="cite_note-vsi-13"><span class="mw-cite-backlink"><b><a href="#cite_ref-vsi_13-0">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="http://www.vissim.com/products/addons/vissim/fixed-point.html">"VisSim is now solidThinking Embed"</a>. <i>www.vissim.com</i>. solidThinking Inc.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=www.vissim.com&amp;rft.atitle=VisSim+is+now+solidThinking+Embed&amp;rft_id=http%3A%2F%2Fwww.vissim.com%2Fproducts%2Faddons%2Fvissim%2Ffixed-point.html&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AFixed-point+arithmetic" class="Z3988"></span></span>
+</li>
+<li id="cite_note-PS2-14"><span class="mw-cite-backlink"><b><a href="#cite_ref-PS2_14-0">^</a></b></span> <span class="reference-text">PS2 GS User's Guide, Chapter 7.1 "Explanatory Notes"</span>
+</li>
+<li id="cite_note-TTS-15"><span class="mw-cite-backlink"><b><a href="#cite_ref-TTS_15-0">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="https://docs.microsoft.com/en-us/typography/opentype/otspec140/tt_instructions#dt">"The TrueType Instruction Set: Data types"</a>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=unknown&amp;rft.btitle=The+TrueType+Instruction+Set%3A+Data+types&amp;rft_id=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Ftypography%2Fopentype%2Fotspec140%2Ftt_instructions%23dt&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AFixed-point+arithmetic" class="Z3988"></span></span>
+</li>
+<li id="cite_note-Freetype-16"><span class="mw-cite-backlink"><b><a href="#cite_ref-Freetype_16-0">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="https://lists.nongnu.org/archive/html/freetype/2002-09/msg00076.html">"&#91;Freetype&#93; Why 26.6&#160;?"</a>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=unknown&amp;rft.btitle=%5BFreetype%5D+Why+26.6+%3F&amp;rft_id=https%3A%2F%2Flists.nongnu.org%2Farchive%2Fhtml%2Ffreetype%2F2002-09%2Fmsg00076.html&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AFixed-point+arithmetic" class="Z3988"></span></span>
+</li>
+<li id="cite_note-Dolphin_2014-17"><span class="mw-cite-backlink"><b><a href="#cite_ref-Dolphin_2014_17-0">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="http://dolphin-emu.org/blog/2014/03/15/pixel-processing-problems/">"Dolphin Emulator"</a>. <i>Dolphin Emulator</i>. 2014-03-15.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=Dolphin+Emulator&amp;rft.atitle=Dolphin+Emulator&amp;rft.date=2014-03-15&amp;rft_id=http%3A%2F%2Fdolphin-emu.org%2Fblog%2F2014%2F03%2F15%2Fpixel-processing-problems%2F&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AFixed-point+arithmetic" class="Z3988"></span></span>
+</li>
+<li id="cite_note-WavPack-18"><span class="mw-cite-backlink"><b><a href="#cite_ref-WavPack_18-0">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="http://www.wavpack.com/technical.htm">"WavPack Technical Description"</a>. <i>www.wavpack.com</i><span class="reference-accessdate">. Retrieved <span class="nowrap">2015-07-13</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=www.wavpack.com&amp;rft.atitle=WavPack+Technical+Description&amp;rft_id=http%3A%2F%2Fwww.wavpack.com%2Ftechnical.htm&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AFixed-point+arithmetic" class="Z3988"></span></span>
+</li>
+<li id="cite_note-nlu-19"><span class="mw-cite-backlink"><b><a href="#cite_ref-nlu_19-0">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external text" href="https://github.com/nestlabs/nlutilities">Nest Labs Utilities library</a></span>
+</li>
+<li id="cite_note-Fractint_2005-20"><span class="mw-cite-backlink"><b><a href="#cite_ref-Fractint_2005_20-0">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="https://web.archive.org/web/20101027194454/http://spanky.triumf.ca/www/fractint/periodicity.html#integer_math_anchor">"Fractint, A Little Code"</a>. Archived from <a rel="nofollow" class="external text" href="http://spanky.triumf.ca/www/fractint/periodicity.html#integer_math_anchor">the original</a> on 2010-10-27<span class="reference-accessdate">. Retrieved <span class="nowrap">2005-10-24</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=unknown&amp;rft.btitle=Fractint%2C+A+Little+Code&amp;rft_id=http%3A%2F%2Fspanky.triumf.ca%2Fwww%2Ffractint%2Fperiodicity.html%23integer_math_anchor&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AFixed-point+arithmetic" class="Z3988"></span></span>
+</li>
+<li id="cite_note-Quantum-21"><span class="mw-cite-backlink"><b><a href="#cite_ref-Quantum_21-0">^</a></b></span> <span class="reference-text"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite class="citation web cs1"><a rel="nofollow" class="external text" href="https://docs.microsoft.com/en-us/quantum/libraries/numerics/?view=qsharp-preview">"Introduction to the Quantum Numerics Library"</a><span class="reference-accessdate">. Retrieved <span class="nowrap">2019-11-13</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=unknown&amp;rft.btitle=Introduction+to+the+Quantum+Numerics+Library&amp;rft_id=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fquantum%2Flibraries%2Fnumerics%2F%3Fview%3Dqsharp-preview&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AFixed-point+arithmetic" class="Z3988"></span></span>
+</li>
+</ol></div>
+<div class="mw-heading mw-heading2"><h2 id="Further_reading">Further reading</h2></span></div>
+<ul><li><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1238218222"><cite id="CITEREFWarren,_Jr.2013" class="citation book cs1">Warren, Jr., Henry S. (2013). <i><a href="https://en.wikipedia.org/wiki/Hacker%27s_Delight" title="Hacker&#39;s Delight">Hacker's Delight</a></i> (2&#160;ed.). <a href="https://en.wikipedia.org/wiki/Addison_Wesley" class="mw-redirect" title="Addison Wesley">Addison Wesley</a> / <a href="https://en.wikipedia.org/wiki/Pearson_Education,_Inc." class="mw-redirect" title="Pearson Education, Inc.">Pearson Education, Inc.</a> <a href="https://en.wikipedia.org/wiki/ISBN_(identifier)" class="mw-redirect" title="ISBN (identifier)">ISBN</a>&#160;<a href="https://en.wikipedia.org/wiki/Special:BookSources/978-0-321-84268-8" title="Special:BookSources/978-0-321-84268-8"><bdi>978-0-321-84268-8</bdi></a>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Hacker%27s+Delight&amp;rft.edition=2&amp;rft.pub=Addison+Wesley+%2F+Pearson+Education%2C+Inc.&amp;rft.date=2013&amp;rft.isbn=978-0-321-84268-8&amp;rft.aulast=Warren%2C+Jr.&amp;rft.aufirst=Henry+S.&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AFixed-point+arithmetic" class="Z3988"></span></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="External_links">External links</h2></span></div>
+<style data-mw-deduplicate="TemplateStyles:r1235681985">.mw-parser-output .side-box{margin:4px 0;box-sizing:border-box;border:1px solid #aaa;font-size:88%;line-height:1.25em;background-color:var(--background-color-interactive-subtle,#f8f9fa);display:flow-root}.mw-parser-output .side-box-abovebelow,.mw-parser-output .side-box-text{padding:0.25em 0.9em}.mw-parser-output .side-box-image{padding:2px 0 2px 0.9em;text-align:center}.mw-parser-output .side-box-imageright{padding:2px 0.9em 2px 0;text-align:center}@media(min-width:500px){.mw-parser-output .side-box-flex{display:flex;align-items:center}.mw-parser-output .side-box-text{flex:1;min-width:0}}@media(min-width:720px){.mw-parser-output .side-box{width:238px}.mw-parser-output .side-box-right{clear:right;float:right;margin-left:1em}.mw-parser-output .side-box-left{margin-right:1em}}</style><style data-mw-deduplicate="TemplateStyles:r1237033735">@media print{body.ns-0 .mw-parser-output .sistersitebox{display:none!important}}@media screen{html.skin-theme-clientpref-night .mw-parser-output .sistersitebox img[src*="Wiktionary-logo-en-v2.svg"]{background-color:white}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .sistersitebox img[src*="Wiktionary-logo-en-v2.svg"]{background-color:white}}</style><div class="side-box side-box-right plainlinks sistersitebox"><style data-mw-deduplicate="TemplateStyles:r1126788409">.mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-parser-output .plainlist ul li{margin-bottom:0}</style>
+<div class="side-box-flex">
+<div class="side-box-image"><span class="noviewer" typeof="mw:File"><span><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Wikibooks-logo-en-noslogan.svg/40px-Wikibooks-logo-en-noslogan.svg.png" decoding="async" width="40" height="40" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Wikibooks-logo-en-noslogan.svg/60px-Wikibooks-logo-en-noslogan.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Wikibooks-logo-en-noslogan.svg/80px-Wikibooks-logo-en-noslogan.svg.png 2x" data-file-width="400" data-file-height="400" /></span></span></div>
+<div class="side-box-text plainlist">The Wikibook <i><a href="https://en.wikibooks.org/wiki/Floating_Point" class="extiw" title="wikibooks:Floating Point">Floating Point</a></i> has a page on the topic of: <i><b><a href="https://en.wikibooks.org/wiki/Floating_Point/Fixed-Point_Numbers" class="extiw" title="wikibooks:Floating Point/Fixed-Point Numbers">Fixed-Point Numbers</a></b></i></div></div>
+</div>
+<link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1235681985"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1237033735"><div class="side-box side-box-right plainlinks sistersitebox"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1126788409">
+<div class="side-box-flex">
+<div class="side-box-image"><span class="noviewer" typeof="mw:File"><span><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Wikibooks-logo-en-noslogan.svg/40px-Wikibooks-logo-en-noslogan.svg.png" decoding="async" width="40" height="40" class="mw-file-element" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Wikibooks-logo-en-noslogan.svg/60px-Wikibooks-logo-en-noslogan.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Wikibooks-logo-en-noslogan.svg/80px-Wikibooks-logo-en-noslogan.svg.png 2x" data-file-width="400" data-file-height="400" /></span></span></div>
+<div class="side-box-text plainlist">The Wikibook <i><a href="https://en.wikibooks.org/wiki/Embedded_Systems" class="extiw" title="wikibooks:Embedded Systems">Embedded Systems</a></i> has a page on the topic of: <i><b><a href="https://en.wikibooks.org/wiki/Embedded_Systems/Embedded_System_Basics#Fixed-Point_Arithmetic" class="extiw" title="wikibooks:Embedded Systems/Embedded System Basics">Fixed-Point Arithmetic</a></b></i></div></div>
+</div>
+<ul><li><a rel="nofollow" class="external text" href="https://spin.atomicobject.com/2012/03/15/simple-fixed-point-math/">Simple Fixed-Point Math</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.digitalsignallabs.com/fp.pdf">Fixed-Point Arithmetic - An Introduction</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.superkits.net/whitepapers/Fixed%20Point%20Representation%20&amp;%20Fractional%20Math.pdf">Fixed Point Representation and Fractional Math</a></li>
+<li><a rel="nofollow" class="external text" href="https://web.archive.org/web/20020611080806/http://www.embedded.com/98/9804fe2.htm">A Calculated Look at Fixed-Point Arithmetic</a>, <a rel="nofollow" class="external text" href="https://web.archive.org/web/20111005183025/http://www.eetindia.co.in/ARTICLES/1998APR/PDF/EEIOL_1998APR03_EMS_TA.pdf">(PDF)</a></li></ul>
+<div class="navbox-styles"><style data-mw-deduplicate="TemplateStyles:r1129693374">.mw-parser-output .hlist dl,.mw-parser-output .hlist ol,.mw-parser-output .hlist ul{margin:0;padding:0}.mw-parser-output .hlist dd,.mw-parser-output .hlist dt,.mw-parser-output .hlist li{margin:0;display:inline}.mw-parser-output .hlist.inline,.mw-parser-output .hlist.inline dl,.mw-parser-output .hlist.inline ol,.mw-parser-output .hlist.inline ul,.mw-parser-output .hlist dl dl,.mw-parser-output .hlist dl ol,.mw-parser-output .hlist dl ul,.mw-parser-output .hlist ol dl,.mw-parser-output .hlist ol ol,.mw-parser-output .hlist ol ul,.mw-parser-output .hlist ul dl,.mw-parser-output .hlist ul ol,.mw-parser-output .hlist ul ul{display:inline}.mw-parser-output .hlist .mw-empty-li{display:none}.mw-parser-output .hlist dt::after{content:": "}.mw-parser-output .hlist dd::after,.mw-parser-output .hlist li::after{content:" · ";font-weight:bold}.mw-parser-output .hlist dd:last-child::after,.mw-parser-output .hlist dt:last-child::after,.mw-parser-output .hlist li:last-child::after{content:none}.mw-parser-output .hlist dd dd:first-child::before,.mw-parser-output .hlist dd dt:first-child::before,.mw-parser-output .hlist dd li:first-child::before,.mw-parser-output .hlist dt dd:first-child::before,.mw-parser-output .hlist dt dt:first-child::before,.mw-parser-output .hlist dt li:first-child::before,.mw-parser-output .hlist li dd:first-child::before,.mw-parser-output .hlist li dt:first-child::before,.mw-parser-output .hlist li li:first-child::before{content:" (";font-weight:normal}.mw-parser-output .hlist dd dd:last-child::after,.mw-parser-output .hlist dd dt:last-child::after,.mw-parser-output .hlist dd li:last-child::after,.mw-parser-output .hlist dt dd:last-child::after,.mw-parser-output .hlist dt dt:last-child::after,.mw-parser-output .hlist dt li:last-child::after,.mw-parser-output .hlist li dd:last-child::after,.mw-parser-output .hlist li dt:last-child::after,.mw-parser-output .hlist li li:last-child::after{content:")";font-weight:normal}.mw-parser-output .hlist ol{counter-reset:listitem}.mw-parser-output .hlist ol>li{counter-increment:listitem}.mw-parser-output .hlist ol>li::before{content:" "counter(listitem)"\a0 "}.mw-parser-output .hlist dd ol>li:first-child::before,.mw-parser-output .hlist dt ol>li:first-child::before,.mw-parser-output .hlist li ol>li:first-child::before{content:" ("counter(listitem)"\a0 "}</style><style data-mw-deduplicate="TemplateStyles:r1236075235">.mw-parser-output .navbox{box-sizing:border-box;border:1px solid #a2a9b1;width:100%;clear:both;font-size:88%;text-align:center;padding:1px;margin:1em auto 0}.mw-parser-output .navbox .navbox{margin-top:0}.mw-parser-output .navbox+.navbox,.mw-parser-output .navbox+.navbox-styles+.navbox{margin-top:-1px}.mw-parser-output .navbox-inner,.mw-parser-output .navbox-subgroup{width:100%}.mw-parser-output .navbox-group,.mw-parser-output .navbox-title,.mw-parser-output .navbox-abovebelow{padding:0.25em 1em;line-height:1.5em;text-align:center}.mw-parser-output .navbox-group{white-space:nowrap;text-align:right}.mw-parser-output .navbox,.mw-parser-output .navbox-subgroup{background-color:#fdfdfd}.mw-parser-output .navbox-list{line-height:1.5em;border-color:#fdfdfd}.mw-parser-output .navbox-list-with-group{text-align:left;border-left-width:2px;border-left-style:solid}.mw-parser-output tr+tr>.navbox-abovebelow,.mw-parser-output tr+tr>.navbox-group,.mw-parser-output tr+tr>.navbox-image,.mw-parser-output tr+tr>.navbox-list{border-top:2px solid #fdfdfd}.mw-parser-output .navbox-title{background-color:#ccf}.mw-parser-output .navbox-abovebelow,.mw-parser-output .navbox-group,.mw-parser-output .navbox-subgroup .navbox-title{background-color:#ddf}.mw-parser-output .navbox-subgroup .navbox-group,.mw-parser-output .navbox-subgroup .navbox-abovebelow{background-color:#e6e6ff}.mw-parser-output .navbox-even{background-color:#f7f7f7}.mw-parser-output .navbox-odd{background-color:transparent}.mw-parser-output .navbox .hlist td dl,.mw-parser-output .navbox .hlist td ol,.mw-parser-output .navbox .hlist td ul,.mw-parser-output .navbox td.hlist dl,.mw-parser-output .navbox td.hlist ol,.mw-parser-output .navbox td.hlist ul{padding:0.125em 0}.mw-parser-output .navbox .navbar{display:block;font-size:100%}.mw-parser-output .navbox-title .navbar{float:left;text-align:left;margin-right:0.5em}body.skin--responsive .mw-parser-output .navbox-image img{max-width:none!important}@media print{body.ns-0 .mw-parser-output .navbox{display:none!important}}</style></div><div role="navigation" class="navbox" aria-labelledby="Data_types" style="padding:3px"><table class="nowraplinks hlist mw-collapsible autocollapse navbox-inner" style="border-spacing:0;background:transparent;color:inherit"><tbody><tr><th scope="col" class="navbox-title" colspan="2"><link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r1129693374"><style data-mw-deduplicate="TemplateStyles:r1239400231">.mw-parser-output .navbar{display:inline;font-size:88%;font-weight:normal}.mw-parser-output .navbar-collapse{float:left;text-align:left}.mw-parser-output .navbar-boxtext{word-spacing:0}.mw-parser-output .navbar ul{display:inline-block;white-space:nowrap;line-height:inherit}.mw-parser-output .navbar-brackets::before{margin-right:-0.125em;content:"[ "}.mw-parser-output .navbar-brackets::after{margin-left:-0.125em;content:" ]"}.mw-parser-output .navbar li{word-spacing:-0.125em}.mw-parser-output .navbar a>span,.mw-parser-output .navbar a>abbr{text-decoration:inherit}.mw-parser-output .navbar-mini abbr{font-variant:small-caps;border-bottom:none;text-decoration:none;cursor:inherit}.mw-parser-output .navbar-ct-full{font-size:114%;margin:0 7em}.mw-parser-output .navbar-ct-mini{font-size:114%;margin:0 4em}html.skin-theme-clientpref-night .mw-parser-output .navbar li a abbr{color:var(--color-base)!important}@media(prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .navbar li a abbr{color:var(--color-base)!important}}@media print{.mw-parser-output .navbar{display:none!important}}</style><div class="navbar plainlinks hlist navbar-mini"><ul><li class="nv-view"><a href="https://en.wikipedia.org/wiki/Template:Data_types" title="Template:Data types"><abbr title="View this template">v</abbr></a></li><li class="nv-talk"><a href="https://en.wikipedia.org/wiki/Template_talk:Data_types" title="Template talk:Data types"><abbr title="Discuss this template">t</abbr></a></li><li class="nv-edit"><a href="https://en.wikipedia.org/wiki/Special:EditPage/Template:Data_types" title="Special:EditPage/Template:Data types"><abbr title="Edit this template">e</abbr></a></li></ul></div><div id="Data_types" style="font-size:114%;margin:0 4em"><a href="https://en.wikipedia.org/wiki/Data_type" title="Data type">Data types</a></div></th></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Units_of_information" title="Units of information">Uninterpreted</a></th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Bit" title="Bit">Bit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Byte" title="Byte">Byte</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Ternary_numeral_system" title="Ternary numeral system">Trit</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Ternary_numeral_system#Tryte" title="Ternary numeral system">Tryte</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Word_(computer_architecture)" title="Word (computer architecture)">Word</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Bit_array" title="Bit array">Bit array</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Numeric</th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Arbitrary-precision_arithmetic" title="Arbitrary-precision arithmetic">Arbitrary-precision or bignum</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Complex_data_type" title="Complex data type">Complex</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Decimal_data_type" title="Decimal data type">Decimal</a></li>
+<li><a class="mw-selflink selflink">Fixed point</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Floating-point_arithmetic" title="Floating-point arithmetic">Floating point</a>
+<ul><li>Reduced precision
+<ul><li><a href="https://en.wikipedia.org/wiki/Minifloat" title="Minifloat">Minifloat</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Half-precision_floating-point_format" title="Half-precision floating-point format">Half precision</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Bfloat16_floating-point_format" title="Bfloat16 floating-point format">bfloat16</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Single-precision_floating-point_format" title="Single-precision floating-point format">Single precision</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format" title="Double-precision floating-point format">Double precision</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Quadruple-precision_floating-point_format" title="Quadruple-precision floating-point format">Quadruple precision</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Octuple-precision_floating-point_format" title="Octuple-precision floating-point format">Octuple precision</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Extended_precision" title="Extended precision">Extended precision</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Long_double" title="Long double">Long double</a></li></ul></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Integer_(computer_science)" title="Integer (computer science)">Integer</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Signedness" title="Signedness">signedness</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Interval_arithmetic#Implementations" title="Interval arithmetic">Interval</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Rational_data_type" title="Rational data type">Rational</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Pointer_(computer_programming)" title="Pointer (computer programming)">Pointer</a></th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Memory_address" title="Memory address">Address</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Physical_address" title="Physical address">physical</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Virtual_address_space" title="Virtual address space">virtual</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Reference_(computer_science)" title="Reference (computer science)">Reference</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Plain_text" title="Plain text">Text</a></th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Character_(computing)" title="Character (computing)">Character</a></li>
+<li><a href="https://en.wikipedia.org/wiki/String_(computer_science)" title="String (computer science)">String</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Null-terminated_string" title="Null-terminated string">null-terminated</a></li></ul></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%"><a href="https://en.wikipedia.org/wiki/Composite_data_type" title="Composite data type">Composite</a></th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Algebraic_data_type" title="Algebraic data type">Algebraic data type</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Generalized_algebraic_data_type" title="Generalized algebraic data type">generalized</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Array_data_type" class="mw-redirect" title="Array data type">Array</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Associative_array" title="Associative array">Associative array</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Class_(computer_programming)" title="Class (computer programming)">Class</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Dependent_type" title="Dependent type">Dependent</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Intuitionistic_type_theory#Equality_type" title="Intuitionistic type theory">Equality</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Inductive_type" title="Inductive type">Inductive</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Intersection_type" title="Intersection type">Intersection</a></li>
+<li><a href="https://en.wikipedia.org/wiki/List_(abstract_data_type)" title="List (abstract data type)">List</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Object_(computer_science)" title="Object (computer science)">Object</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Metaobject" title="Metaobject">metaobject</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Option_type" title="Option type">Option type</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Product_type" title="Product type">Product</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Record_(computer_science)" title="Record (computer science)">Record or Struct</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Refinement_type" title="Refinement type">Refinement</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Set_(abstract_data_type)" title="Set (abstract data type)">Set</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Union_type" title="Union type">Union</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Tagged_union" title="Tagged union">tagged</a></li></ul></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Other</th><td class="navbox-list-with-group navbox-list navbox-even" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Boolean_data_type" title="Boolean data type">Boolean</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Bottom_type" title="Bottom type">Bottom type</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Container_(abstract_data_type)" title="Container (abstract data type)">Collection</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Enumerated_type" title="Enumerated type">Enumerated type</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Exception_handling" title="Exception handling">Exception</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Function_type" title="Function type">Function type</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Opaque_data_type" title="Opaque data type">Opaque data type</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Recursive_data_type" title="Recursive data type">Recursive data type</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Semaphore_(programming)" title="Semaphore (programming)">Semaphore</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Stream_(computing)" title="Stream (computing)">Stream</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Strongly_typed_identifier" title="Strongly typed identifier">Strongly typed identifier</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Top_type" title="Top type">Top type</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Type_class" title="Type class">Type class</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Empty_type" title="Empty type">Empty type</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Unit_type" title="Unit type">Unit type</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Void_type" title="Void type">Void</a></li></ul>
+</div></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Related<br />topics</th><td class="navbox-list-with-group navbox-list navbox-odd" style="width:100%;padding:0"><div style="padding:0 0.25em">
+<ul><li><a href="https://en.wikipedia.org/wiki/Abstract_data_type" title="Abstract data type">Abstract data type</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Boxing_(computer_science)" class="mw-redirect" title="Boxing (computer science)">Boxing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_structure" title="Data structure">Data structure</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Generic_programming" title="Generic programming">Generic</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Kind_(type_theory)" title="Kind (type theory)">Kind</a>
+<ul><li><a href="https://en.wikipedia.org/wiki/Metaclass" title="Metaclass">metaclass</a></li></ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Parametric_polymorphism" title="Parametric polymorphism">Parametric polymorphism</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Primitive_data_type" title="Primitive data type">Primitive data type</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Interface_(object-oriented_programming)" title="Interface (object-oriented programming)">Interface</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Subtyping" title="Subtyping">Subtyping</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Type_constructor" title="Type constructor">Type constructor</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Type_conversion" title="Type conversion">Type conversion</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Type_system" title="Type system">Type system</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Type_theory" title="Type theory">Type theory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Variable_(computer_science)" title="Variable (computer science)">Variable</a></li></ul>
+</div></td></tr></tbody></table></div>
+<!-- 
+NewPP limit report
+Parsed by mw‐web.codfw.main‐76f5ff57bd‐v6cp9
+Cached time: 20240917232119
+Cache expiry: 2592000
+Reduced expiry: false
+Complications: [vary‐revision‐sha1, show‐toc]
+CPU time usage: 0.557 seconds
+Real time usage: 0.724 seconds
+Preprocessor visited node count: 5295/1000000
+Post‐expand include size: 86126/2097152 bytes
+Template argument size: 7434/2097152 bytes
+Highest expansion depth: 13/100
+Expensive parser function count: 10/500
+Unstrip recursion depth: 1/20
+Unstrip post‐expand size: 72395/5000000 bytes
+Lua time usage: 0.294/10.000 seconds
+Lua memory usage: 5952042/52428800 bytes
+Number of Wikibase entities loaded: 0/400
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  553.091      1 -total
+ 27.87%  154.152      1 Template:Reflist
+ 20.18%  111.604     10 Template:Cite_web
+ 16.37%   90.530      1 Template:Data_types
+ 15.96%   88.298      1 Template:Navbox
+ 12.70%   70.230      1 Template:Short_description
+  9.00%   49.763      4 Template:Ambox
+  8.70%   48.117      1 Template:Original_research
+  8.12%   44.931      2 Template:Pagetype
+  6.63%   36.643      3 Template:Cn
+-->
+
+<!-- Saved in parser cache with key enwiki:pcache:idhash:449736-0!canonical and timestamp 20240917232119 and revision id 1245584238. Rendering was triggered because: page-view
+ -->
+</div>
