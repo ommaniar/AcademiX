@@ -23,7 +23,7 @@ const Home = () => {
     return (
         <div className="m-4 gap-4 flex flex-col justify-center items-center">
             <p className="md:text-4xl font-extrabold my-4">AcademiX - Academics Extended</p>
-            <Accordion type={"multiple"} className="w-[70%]" defaultValue={['item-1', '2', '3']}>
+            <Accordion type={"multiple"} collapsible className="w-[70%]" defaultValue={['item-1', '2', '3']}>
                 <AccordionItem value="item-1">
                     <AccordionTrigger className="text-2xl font-bold">What is AcademiX?</AccordionTrigger>
                     <AccordionContent className='text-lg'>
