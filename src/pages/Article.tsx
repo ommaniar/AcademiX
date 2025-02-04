@@ -8,14 +8,14 @@ const Article = (props) => {
     const [feedUrl, setFeedUrl] = useState(null);
 
     const fetchRecommendations = async () => {
-        const res = await fetch(`http://127.0.0.1:8000/api/get-recommendation/${title}`);
+        const res = await fetch(`https://academix-backend-nlqg.onrender.com/api/get-recommendation/${title}`);
         const data = await res.json();
         setRecommendations(data['recommendations'].slice(0, 5));
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await fetch('http://127.0.0.1:8000/api/add-article', {
+        const res = await fetch('https://academix-backend-nlqg.onrender.com/api/add-article', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ const Article = (props) => {
     }
 
     const fetchArticle = async () => {
-        const res = await fetch(`http://127.0.0.1:8000/api/get-article/${title}`);
+        const res = await fetch(`https://academix-backend-nlqg.onrender.com/api/get-article/${title}`);
         const data = await res.json();
         // find all wikipedia links and add : in front of their innerHTML
         data.content = data.content.replace(/<a.*?href="https:\/\/.*?\.wikipedia\.org\/wiki\/(.*?)".*?>(.*?)<\/a>/g, (match, p1, p2) => {
@@ -141,7 +141,7 @@ const Article = (props) => {
 const ArticleList = () => {
     const [articles, setArticles] = useState([]);
     const fetchArticles = async () => {
-        const res = await fetch('http://127.0.0.1:8000/api/get-all-articles');
+        const res = await fetch('https://academix-backend-nlqg.onrender.com/api/get-all-articles');
         const data = await res.json();
         setArticles(data);
     }
@@ -151,7 +151,7 @@ const ArticleList = () => {
     }, []);
     const handleAddArticle = async (e: any) => {
         e.preventDefault();
-        await fetch('http://127.0.0.1:8000/api/add-article/?url=' + articleUrl)
+        await fetch('https://academix-backend-nlqg.onrender.com/api/add-article/?url=' + articleUrl)
             .then((res) => res.json())
             .then((data) => {
                 if(data.error === undefined){

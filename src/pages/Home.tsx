@@ -6,7 +6,7 @@ const Home = () => {
     const [articles, setArticles] = useState([]);
     
     const fetchArticles = async () => {
-        const res = await fetch('http://127.0.0.1:8000/api/get-all-articles');
+        const res = await fetch('https://academix-backend-nlqg.onrender.com/api/get-all-articles');
         const data = await res.json();
         const articles_random_5 = data.sort(() => Math.random() - Math.random()).slice(0, 5);
         setArticles(articles_random_5);
@@ -23,7 +23,7 @@ const Home = () => {
     return (
         <div className="m-4 gap-4 flex flex-col justify-center items-center">
             <p className="md:text-4xl font-extrabold my-4">AcademiX - Academics Extended</p>
-            <Accordion type="multiple" collapsible className="w-[70%]" defaultValue={['item-1', '2', '3']}>
+            <Accordion type={"multiple"} className="w-[70%]" defaultValue={['item-1', '2', '3']}>
                 <AccordionItem value="item-1">
                     <AccordionTrigger className="text-2xl font-bold">What is AcademiX?</AccordionTrigger>
                     <AccordionContent className='text-lg'>
@@ -40,7 +40,7 @@ const Home = () => {
                         Create a list of tools that are available on the website with card like UI and a link icon on left side of the card
                         */ }
                         <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                            <Link className="text-lg" size="18" className="mr-4" />
+                            <Link className="text-lg mr-4" size="18"/>
                             <div className="gap-1">
                                 <a className="" 
                                 href="https://en.wikipedia.org/wiki/Booth%27s_multiplication_algorithm">: What is Booth's Algorithm</a>
@@ -48,7 +48,7 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                            <Link className="text-lg" size="18" className="mr-4" />
+                            <Link className="text-lg mr-4" size="18"/>
                             <div className="gap-1">
                                 <a className="" 
                                 href="https://en.wikipedia.org/wiki/Binary_number#Conversion_to_and_from_other_numeral_systems">: What is Number Conversion</a>
@@ -56,7 +56,7 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                            <Link className="text-lg" size="18" className="mr-4" />
+                            <Link className="text-lg mr-4" size="18"/>
                             <div className="gap-1">
                                 <a className="" 
                                 href="https://en.wikipedia.org/wiki/Binary_number#Binary_arithmetic">: What is Binary Arithmetic</a>
@@ -64,7 +64,7 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                            <Link className="text-lg" size="18" className="mr-4" />
+                            <Link className="text-lg mr-4" size="18"/>
                             <div className="gap-1">
                                 <a className="" 
                                 href="https://en.wikipedia.org/wiki/Partially_ordered_set">: What is POSET</a>
@@ -72,7 +72,7 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                            <Link className="text-lg" size="18" className="mr-4" />
+                            <Link className="text-lg mr-4" size="18"/>
                             <div className="gap-1">
                                 <a className="" 
                                 href="https://en.wikipedia.org/wiki/Division_algorithm#Restoring_division">: What is Booth's Division Algorithm</a>
@@ -80,7 +80,7 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                            <Link className="text-lg" size="18" className="mr-4" />
+                            <Link className="text-lg mr-4" size="18"/>
                             <div className="gap-1">
                                 <a className="" 
                                 href="https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm">: What is Floyd-Warshall Algorithm</a>

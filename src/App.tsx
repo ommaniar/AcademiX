@@ -1,7 +1,6 @@
 import Navbar from "./Navbar"
 import { BrowserRouter as Router, Route, Routes, useParams } from "react-router-dom"
 import Home from "./pages/Home"
-import LearnX from "./pages/LearnX"
 import Tools from "./pages/Tools"
 import BoothsAlgorithm from "./pages/tools/BoothsAlgorithm"
 import NumberConversion from "./pages/tools/NumberConversion"

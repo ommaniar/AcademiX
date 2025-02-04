@@ -10,7 +10,7 @@ const Tools = () => {
             <h1 className="font-bold text-3xl my-4">Tools</h1>
             <h1 className="font-bold text-xl my-4">Computer Organization & Architecture</h1>
             <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                <Link className="text-lg" size="18" className="mr-4" />
+                <Link className="text-lg mr-4" size="18" />
                 <div className="gap-1">
                 <a className="" 
                 href="https://en.wikipedia.org/wiki/Booth%27s_multiplication_algorithm">:What is Booth's Algorithm</a>
@@ -18,7 +18,7 @@ const Tools = () => {
                 </div>
             </div>
             <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                <Link className="text-lg" size="18" className="mr-4" />
+                <Link className="text-lg mr-4" size="18" />
                 <div className="gap-1">
                     <a className="" 
                 href="https://en.wikipedia.org/wiki/Binary_number#Conversion_to_and_from_other_numeral_systems">:What is Number Conversion</a>
@@ -26,7 +26,7 @@ const Tools = () => {
                 </div>
             </div>
             <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                <Link className="text-lg" size="18" className="mr-4" />
+                <Link className="text-lg mr-4" size="18" />
                     <div className="gap-1">
                     <a className="" 
                     href="https://en.wikipedia.org/wiki/Binary_number#Binary_arithmetic">:What is Binary Arithmetic</a>
@@ -34,7 +34,7 @@ const Tools = () => {
                 </div>
             </div>
             <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                <Link className="text-lg" size="18" className="mr-4" />
+                <Link className="text-lg mr-4" size="18" />
                 <div className="gap-1">
                     <a className="" 
                     href="https://en.wikipedia.org/wiki/Division_algorithm#Restoring_division">:What is Booth's Division Algorithm</a>
@@ -45,7 +45,7 @@ const Tools = () => {
         <div className="m-4">
             <h1 className="font-bold text-xl my-4">Discrete Mathematics</h1>
             <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                <Link className="text-lg" size="18" className="mr-4" />
+                <Link className="text-lg mr-4" size="18" />
                 <div className="gap-1">
                     <a className="" 
                     href="https://en.wikipedia.org/wiki/Partially_ordered_set">:What is POSET</a>
@@ -53,7 +53,7 @@ const Tools = () => {
                 </div>
             </div>
             <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                <Link className="text-lg" size="18" className="mr-4" />
+                <Link className="text-lg mr-4" size="18" />
                 <div className="gap-1">
                     <a className="" 
                     href="https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm">:What is Floyd-Warshall Algorithm</a>

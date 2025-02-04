@@ -29,13 +29,7 @@ const BoothsAlgorithm = () => {
     const [num1Bin, setNum1Bin] = useState<string>('');
     const [num2Bin, setNum2Bin] = useState<string>('');
     const [steps, setSteps] = useState<any[]>([]);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const shiftRight = (ac: string, qr: string, q_1: string) => {
-        // arithmetic shift right
-        const shifted = ac[0] + ac + qr + q_1;
-        return shifted;
-    }
-
+    
     const boothAlgorithm = async (num1: string, num2: string) => {
         // Hit endpoint /api/booths-algorithm?num1={num1}&num2={num2}
         // returns json object with steps
@@ -46,7 +40,7 @@ const BoothsAlgorithm = () => {
         //         ...
         //     ]
         // }
-        const response = await fetch(`http://127.0.0.1:8000/api/booths-algorithm/?num1=${num1}&num2=${num2}`)
+        const response = await fetch(`https://academix-backend-nlqg.onrender.com/api/booths-algorithm/?num1=${num1}&num2=${num2}`)
             .then(response => {
                 return response.json();
             })
@@ -112,7 +106,7 @@ const BoothsAlgorithm = () => {
     return (
         <div className='m-4 gap-4 justify-center items-center flex flex-col'>
             <div className='w-[80%]'>
-            <Accordion type="single" collapsible className="" defaultValue={['item-1']}>
+            <Accordion type="single" collapsible className="" defaultValue={'item-1'}>
                 <AccordionItem value="item-1">
                     <AccordionTrigger className="text-2xl font-bold">What is Booth's Algorithm?</AccordionTrigger>
                 <AccordionContent className="prose text-lg w-full">
