@@ -40,7 +40,7 @@ const BoothsAlgorithm = () => {
         //         ...
         //     ]
         // }
-        const response = await fetch(`http://127.0.0.1:8000/api/booths-algorithm/?num1=${num1}&num2=${num2}`)
+        const response = await fetch(`https://academix-backend-nlqg.onrender.com/api/booths-algorithm/?num1=${num1}&num2=${num2}`)
             .then(response => {
                 return response.json();
             })
