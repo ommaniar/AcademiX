@@ -11,7 +11,10 @@ import BoothsDivisionAlgorithm from "./pages/tools/BoothsDiv"
 import WarshallAlgorithm from "./pages/tools/WarshallAlgorithm"
 import DiscreteMath from "./posts/DiscreteMath"
 import Article, {ArticleList} from "./pages/Article"
-
+import BubbleSortAlgorithm from "./pages/tools/BubbleSortAlgorithm"
+import SelectionSortAlgorithm from "./pages/tools/SelectionSortAlgorithm"
+import FractionalKnapsack from "./pages/tools/FractionalKnapsack"
+import ZeroOneKnapsackProblem from "./pages/tools/ZeroOneKnapsackProblem"
 const App = () => {
   const FindTopic = () => {
     const { topic } = useParams();
@@ -44,6 +47,11 @@ const App = () => {
           <Route path="/why-do-we-learn/:topic" element={<FindTopic />} />
           <Route path="/tools/division-algorithm" element={<BoothsDivisionAlgorithm />} />
           <Route path="/tools/warshall-algorithm" element={<WarshallAlgorithm />} />
+          <Route path="/tools/bubble-sort" element={<BubbleSortAlgorithm/>}></Route>
+          <Route path="/tools/selection-sort" element={<SelectionSortAlgorithm/>}></Route>
+          <Route path="/tools/fractional-knapsack" element={<FractionalKnapsack/>}></Route>
+          <Route path="/tools/0-1-knapsack" element={<ZeroOneKnapsackProblem/>}></Route>
+
           <Route path="/article/:title" element={<Article />} />
         </Routes>
       </Router>
