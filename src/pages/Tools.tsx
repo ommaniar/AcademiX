@@ -103,6 +103,14 @@ const Tools = () => {
                         <a href="/tools/0-1-knapsack" className="ml-1 text-indigo-600 hover:underline">0/1 Knapsack</a>
                     </div>
                 </div>
+                <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
+                    <Link className="text-lg mr-4" size="18" />
+                    <div className="gap-1">
+                        <a className=""
+                            href="https://en.wikipedia.org/wiki/String-searching_algorithm">:What is String Matching</a>
+                        <a href="/tools/string-matching" className="ml-1 text-indigo-600 hover:underline">String Matching</a>
+                    </div>
+                </div>
                 {/* </div> */}
             </div>
         </div>
