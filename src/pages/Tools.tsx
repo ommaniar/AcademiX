@@ -123,11 +123,18 @@ const Tools = () => {
                     <Link className="text-lg mr-4" size="18" />
                     <div className="gap-1">
                         <a className=""
-                            href="https://en.wikipedia.org/wiki/Knapsack_problem">:What is Matrix Chain Multiplication</a>
+                            href="https://en.wikipedia.org/wiki/Matrix_chain_multiplication">:What is Matrix Chain Multiplication</a>
                         <a href="/tools/matrix-chain-multiplication" className="ml-1 text-indigo-600 hover:underline">MCM</a>
                     </div>
                 </div>
-                
+                <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
+                    <Link className="text-lg mr-4" size="18" />
+                    <div className="gap-1">
+                        <a className=""
+                            href="https://en.wikipedia.org/wiki/String-searching_algorithm">:What is String Matching</a>
+                        <a href="/tools/string-matching" className="ml-1 text-indigo-600 hover:underline">String Matching</a>
+                    </div>
+                </div>
                 {/* </div> */}
             </div>
         </div>
