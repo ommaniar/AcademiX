@@ -16,6 +16,9 @@ import SelectionSortAlgorithm from "./pages/tools/SelectionSortAlgorithm"
 import FractionalKnapsack from "./pages/tools/FractionalKnapsack"
 import ZeroOneKnapsackProblem from "./pages/tools/ZeroOneKnapsackProblem"
 import InsertionSortAlgorithm from "./pages/tools/InsertionSortAlgorithm"
+import MergeSortAlgorithm from "./pages/tools/MergeSortAlgorithm"
+import QuickSortAlgorithm from "./pages/tools/QuickSortAlgorithm"
+import MCM from "./pages/tools/MCM"
 const App = () => {
   const FindTopic = () => {
     const { topic } = useParams();
@@ -53,6 +56,10 @@ const App = () => {
           <Route path="/tools/fractional-knapsack" element={<FractionalKnapsack/>}></Route>
           <Route path="/tools/0-1-knapsack" element={<ZeroOneKnapsackProblem/>}></Route>
           <Route path="/tools/insertion-sort" element={<InsertionSortAlgorithm/>}></Route>
+          <Route path="/tools/merge-sort" element={<MergeSortAlgorithm/>}></Route>
+          <Route path="/tools/quick-sort" element={<QuickSortAlgorithm/>}></Route>
+          <Route path="/tools/matrix-chain-multiplication" element={<MCM/>}></Route>
+
           <Route path="/article/:title" element={<Article />} />
         </Routes>
       </Router>
