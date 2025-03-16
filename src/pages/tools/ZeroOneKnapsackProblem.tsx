@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../../components/accordion"
 import { CopyBlock, dracula } from 'react-code-blocks';
 function ZeroOneKnapsackProblem() {
@@ -33,13 +33,13 @@ function knapsack(W, val, wt) {
     return dp[n][W];
 }
 `
-    const [matrix, setMatrix] = useState([]);
+    const [matrix, setMatrix] = useState<number[][]>([]);
     const [weights, setWeights] = useState("");
     const [profits, setProfits] = useState("");
     const [capacity, setCapacity] = useState(0);
-    const [displayError, setDisplayError] = useState(false)
-    const [finalProfit, setFinalProfit] = useState()
-    const [selected, setSelected] = useState([])
+    const [displayError, setDisplayError] = useState<string | boolean>(false)
+    const [finalProfit, setFinalProfit] = useState<number | null>(null)
+    const [selected, setSelected] = useState<number[]>([])
     function toIntArray(intString: string) {
         const strArray = intString.split(','); // Splitting the string into an array
         const intArray = strArray.map(num => {
@@ -49,17 +49,17 @@ function knapsack(W, val, wt) {
                     throw new Error(`Invalid number: "${num.trim()}"`);
                 }
                 return parsed;
-            } catch (error: Error) {
-                console.error(error.message);
+            } catch (error: unknown) {
+                console.error((error as Error).message);
                 return null; // or handle it as needed
             }
         });
 
         return intArray;
     }
-    const zeroOneKnapsack = (W, wt: Array<Int16Array>, val: Array<Int16Array>) => {
-        let n = wt.length;
-        let dp = Array.from({ length: n + 1 }, () => Array(W + 1).fill(0));
+    const zeroOneKnapsack = (W: number, wt: number[], val: number[]) => {
+        const n = wt.length;
+        const dp = Array.from({ length: n + 1 }, () => Array(W + 1).fill(0));
 
         // Build table dp[][] in bottom-up manner
         for (let i = 0; i <= n; i++) {
@@ -76,7 +76,7 @@ function knapsack(W, val, wt) {
                         pick = val[i - 1] + dp[i - 1][j - wt[i - 1]];
 
                     // Don't pick the ith item
-                    let notPick = dp[i - 1][j];
+                    const notPick = dp[i - 1][j];
 
                     dp[i][j] = Math.max(pick, notPick);
                 }
@@ -84,30 +84,30 @@ function knapsack(W, val, wt) {
         }
 
         setMatrix(dp)
-        let selected = Array(n).fill(0);
+        const selected = Array(n).fill(0);
         let w = W;
         for (let i = n; i > 0; i--) {
             if (dp[i][w] !== dp[i - 1][w]) {
                 selected[i - 1] = 1;  // Mark this item as selected
-                w -= weights[i - 1];  // Reduce the remaining capacity
+                w -= wt[i - 1];  // Reduce the remaining capacity
             }
         }
         setSelected(selected)
         return dp[n][W];
     }
-    const handleSubmit = (e: Event) => {
+    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        let weight_arr = toIntArray(weights);
-        let profit_arr = toIntArray(profits);
+        const weight_arr = toIntArray(weights).filter((num): num is number => num !== null);
+        const profit_arr = toIntArray(profits).filter((num): num is number => num !== null);
         if (weight_arr.length == profit_arr.length) {
             setDisplayError(false)
 
-            let max_profit = zeroOneKnapsack(capacity, weight_arr, profit_arr);
+            const max_profit = zeroOneKnapsack(capacity, weight_arr, profit_arr);
             console.log(max_profit);
             setFinalProfit(max_profit);
         } else {
             setFinalProfit(null);
-            setDisplayError("Both Weights and profits needs to be having same length")
+            setDisplayError("The number of items in weights and profits array should be equal.")
         }
     }
 
@@ -116,10 +116,11 @@ function knapsack(W, val, wt) {
         <div className='m-4 gap-4 justify-center items-center flex flex-col'>
             <div className="w-[80%]">
                 <h1 className="text-2xl font-bold">Zero One Knapsack Problem (Bottom-Up DP)</h1>
-                <p className='text-xl my-2 prose'><a href='https://en.wikipedia.org/wiki/Knapsack_problem'>:    Explanation</a></p>
-                <Accordion type="single" collapsible className="" defaultValue={'item-1'}>
+                <p className='text-xl my-2 prose'><a href='https://en.wikipedia.org/wiki/Knapsack_problem'>:Explanation</a></p>
+                <p className='text-xl my-2 prose'><a href='https://en.wikipedia.org/wiki/Knapsack_problem#0-1_knapsack_problem'>:Pseudocode</a></p>
+                <Accordion type="single" collapsible className="">
                     <AccordionItem value="item-1">
-                        <AccordionTrigger className="text-2xl font-bold">Algorithm?</AccordionTrigger>
+                        <AccordionTrigger className="text-xl font-bold">Algorithm</AccordionTrigger>
                         <AccordionContent className=' w-full font-mono'>
 
                             <CopyBlock
@@ -131,7 +132,8 @@ function knapsack(W, val, wt) {
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>
-                <form className='flex flex-col gap-2 w-96'>
+                <h1 className='text-lg font-bold my-2'>0-1 Knapsack Solver</h1>
+                <form className='flex flex-col gap-2'>
                     Weights (comma seperated): <input type="text" name="weights" id="weights" required className='border p-2 rounded-md' onChange={(e) => { setWeights(e.target.value) }} />
                     Profits (comma seperated): <input type="text" name="profits" id="profits" required className='border p-2 rounded-md' onChange={(e) => { setProfits(e.target.value) }} />
                     Capacity: <input type="number" name="capacity" id="capacity" required className='border p-2 rounded-md' onChange={(e) => { setCapacity(parseInt(e.target.value)) }} />
@@ -153,7 +155,7 @@ function knapsack(W, val, wt) {
                         Dynamic Programming Table:
                         <table className="border-collapse border border-gray-300 w-full text-center">
                             <tbody>
-                                {matrix.map((row: Array, rowIndex) => (
+                                {matrix.map((row: number[], rowIndex) => (
                                     <tr key={rowIndex} className="odd:bg-gray-100 even:bg-gray-200">
                                         {row.map((i, colIndex) => (
                                             <td
@@ -172,17 +174,17 @@ function knapsack(W, val, wt) {
                 {selected.length > 0 && (
                     <div className='py-3'>
                         Items Selected:
-                        <table  className="border-collapse border border-gray-300 w-full text-center">
+                        <table className="border-collapse border border-gray-300 w-full text-center">
                             <tr className='bg-gray-500'>
-                            {selected.map((i,index)=>
-                            (<th className="border border-gray-300 p-2 text-gray-100">{index + 1}</th>)
-                        )}
+                                {selected.map((_, index) =>
+                                    (<th className="border border-gray-300 p-2 text-gray-100">{index + 1}</th>)
+                                )}
                             </tr>
                             <tr className='bg-gray-100'>
-                        {selected.map((i)=>
-                            (<td className="border border-gray-300 p-2 text-gray-700">{i}</td>)
-                        )}
-                        </tr>
+                                {selected.map((i) =>
+                                    (<td className="border border-gray-300 p-2 text-gray-700">{i}</td>)
+                                )}
+                            </tr>
                         </table>
                     </div>
                 )}

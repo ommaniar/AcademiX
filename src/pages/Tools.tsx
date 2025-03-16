@@ -43,58 +43,66 @@ const Tools = () => {
                 </div>
 
                 {/* <div className="m-4"> */}
-                    <h1 className="font-bold text-xl my-4">Discrete Mathematics</h1>
-                    <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                        <Link className="text-lg mr-4" size="18" />
-                        <div className="gap-1">
-                            <a className=""
-                                href="https://en.wikipedia.org/wiki/Partially_ordered_set">:What is POSET</a>
-                            <a href="/tools/poset" className="ml-1 text-indigo-600 hover:underline">POSET</a>
-                        </div>
+                <h1 className="font-bold text-xl my-4">Discrete Mathematics</h1>
+                <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
+                    <Link className="text-lg mr-4" size="18" />
+                    <div className="gap-1">
+                        <a className=""
+                            href="https://en.wikipedia.org/wiki/Partially_ordered_set">:What is POSET</a>
+                        <a href="/tools/poset" className="ml-1 text-indigo-600 hover:underline">POSET</a>
                     </div>
-                    <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                        <Link className="text-lg mr-4" size="18" />
-                        <div className="gap-1">
-                            <a className=""
-                                href="https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm">:What is Floyd-Warshall Algorithm</a>
-                            <a href="/tools/warshall-algorithm" className="ml-1 text-indigo-600 hover:underline">Floyd-Warshall Algorithm</a>
-                        </div>
+                </div>
+                <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
+                    <Link className="text-lg mr-4" size="18" />
+                    <div className="gap-1">
+                        <a className=""
+                            href="https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm">:What is Floyd-Warshall Algorithm</a>
+                        <a href="/tools/warshall-algorithm" className="ml-1 text-indigo-600 hover:underline">Floyd-Warshall Algorithm</a>
                     </div>
+                </div>
                 {/* </div> */}
                 {/* <div className="m-4"> */}
-                    <h1 className="font-bold text-xl my-4">Design and Analysis of Algorithms</h1>
-                    <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                        <Link className="text-lg mr-4" size="18" />
-                        <div className="gap-1">
-                            <a className=""
-                                href="https://en.wikipedia.org/wiki/Bubble_sort">:What is Bubble Sort</a>
-                            <a href="/tools/bubble-sort" className="ml-1 text-indigo-600 hover:underline">Bubble Sort</a>
-                        </div>
+                <h1 className="font-bold text-xl my-4">Design and Analysis of Algorithms</h1>
+                <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
+                    <Link className="text-lg mr-4" size="18" />
+                    <div className="gap-1">
+                        <a className=""
+                            href="https://en.wikipedia.org/wiki/Bubble_sort">:What is Bubble Sort</a>
+                        <a href="/tools/bubble-sort" className="ml-1 text-indigo-600 hover:underline">Bubble Sort</a>
                     </div>
-                    <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                        <Link className="text-lg mr-4" size="18" />
-                        <div className="gap-1">
-                            <a className=""
-                                href="https://en.wikipedia.org/wiki/Selection_sort">:What is Selection Sort</a>
-                            <a href="/tools/selection-sort" className="ml-1 text-indigo-600 hover:underline">Selection Sort Sort</a>
-                        </div>
+                </div>
+                <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
+                    <Link className="text-lg mr-4" size="18" />
+                    <div className="gap-1">
+                        <a className=""
+                            href="https://en.wikipedia.org/wiki/Selection_sort">:What is Selection Sort</a>
+                        <a href="/tools/selection-sort" className="ml-1 text-indigo-600 hover:underline">Selection Sort</a>
                     </div>
-                    <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                        <Link className="text-lg mr-4" size="18" />
-                        <div className="gap-1">
-                            <a className=""
-                                href="https://en.wikipedia.org/wiki/Continuous_knapsack_problem">:What is Fractional Knapsack</a>
-                            <a href="/tools/fractional-knapsack" className="ml-1 text-indigo-600 hover:underline">Fractional Knapsack</a>
-                        </div>
+                </div>
+                <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
+                    <Link className="text-lg mr-4" size="18" />
+                    <div className="gap-1">
+                        <a className=""
+                            href="https://en.wikipedia.org/wiki/Insertion_sort">:What is Insertion Sort</a>
+                        <a href="/tools/insertion-sort" className="ml-1 text-indigo-600 hover:underline">Insertion Sort</a>
                     </div>
-                    <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
-                        <Link className="text-lg mr-4" size="18" />
-                        <div className="gap-1">
-                            <a className=""
-                                href="https://en.wikipedia.org/wiki/Knapsack_problem">:What is 0/1 Knapsack</a>
-                            <a href="/tools/0-1-knapsack" className="ml-1 text-indigo-600 hover:underline">0/1 Knapsack</a>
-                        </div>
+                </div>
+                <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
+                    <Link className="text-lg mr-4" size="18" />
+                    <div className="gap-1">
+                        <a className=""
+                            href="https://en.wikipedia.org/wiki/Continuous_knapsack_problem">:What is Fractional Knapsack</a>
+                        <a href="/tools/fractional-knapsack" className="ml-1 text-indigo-600 hover:underline">Fractional Knapsack</a>
                     </div>
+                </div>
+                <div className="my-2 rounded-md p-4 flex text-lg items-center border border-gray-300">
+                    <Link className="text-lg mr-4" size="18" />
+                    <div className="gap-1">
+                        <a className=""
+                            href="https://en.wikipedia.org/wiki/Knapsack_problem">:What is 0/1 Knapsack</a>
+                        <a href="/tools/0-1-knapsack" className="ml-1 text-indigo-600 hover:underline">0/1 Knapsack</a>
+                    </div>
+                </div>
                 {/* </div> */}
             </div>
         </div>
